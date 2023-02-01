@@ -1,7 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&display=swap');
+
+
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+}
+
+body {
+  font-family: 'Playfair Display', serif;
 }
 
 html {
@@ -10,4 +17,8 @@ html {
 
 ::-webkit-scrollbar {
   display: none;
+}
+
+.navbar {
+  background-image: linear-gradient(to right top, #216b28, #1c7224, #17791f, #0f8019, #04870f)
 }

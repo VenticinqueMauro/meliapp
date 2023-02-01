@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import './App.css'
-import NavbarMenu from './components/NavbarMenu'
+import { Navbar } from './components'
 import { ItemListContainer } from './itemListContainer/ItemListContainer'
 
 function App() {
@@ -23,7 +23,7 @@ function App() {
           </div>
           :
           <>
-            <NavbarMenu />
+            <Navbar />
             <ItemListContainer />
           </>
       }
