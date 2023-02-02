@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap');
 
 * {
   padding: 0;
@@ -19,6 +19,20 @@ html {
   display: none;
 }
 
+.welcome{
+  font-family: 'Dancing Script', cursive;
+  text-shadow: 0px 2px 2px #000;
+}
+
+.gifWelcome{
+  height: 100%;
+  width: 100%;
+  background-image: url('./assets/camarero.webp');
+  background-size: 150% 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
 .navbar {
-  background-image: linear-gradient(to right top, #216b28, #1c7224, #17791f, #0f8019, #04870f)
+  background-image: linear-gradient(to right bottom, #005264, #004b5b, #014352, #013c49, #013541);
 }
