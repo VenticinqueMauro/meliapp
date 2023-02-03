@@ -7,7 +7,7 @@ export const Carta: Menu[] = [
     // PICADAS
     {
         name: 'Picadas',
-        precio: 0,
+        precio: 5,
         categoria: 'entradas',
         ingredientes: 'Jamon Cocido, Jamon Crudo, Ternera Adobada, Salame Español, Queso Tafi, Queso Tybo, Queso Roquefort, Papas Rusticas, Olivas Verdes y Negras, Con Aderezos de la Casa...',
         porcionSize: 'Chica' || 'Grande',
@@ -15,19 +15,19 @@ export const Carta: Menu[] = [
     },
     {
         name: 'Rabas Americano',
-        precio: 0,
+        precio: 10,
         categoria: 'entradas',
         ingredientes: 'Con tres salsas',
     },
     {
         name: 'Empanadas',
-        precio: 0,
+        precio: 15,
         categoria: 'entradas',
         variante: ['Carne', 'Pollo', 'Capresse']
     },
     {
         name: 'Papas',
-        precio: 0,
+        precio: 20,
         categoria: 'entradas',
         variante: [
             'Papas Bravas',
