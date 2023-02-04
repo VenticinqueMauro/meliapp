@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react'
 import './App.css'
-import { OrdenyFiltro } from './components/OrdenyFiltro'
 import { Sidebar } from './components/Sidebar'
 import { ItemListContainer } from './itemListContainer/ItemListContainer'
 
 
 function App() {
 
-  const [loader, setLoader] = useState(false)
+  const [loader, setLoader] = useState(true)
+
 
   useEffect(() => {
     setTimeout(() => {
@@ -30,7 +30,6 @@ function App() {
           :
           <>
             <Sidebar />
-            <OrdenyFiltro />
             <ItemListContainer />
           </>
       }

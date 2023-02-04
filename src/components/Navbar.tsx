@@ -4,6 +4,7 @@ import { HiOutlineMenuAlt4 } from 'react-icons/hi'
 import { AiOutlineCaretRight, AiOutlineCaretLeft } from 'react-icons/ai'
 import { Logo } from "./Logo"
 import { useEffect, useState } from "react"
+import { OrdenyFiltro } from "./orderAndFilter/OrdenyFiltro"
 
 const categoriaAlmuerzoCena: Categoria[] = [
     {
@@ -92,7 +93,7 @@ export const Navbar: React.FC<menuProps> = ({ setOpen }) => {
                     <span><AiOutlineCaretRight className="text-xl text-orange-300" /></span>
                     {
                         categoriaPorHorario.map((menu, i) => (
-                            <a key={i} href={`#${menu.name.slice(3)}`} className="mx-1 uppercase w-auto p-1 text-sm text-center rounded-lg mt-2 mb-2 bg-gray-50 text-black border border-white lg:hover:bg-gray-200 lg:focus:bg-gray-200 lg:active:bg-gray-200  transition-all duration-300 ease-in-out transform active:scale-95" style={{ boxShadow: '-1px 1px 0px #fdba74' }}>
+                            <a key={i} href={`#${menu.name.slice(3)}`} className="mx-1 uppercase w-auto p-1 text-sm text-center rounded-sm mt-2 mb-2 bg-gray-50 text-black border border-white lg:hover:bg-gray-200 lg:focus:bg-gray-200 lg:active:bg-gray-200  transition-all duration-300 ease-in-out transform active:scale-95" style={{ boxShadow: '-1px 1px 0px #fdba74' }}>
                                 {menu.name}
                             </a>
                         ))
@@ -105,6 +106,7 @@ export const Navbar: React.FC<menuProps> = ({ setOpen }) => {
                     <input className="bg-transparent h-6 outline-none placeholder:text-white  border-b-2 border-transparent transition-all duration-200 placeholder:text-start tracking-widest placeholder:text-xs focus:outline-none focus:border-none" type={'text'} placeholder="Busca tu menu favorito..." onChange={() => {}} />
                 </div>
             </div>
+            <OrdenyFiltro />
         </div>
     )
 }

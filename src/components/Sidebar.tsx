@@ -9,7 +9,6 @@ export const Sidebar = () => {
 
     const [open, setOpen] = useState(false)
 
-
     return (
             <>
                 <Navbar setOpen={setOpen} />
@@ -19,9 +18,9 @@ export const Sidebar = () => {
                             <MdOutlineRestaurantMenu className='text-4xl p-1  text-black' />
                         </button>
                     </div>
-                    <div className='text-center text-sky-800 p-2 text-lg hover:bg-orange-400 cursor-pointer '>Link 1</div>
-                    <div className='text-center text-sky-800 p-2 text-lg hover:bg-orange-400 cursor-pointer '>Link 2</div>
-                    <div className='text-center text-sky-800 p-2 text-lg hover:bg-orange-400 cursor-pointer '>Link 3</div>
+                    <div className='text-center text-sky-800 p-2 text-lg hover:bg-orange-400 cursor-pointer '>Ivone del Yucone</div>
+                    <div className='text-center text-sky-800 p-2 text-lg hover:bg-orange-400 cursor-pointer '>Sofia</div>
+                    <div className='text-center text-sky-800 p-2 text-lg hover:bg-orange-400 cursor-pointer '>Eña</div>
                 </div>
             </>
     )
