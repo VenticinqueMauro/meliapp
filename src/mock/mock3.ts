@@ -1,6 +1,7 @@
 export const carta3 = [
     {
-        categoria: 'entrada', menus: [{
+        categoria: 'entrada',
+        menus: [{
             nombre: 'Ensalada César', ingredientes: ['lechuga', 'pollo', 'crutones', 'queso parmesano', 'dressing de anchovies'],
             precio: 10
         },
