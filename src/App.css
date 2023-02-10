@@ -13,8 +13,8 @@
 
 body {
   font-family: 'EB Garamond', serif;
-  background-color: #f1f2df;
-  background-image: url("https://www.transparenttextures.com/patterns/xv.png");
+  background-color: #fff8e6;
+  background-image: url("https://www.transparenttextures.com/patterns/food.png");
 }
 
 html {
@@ -46,6 +46,5 @@ html {
 
 .navbar {
   /* background-image: linear-gradient(to right bottom, #005264, #004b5b, #014352, #013c49, #013541); */
-  background-image: linear-gradient(to right top, #067d32, #177c3a, #227b41, #2b7947, #33784d);
+  background-image: linear-gradient(to left bottom, #1d1c19, #262522, #2f2e2b, #383734, #42413e);
 }
-

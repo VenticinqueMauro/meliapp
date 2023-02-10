@@ -30,11 +30,6 @@ function App() {
   }, [])
 
 
-
-
-
-
-
   const [loader, setLoader] = useState(false)
 
 

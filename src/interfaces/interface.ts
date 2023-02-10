@@ -6,15 +6,14 @@ export interface User {
 }
 
 
-export interface Menu {
-    name: string,
-    precio: number | {paraUno: number, paraDos: number},
-    categoria: string,
-    ingredientes?: string,
-    porcionSize?: string
-    variante?: string[]
+export interface ICategoria {
+    categoria: string
+    menus: IMenu[]
 }
 
-export interface Categoria {
-    name: string
+export interface IMenu {
+    nombre: string
+    ingredientes: string[]
+    precio: number
 }
+
