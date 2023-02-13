@@ -1,6 +1,7 @@
 import { useAppDispatch, useAppSelector } from "@/app/hooks"
 import { buscarMenu, selectCarta } from "@/features/menuDigital/cartaSlice"
 import React, { useEffect, useState } from "react"
+import { Link as Ruta } from 'react-scroll'
 import { AiOutlineCaretLeft, AiOutlineCaretRight } from 'react-icons/ai'
 import { BiSearchAlt } from 'react-icons/bi'
 import { HiOutlineMenuAlt4 } from 'react-icons/hi'
@@ -101,19 +102,19 @@ export const Navbar: React.FC<menuProps> = ({ setOpen }) => {
             </div>
             <div className="relative overflow-hidden mx-auto">
                 <div className="flex overflow-x-auto gap- xl:justify-around items-center " style={{ whiteSpace: 'nowrap' }}>
-                    <span><AiOutlineCaretRight className="text-xl text-[#F1F2DF]" /></span>
+                    <span><AiOutlineCaretRight className="text-xl text-primary" /></span>
                     {
                         Carta.map((menu, i) => (
-                            <a key={i} href={`#${menu.categoria.slice(3)}`} className="mx-1 categoria uppercase w-auto p-1 text-sm text-center rounded-md mt-2 mb-2 tracking-wider bg-[#F1F2DF] text-[#2c2c2c] border border-white transition-all duration-300 ease-in-out transform active:scale-95" style={{ boxShadow: '-1px 1px 0px #FAC240', textShadow: '0px 1px 1px #F1F2DF' }}>
+                            <Ruta key={i} to={`${menu.categoria.slice(3)}`} spy={true} smooth={true} offset={-190} duration={500} className="mx-1 categoria uppercase w-auto p-1 text-sm text-center rounded-md mt-2 mb-2 tracking-wider bg-primary text-[#2c2c2c] border border-white transition-all duration-300 ease-in-out transform active:scale-95" style={{ boxShadow: '-1px 1px 0px #FAC240', textShadow: '0px 1px 1px #F1F2DF' }}>
                                 {menu.categoria}
-                            </a>
+                            </Ruta>
                         ))
                     }
-                    <span><AiOutlineCaretLeft className="text-xl text-[#F1F2DF]" /></span>
+                    <span><AiOutlineCaretLeft className="text-xl text-primary" /></span>
                 </div>
                 <div className="flex justify-start  items-center mx-auto col-start-5 col-span-2 px-3 py-2">
-                    <BiSearchAlt className="text-xl text-[#2c2c2c] rounded-l-md bg-[#FAC240] h-7 w-7 p-1" />
-                    <input className="bg-[#fff8e6] text-black h-7 w-full outline-none p-2 placeholder:text-gray-900 rounded-r-md  border-b-2 border-transparent transition-all duration-200 placeholder:text-start tracking-widest placeholder:text-sm placeholder:font-medium focus:outline-none focus:border-none" type={'text'} placeholder="Busca tu menu favorito..." onChange={handleSearch} />
+                    <BiSearchAlt className="text-xl text-bgPrice rounded-l-md bg-secondary h-7 w-7 p-1" />
+                    <input className="bg-primary text-black h-7 w-full outline-none p-2 placeholder:text-gray-900 rounded-r-md  border-b-2 border-transparent transition-all duration-200 placeholder:text-start tracking-widest placeholder:text-sm placeholder:font-medium focus:outline-none focus:border-none" type={'text'} placeholder="Busca tu menu favorito..." onChange={handleSearch} />
                 </div>
             </div>
             <OrderAndFilter />

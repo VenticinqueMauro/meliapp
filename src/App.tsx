@@ -1,18 +1,34 @@
 import { doc, getDoc } from 'firebase/firestore'
 import { useEffect, useState } from 'react'
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, useNavigate } from 'react-router-dom'
 import './App.css'
 import { Presentacion } from './components'
 import { ItemListContainer } from './components/itemListContainer/ItemListContainer'
 import { Login } from './components/login/Login'
 import { db } from './main'
+import { HotKeys, KeyMap, KeyName } from 'react-hotkeys';
 
+
+const keyMap: KeyMap = {
+  SAVE: 'alt+a+r'
+};
 
 
 
 function App() {
 
   const docRef = doc(db, "cartaAmericano", "carta");
+
+  const navigate = useNavigate()
+
+  const handlers = {
+    SAVE: (keyEvent?: KeyboardEvent) => {
+      if (keyEvent) {
+        keyEvent.preventDefault();
+      }
+      navigate('/login-americano-rb')
+    },
+  };
 
   const traerInfo = async () => {
     const docSnap = await getDoc(docRef);
@@ -40,7 +56,7 @@ function App() {
   }, [])
 
   return (
-    <>
+    <HotKeys keyMap={keyMap} handlers={handlers}>
       {
         loader
           ?
@@ -48,13 +64,13 @@ function App() {
           :
           <Routes>
             <Route path='/' element={<ItemListContainer />} />
-            <Route path='/login' element={<Login />} />
+            <Route path='/login-americano-rb' element={<Login />} />
             <Route path='*' element={<div>ERROR 404...</div>} />
 
           </Routes>
-          
+
       }
-    </>
+    </HotKeys>
   )
 }
 

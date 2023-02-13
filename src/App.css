@@ -17,10 +17,6 @@ body {
   background-image: url("https://www.transparenttextures.com/patterns/food.png");
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
 ::-webkit-scrollbar {
   display: none;
 }
