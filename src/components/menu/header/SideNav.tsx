@@ -17,9 +17,9 @@ export const SideNav: React.FC<sideBarProps> = ({ open, setOpen }) => {
                     <MdOutlineRestaurantMenu className='text-4xl p-1  text-black' />
                 </button>
             </div>
-            <div className='text-center text-black p-2 text-lg hover:bg-secondary hover:text-white transition-all duration-200 cursor-pointer'>Link 1</div>
-            <div className='text-center text-black p-2 text-lg hover:bg-secondary hover:text-white transition-all duration-200 cursor-pointer'>Link 2</div>
-            <div className='text-center text-black p-2 text-lg hover:bg-secondary hover:text-white transition-all duration-200 cursor-pointer'>Link 3</div>
+            <div className='text-center text-black p-2 text-lg hover:bg-secondary hover:text-white transition-all duration-200 cursor-pointer'>Promos</div>
+            <div className='text-center text-black p-2 text-lg hover:bg-secondary hover:text-white transition-all duration-200 cursor-pointer'>Info</div>
+            <div className='text-center text-black p-2 text-lg hover:bg-secondary hover:text-white transition-all duration-200 cursor-pointer'>Redes</div>
 
         </div>
     )
