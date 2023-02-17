@@ -3,8 +3,7 @@ import { buscarMenu, selectCarta } from "@/features/menuDigital/cartaSlice"
 import React, { useEffect, useState } from "react"
 import { Link as Ruta } from 'react-scroll'
 import { AiOutlineCaretLeft, AiOutlineCaretRight } from 'react-icons/ai'
-import { BiSearchAlt } from 'react-icons/bi'
-import { HiOutlineMenuAlt4 } from 'react-icons/hi'
+import { BiSearchAlt, BiRestaurant } from 'react-icons/bi'
 import { OrderAndFilter } from "../orderAndFilter/OrderAndFilter"
 
 const categoriaAlmuerzoCena = [
@@ -96,7 +95,7 @@ export const Navbar: React.FC<menuProps> = ({ setOpen }) => {
                 </div>
                 <div >
                     <button className="flex items-center pr-3" onClick={() => setOpen(true)} >
-                        <HiOutlineMenuAlt4 className="text-4xl p-1 navbar text-white border border-white  rounded-md transition-all duration-300 ease-in-out transform active:scale-95" />
+                        <BiRestaurant className="text-4xl p-1 navbar text-primary  border border-secondary rounded-md transition-all duration-300 ease-in-out transform active:scale-95" />
                     </button>
                 </div>
             </div>
@@ -105,7 +104,7 @@ export const Navbar: React.FC<menuProps> = ({ setOpen }) => {
                     <span><AiOutlineCaretRight className="text-xl text-primary" /></span>
                     {
                         Carta.map((menu, i) => (
-                            <Ruta key={i} to={`${menu.categoria.slice(3)}`} spy={true} smooth={true} offset={-190} duration={500} className="mx-1 categoria uppercase w-auto p-1 text-sm text-center rounded-md mt-2 mb-2 tracking-wider bg-primary text-[#2c2c2c] border border-white transition-all duration-300 ease-in-out transform active:scale-95" style={{ boxShadow: '-1px 1px 0px #FAC240', textShadow: '0px 1px 1px #F1F2DF' }}>
+                            <Ruta key={i} to={`${menu.categoria.slice(3)}`} spy={true} smooth={true} offset={-190} duration={500} className="mx-1 categoria uppercase w-auto p-1 text-sm text-center rounded-md mt-2 mb-2 tracking-wider bg-secondary text-white border border-primary transition-all duration-300 ease-in-out transform active:scale-95 " style={{ textShadow: '1px 1px 1px #000' }}>
                                 {menu.categoria}
                             </Ruta>
                         ))
@@ -113,8 +112,8 @@ export const Navbar: React.FC<menuProps> = ({ setOpen }) => {
                     <span><AiOutlineCaretLeft className="text-xl text-primary" /></span>
                 </div>
                 <div className="flex justify-start  items-center mx-auto col-start-5 col-span-2 px-3 py-2">
-                    <BiSearchAlt className="text-xl text-bgPrice rounded-l-md bg-secondary h-7 w-7 p-1" />
-                    <input className="bg-primary text-black h-7 w-full outline-none p-2 placeholder:text-gray-900 rounded-r-md  border-b-2 border-transparent transition-all duration-200 placeholder:text-start tracking-widest placeholder:text-sm placeholder:font-medium focus:outline-none focus:border-none" type={'text'} placeholder="Busca tu menu favorito..." onChange={handleSearch} />
+                    <BiSearchAlt className="text-xl text-primary rounded-l-md border-t border-l border-b border-secondary bg-bgPrice h-7 w-7 p-1" />
+                    <input className="bg-primary text-black h-7 w-full outline-none p-2 placeholder:text-gray-900 rounded-r-md  border-b-2 border-transparent transition-all duration-200 placeholder:text-start tracking-widest placeholder:text-sm placeholder:font-medium focus:outline-none focus:border-none" type={'text'} placeholder="Busca tu menú favorito..." onChange={handleSearch} />
                 </div>
             </div>
             <OrderAndFilter />

@@ -6,12 +6,6 @@ export const ItemListContainer = () => {
 
 
 
-    // return (
-    //     <div style={{ marginTop: `${navbarHeight}px` }}>
-    //         {/* Contenido de la sección de la categoría */}
-    //     </div>
-    // );
-
 
     return (
         <>
