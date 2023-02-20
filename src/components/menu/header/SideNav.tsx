@@ -11,7 +11,7 @@ export const SideNav: React.FC<sideBarProps> = ({ open, setOpen }) => {
 
 
     return (
-        <div className={`${open ? 'w-64' : 'w-0'} bg-primary shadow shadow-xl shadow-black sideBar min-h-screen fixed top-0 right-0 transition-all duration-300`}>
+        <div className={`${open ? 'w-64' : 'w-0'} bg-primary shadow shadow-xl shadow-black sideBar min-h-screen fixed top-0 right-0 transition-all duration-300 z-50`}>
             <div className={`${!open && 'hidden'} flex items-center justify-end pt-3 px-3 p-1 `}>
                 <button className='mb-5' onClick={() => setOpen(false)}>
                     <MdOutlineRestaurantMenu className='text-4xl p-1  text-black' />

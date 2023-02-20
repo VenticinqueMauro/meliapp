@@ -16,24 +16,16 @@
 .containerAll {
   font-family: 'Bitter', serif;
   overflow-y: scroll;
-  /* background-image: url('https://lexica-serve-encoded-images2.sharif.workers.dev/full_jpg/40fb364f-ab7c-427e-9770-9582c51ebc3e'); */
-  /* background-image: url('https://lexica-serve-encoded-images2.sharif.workers.dev/full_jpg/d20f3cd6-428b-4272-9655-fbeeba227cb4'); */
-  /* background-image: url('https://lexica-serve-encoded-images2.sharif.workers.dev/full_jpg/77d2b1a2-81c2-4297-96c2-76885868fb01'); */
-  /* background-image: url('https://lexica-serve-encoded-images2.sharif.workers.dev/full_jpg/485bd065-b486-4733-a214-43cb7d36bc3b'); */
-  /* background-image: url('https://lexica-serve-encoded-images2.sharif.workers.dev/full_jpg/6edd7e8b-140c-471c-9310-5b5c3db4655b'); */
-  /* background-image: url('https://lexica-serve-encoded-images2.sharif.workers.dev/full_jpg/f9f75afa-1ff9-42d9-8aa8-3a7ec80691e7'); */
-  /* background-image: url('https://lexica-serve-encoded-images2.sharif.workers.dev/full_jpg/edfb1ad1-a149-4b6e-be64-ca79ae8d394d'); */
-  /* background-image: url('https://lexica-serve-encoded-images2.sharif.workers.dev/full_jpg/fdf85e60-13cf-4234-b796-5f3ed2f53c48'); */
-  /* background-image: url('https://lexica-serve-encoded-images2.sharif.workers.dev/full_jpg/54df7b3c-5f67-47a3-8ffd-71653974f2b0'); */
   /* background-image: url('https://lexica-serve-encoded-images2.sharif.workers.dev/full_jpg/ad0173a9-f9a8-4816-93d6-3e4facfc2c50'); */
-  /* background-image: url('https://lexica-serve-encoded-images2.sharif.workers.dev/full_jpg/dc0bcf8e-fb74-41de-be95-cf5a1b7120e8'); */
-  /* background-image: url('https://lexica-serve-encoded-images2.sharif.workers.dev/full_jpg/f5c69219-d569-475b-b53b-3dd3413a0f9d'); */
-  /* background-image: url('https://lexica-serve-encoded-images2.sharif.workers.dev/full_jpg/cc5592e5-ca55-46e9-a97d-18d10df5f6a5'); */
-  background-image: url('./assets/fondoDemo.jpeg');
-  background-size: cover;
+  /* background-image: url('https://lexica-serve-encoded-images2.sharif.workers.dev/full_jpg/77d2b1a2-81c2-4297-96c2-76885868fb01'); */
+  /* background-image: url('https://lexica-serve-encoded-images2.sharif.workers.dev/full_jpg/6edd7e8b-140c-471c-9310-5b5c3db4655b'); */
+  /* background-image: url('./assets/fondoDemo.jpeg'); */
+  /* background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  background-position: center;
+  background-position: center; */
+  background-color: #FFFBF3;
+  background-image: url("https://www.transparenttextures.com/patterns/food.png");
 }
 
 ::-webkit-scrollbar {
@@ -41,8 +33,9 @@
 }
 
 .categoria {
-  font-family: 'Libre Caslon Text', serif;
-  font-weight: 600;
+  /* font-family: 'Libre Caslon Text', serif; */
+  font-weight: bold;
+
 }
 
 .welcome {
@@ -61,4 +54,11 @@
 
 .navbar {
   background-color: #111111;
+}
+
+.card {
+  /* background: #00000070; */
+  -webkit-backdrop-filter: blur(1px);
+  backdrop-filter: blur(1px);
+  z-index: 0;
 }

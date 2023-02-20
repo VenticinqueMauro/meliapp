@@ -13,13 +13,13 @@ export const OrderAndFilter = () => {
 
     return (
         <>
-            <div className="flex justify-around p-2 bg-secondary text-black shadow shadow-black tracking-wider font-light">
-                <div className='flex items-center gap-1 text-md cursor-pointer font-semibold'>
+            <div className="flex justify-around p-1 bg-primary text-bgPrice border-b-2 border-black/80 tracking-wider ">
+                <div className='flex items-center gap-1 text-sm cursor-pointer font-medium'>
                     <span><TbArrowsUpDown /></span>
                     <span onClick={() => setOpenOrder(true)}>Ordernar</span>
                 </div>
-                <div className="border-r-2 border-black"></div>
-                <div className='flex items-center gap-1 text-md cursor-pointer font-semibold'>
+                <div className="border-r-2 border-bgPrice"></div>
+                <div className='flex items-center gap-1 text-sm cursor-pointer font-medium'>
                     <span><RiFilter2Line /></span>
                     <span onClick={() => setOpenFilter(true)}>Filtrar</span>
                 </div>

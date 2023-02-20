@@ -14,6 +14,8 @@ export interface ICategoria {
 export interface IMenu {
     nombre: string
     ingredientes: string[]
+    descripcion?: string
+    imagen?: string
     precio: number
 }
 
