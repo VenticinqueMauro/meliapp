@@ -15,7 +15,6 @@
 
 .containerAll {
   font-family: 'Bitter', serif;
-  overflow-y: scroll;
   /* background-image: url('https://lexica-serve-encoded-images2.sharif.workers.dev/full_jpg/ad0173a9-f9a8-4816-93d6-3e4facfc2c50'); */
   /* background-image: url('https://lexica-serve-encoded-images2.sharif.workers.dev/full_jpg/77d2b1a2-81c2-4297-96c2-76885868fb01'); */
   /* background-image: url('https://lexica-serve-encoded-images2.sharif.workers.dev/full_jpg/6edd7e8b-140c-471c-9310-5b5c3db4655b'); */
@@ -62,3 +61,4 @@
   backdrop-filter: blur(1px);
   z-index: 0;
 }
+

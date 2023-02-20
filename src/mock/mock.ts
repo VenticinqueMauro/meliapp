@@ -11,7 +11,7 @@ export const mock: ICategoria[] = [
             {
                 nombre: 'rabas americano',
                 precio: getrandomNumber(),
-                ingredientes: ['Con tres salsas']
+                ingredientes: ['Con tres salsas'],
             },
             {
                 nombre: 'empanadas',
