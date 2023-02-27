@@ -24,7 +24,8 @@
   background-attachment: fixed;
   background-position: center; */
   background-color: #FFFBF3;
-  background-image: url("https://www.transparenttextures.com/patterns/food.png");
+  background-image: url(https://www.transparenttextures.com/patterns/redox-02.png);
+  /* background-image: url("https://www.transparenttextures.com/patterns/food.png"); */
 }
 
 ::-webkit-scrollbar {
