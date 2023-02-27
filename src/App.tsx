@@ -6,7 +6,7 @@ import { Presentacion } from './components'
 import { ItemListContainer } from './components/itemListContainer/ItemListContainer'
 import { Login } from './components/login/Login'
 import { db } from './main'
-import { HotKeys, KeyMap, KeyName } from 'react-hotkeys';
+import { HotKeys, KeyMap } from 'react-hotkeys';
 
 
 const keyMap: KeyMap = {

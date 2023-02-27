@@ -49,6 +49,26 @@ export const cartaSlice = createSlice({
             })
             return result
         },
+        filtroPopulares: (state) => {
+            let populares: ICategoria[] = []
+            state.forEach(categoria => {
+                let menus = categoria.menus.filter(menu => menu.esPopular === true)
+                if (menus.length > 0) {
+                    populares.push({ ...categoria, menus: menus })
+                }
+            })
+            return populares
+        },
+        filtroOfertas: (state) => {
+            let populares: ICategoria[] = []
+            state.forEach(categoria => {
+                let menus = categoria.menus.filter(menu => menu.esOferta === true)
+                if (menus.length > 0) {
+                    populares.push({ ...categoria, menus: menus })
+                }
+            })
+            return populares
+        },
         filtroMenorPrecio: (state) => {
             let newState = [...state];
             newState = newState.map(categoria => {
@@ -74,7 +94,7 @@ export const cartaSlice = createSlice({
     },
 })
 
-export const { buscarMenu, filtroPrecioHasta, filtroMenorPrecio, filtroMayorPrecio, filtroPorIngredientes, removeFilter } = cartaSlice.actions
+export const { buscarMenu, filtroPrecioHasta, filtroMenorPrecio, filtroMayorPrecio, filtroPorIngredientes, filtroPopulares,filtroOfertas, removeFilter } = cartaSlice.actions
 
 export const selectCarta = (state: RootState) => state.carta
 
