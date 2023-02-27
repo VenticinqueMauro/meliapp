@@ -2,6 +2,8 @@ import { useAppSelector } from "@/app/hooks";
 import { selectCarta } from "@/features/menuDigital/cartaSlice";
 import { IoStarSharp } from 'react-icons/io5'
 import { MdLocalOffer } from 'react-icons/md'
+import oferta from '../../assets/sale.svg'
+import popular from '../../assets/star.svg'
 
 export const ItemList = () => {
 
@@ -21,9 +23,9 @@ export const ItemList = () => {
 
                                 <div key={m.nombre} className='pt-3 pb-3 flex justify-between items-end capitalize px-3'>
                                     <div>
-                                        <div className="flex items-center justify-start">
-                                            {m.esOferta === true && <MdLocalOffer />}
-                                            {m.esPopular === true && <IoStarSharp />}
+                                        <div className="flex items-center justify-start gap-1">
+                                            {m.esOferta === true && <img className="w-5 h-5" src={oferta} alt='offer' />}
+                                            {m.esPopular === true && <img className="w-5 h-5" src={popular} alt='offer' />}
                                             <p className="tracking-wider text-lg sm:text-xl font-bold inline-block  text-bgPrice underline"  >{m.nombre}</p>
                                         </div>
                                         <p className="text-base sm:text-lg text-stone-800 font-medium tracking-wider pt-1 rounded rounded-md" >{m.ingredientes.join(', ')}</p>
