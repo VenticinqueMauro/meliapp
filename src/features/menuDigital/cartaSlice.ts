@@ -1,100 +1,177 @@
 import { ICategoria } from '@/interfaces';
-import { mock } from '@/mock/mock';
-import { createSlice } from '@reduxjs/toolkit';
+import { db } from '@/main';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { doc, getDoc } from 'firebase/firestore';
 import type { RootState } from '../../app/store';
 
 
-const initialState = mock
+interface ICartaState {
+    data: ICategoria[];
+    loading: boolean;
+    resultadosBusqueda: ICategoria[];
+    precioHasta: ICategoria[];
+    populares: ICategoria[];
+    promociones: ICategoria[];
+    vegetarianos: ICategoria[];
+    sinTacc: ICategoria[];
+    filtroActual: string
+}
+
+
+
+const initialState: ICartaState = {
+    data: [],
+    loading: false,
+    resultadosBusqueda: [],
+    precioHasta: [],
+    populares: [],
+    promociones: [],
+    vegetarianos: [],
+    sinTacc: [],
+    filtroActual: 'ninguno'
+}
+
+export const fetchMenuData = createAsyncThunk(
+    'carta/fetchMenuData',
+    async () => {
+        try {
+            const docRef = doc(db, "Menus", "Prueba");
+            const docSnap = await getDoc(docRef);
+            if (docSnap.exists()) {
+                return docSnap.data().menus;
+            }
+        } catch (error) {
+            throw error;
+        }
+    }
+);
 
 export const cartaSlice = createSlice({
     name: 'carta',
     initialState,
     reducers: {
-        buscarMenu: (state, { payload }: { payload: string }): ICategoria[] => {
+        buscarMenu: (state, { payload }: { payload: string }): void => {
             if (!payload) {
-                return initialState
+                state.filtroActual = 'ninguno';
+                state.resultadosBusqueda = [];
+                return;
             }
-            let result: ICategoria[] = [];
-            state.forEach(categoria => {
-                let menus = categoria.menus.filter(m => m.nombre.toLowerCase().includes(payload.toLowerCase()));
-                if (menus.length > 0) {
-                    result.push({ ...categoria, menus: menus });
-                }
-            });
-            return result;
+            const newState = state.data
+                .map((categoria) => {
+                    const menus = categoria.menus.filter((menu) => menu.nombre.toLowerCase().includes(payload.toLowerCase()));
+                    if (menus.length > 0) {
+                        return { ...categoria, menus };
+                    }
+                    return null;
+                })
+                .filter((categoria) => categoria !== null) as ICategoria[];
+            state.resultadosBusqueda = newState;
+            state.filtroActual = 'busqueda';
         },
         filtroPrecioHasta: (state, { payload }: { payload: number }) => {
             if (!payload) {
                 return initialState
             }
-            let result: ICategoria[] = []
-            state.forEach(categoria => {
-                let menus = categoria.menus.filter(menu => menu.precio <= payload)
+            const result: ICategoria[] = state.data.map(categoria => {
+                const menus = categoria.menus.filter(menu => menu.precio <= payload)
                 if (menus.length > 0) {
-                    result.push({ ...categoria, menus: menus })
+                    return { ...categoria, menus }
                 }
-            })
-            return result
-        },
-        filtroPorIngredientes: (state, { payload }: { payload: string }) => {
-            if (!payload) {
-                return initialState
-            }
-            let result: ICategoria[] = []
-            state.forEach(categoria => {
-                let menus = categoria.menus.filter(menu => menu.ingredientes.includes(payload))
-                if (menus.length > 0) {
-                    result.push({ ...categoria, menus: menus })
-                }
-            })
-            return result
-        },
-        filtroPopulares: (state) => {
-            let populares: ICategoria[] = []
-            state.forEach(categoria => {
-                let menus = categoria.menus.filter(menu => menu.esPopular === true)
-                if (menus.length > 0) {
-                    populares.push({ ...categoria, menus: menus })
-                }
-            })
-            return populares
-        },
-        filtroOfertas: (state) => {
-            let populares: ICategoria[] = []
-            state.forEach(categoria => {
-                let menus = categoria.menus.filter(menu => menu.esOferta === true)
-                if (menus.length > 0) {
-                    populares.push({ ...categoria, menus: menus })
-                }
-            })
-            return populares
+                return null
+            }).filter((categoria) => categoria !== null).map((categoria) => categoria as ICategoria)
+
+            return { ...state, precioHasta: result, filtroActual: 'hasta' }
         },
         filtroMenorPrecio: (state) => {
-            let newState = [...state];
-            newState = newState.map(categoria => {
-                let menus = [...categoria.menus];
-                menus.sort((a, b) => a.precio - b.precio);
-                return { ...categoria, menus };
-            });
-            return newState;
+            const newState: ICategoria[] = state.data.map((categoria) => ({
+                ...categoria,
+                menus: [...categoria.menus].sort((a, b) => a.precio - b.precio),
+            }));
+            return { ...state, data: newState };
         },
         filtroMayorPrecio: (state) => {
-            let newState = [...state];
-            newState = newState.map(categoria => {
-                let menus = [...categoria.menus];
-                menus.sort((a, b) => b.precio - a.precio);
-                return { ...categoria, menus };
-            });
-            return newState;
+            const newState: ICategoria[] = state.data.map((categoria) => ({
+                ...categoria,
+                menus: [...categoria.menus].sort((a, b) => b.precio - a.precio),
+            }));
+            return { ...state, data: newState };
         },
+        filtroPopulares: (state) => {
+            const newState: ICategoria[] = state.data
+                .map((m) => {
+                    const menus = m.menus.filter((m) => m.esPopular === true);
+                    if (menus.length > 0) {
+                        return { ...m, menus };
+                    }
+                    return null;
+                })
+                .filter((categoria) => categoria !== null)
+                .map((categoria) => categoria as ICategoria);
+            return { ...state, populares: newState, filtroActual: 'popular' };
+        },
+        filtroPromos: (state) => {
+            const newState: ICategoria[] = state.data
+                .map((m) => {
+                    const menus = m.menus.filter((m) => m.esPromo === true);
+                    if (menus.length > 0) {
+                        return { ...m, menus };
+                    }
+                    return null;
+                })
+                .filter((categoria) => categoria !== null)
+                .map((categoria) => categoria as ICategoria);
+
+            return { ...state, promociones: newState, filtroActual: 'promos' };
+        },
+        filtroVegetarianos: (state) => {
+            const newState: ICategoria[] = state.data
+                .map((m) => {
+                    const menus = m.menus.filter((m) => m.esVegetariano === true);
+                    if (menus.length > 0) {
+                        return { ...m, menus };
+                    }
+                    return null;
+                })
+                .filter((categoria) => categoria !== null)
+                .map((categoria) => categoria as ICategoria);
+
+            return { ...state, vegetarianos: newState, filtroActual: 'vegetariano' };
+        },
+        filtroSinTacc: (state) => {
+            const newState: ICategoria[] = state.data
+                .map((m) => {
+                    const menus = m.menus.filter((m) => m.esSinTac === true);
+                    if (menus.length > 0) {
+                        return { ...m, menus };
+                    }
+                    return null;
+                })
+                .filter((categoria) => categoria !== null)
+                .map((categoria) => categoria as ICategoria);
+
+            return { ...state, sinTacc: newState, filtroActual: 'sinTacc' };
+        },
+
         removeFilter: (state) => {
-            state = initialState;
-            return state
-        }
+            state.filtroActual = 'ninguno'
+            return;
+        },
     },
+    extraReducers: (builder) => {
+        builder.addCase(fetchMenuData.pending, (state) => {
+            state.loading = true;
+        });
+        builder.addCase(fetchMenuData.fulfilled, (state, action) => {
+            state.loading = false;
+            state.data = action.payload || [];
+        });
+        builder.addCase(fetchMenuData.rejected, (state, action) => {
+            state.loading = false;
+        });
+    }
 })
 
-export const { buscarMenu, filtroPrecioHasta, filtroMenorPrecio, filtroMayorPrecio, filtroPorIngredientes, filtroPopulares,filtroOfertas, removeFilter } = cartaSlice.actions
+export const { buscarMenu, filtroPrecioHasta, filtroMenorPrecio, filtroMayorPrecio, filtroPopulares, filtroPromos, filtroVegetarianos, filtroSinTacc, removeFilter } = cartaSlice.actions
 
 export const selectCarta = (state: RootState) => state.carta
 

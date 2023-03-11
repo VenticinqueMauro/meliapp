@@ -6,43 +6,7 @@ import { AiOutlineCaretLeft, AiOutlineCaretRight } from 'react-icons/ai'
 import { BiSearchAlt, BiRestaurant } from 'react-icons/bi'
 import { OrderAndFilter } from "../orderAndFilter/OrderAndFilter"
 
-const categoriaAlmuerzoCena = [
-    {
-        name: '🥟 entradas'
-    },
-    {
-        name: '🍜 plato principal'
-    },
-    {
-        name: '🍮 postres'
-    },
-    {
-        name: '🍝 pastas'
-    },
-    {
-        name: '🥪 entrepanes'
-    },
-    {
-        name: '🍳 minutas'
-    },
-    {
-        name: '🥗 ensaladas'
-    },
-    {
-        name: '🍕 pizzas'
-    },
-    {
-        name: '🥃 bebidas'
-    },
-    {
-        name: '☕ cafeteria'
-    },
-]
 
-const categoriaDesayunoMerienda = [...categoriaAlmuerzoCena].sort((a, b) => {
-    const order = ['☕ cafeteria', '🥃 bebidas', '🥪 entrepanes', '🥟 entradas', '🍜 plato principal', '🍕 pizzas', '🍝 pastas', '🍳 minutas', '🥗 ensaladas', '🍮 postres'];
-    return order.indexOf(a.name) - order.indexOf(b.name);
-});
 
 interface menuProps {
     setOpen: React.Dispatch<React.SetStateAction<boolean>>
@@ -51,33 +15,11 @@ interface menuProps {
 
 export const Navbar: React.FC<menuProps> = ({ setOpen }) => {
 
-    const Carta = useAppSelector(selectCarta)
+    const {data} = useAppSelector(selectCarta)
 
-    const [categoriaPorHorario, setCategoriaPorHorario] = useState([])
-
-    const currentTime = new Date().getHours()
 
     const dispatch = useAppDispatch()
 
-    // useEffect(() => {
-
-    //     if (currentTime < 11) {
-    //         setCategoriaPorHorario(categoriaDesayunoMerienda)
-    //     }
-
-    //     if (currentTime >= 11 && currentTime < 15) {
-    //         setCategoriaPorHorario(categoriaAlmuerzoCena)
-    //     }
-
-    //     if (currentTime >= 15 && currentTime < 20) {
-    //         setCategoriaPorHorario(categoriaDesayunoMerienda)
-    //     }
-
-    //     if (currentTime >= 20) {
-    //         setCategoriaPorHorario(categoriaAlmuerzoCena)
-    //     }
-
-    // }, [currentTime])
 
 
     const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -103,7 +45,8 @@ export const Navbar: React.FC<menuProps> = ({ setOpen }) => {
                 <div className="flex overflow-x-auto gap- xl:justify-around items-center " style={{ whiteSpace: 'nowrap' }}>
                     <span><AiOutlineCaretRight className="text-xl text-primary" /></span>
                     {
-                        Carta.map((menu, i) => (
+                        data &&
+                        data.map((menu, i) => (
                             <Ruta key={i} to={`${menu.categoria.slice(3)}`} spy={true} smooth={true} offset={-180} duration={500} className="mx-1 categoria uppercase w-auto p-1 text-sm text-center rounded-md mt-2 mb-2 tracking-wider bg-secondary/95 text-primary transition-all duration-300 ease-in-out transform active:scale-95 " style={{ textShadow: '1px 1px 1px #111111' }}>
                                 {menu.categoria}
                             </Ruta>

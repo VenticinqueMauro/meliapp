@@ -1,11 +1,11 @@
-import { useState } from "react"
 import logoAdmin from '@/assets/admin.png'
 import { User } from "@/interfaces"
-import { Admin } from "./Admin"
+import { useState } from "react"
 import { FaUserCog } from 'react-icons/fa'
-import { RiLockPasswordFill } from 'react-icons/ri'
 import { MdKeyboardBackspace } from 'react-icons/md'
+import { RiLockPasswordFill } from 'react-icons/ri'
 import { Link } from "react-router-dom"
+import { Admin } from "./admin/Admin"
 
 
 
@@ -17,7 +17,7 @@ export const Login = () => {
     })
 
 
-    const [authorized, setAuthorized] = useState(false)
+    const [authorized, setAuthorized] = useState(true)
     const [errorMsj, setErrorMsj] = useState('')
 
 

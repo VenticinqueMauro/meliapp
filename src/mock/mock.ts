@@ -38,7 +38,7 @@ export const mock: ICategoria[] = [
                 nombre: 'lomo saltado',
                 ingredientes: ['lomo de res', 'cebolla', 'tomate', 'pimiento', 'arroz', 'frijoles'],
                 precio: getrandomNumber(),
-                esOferta: true
+                esPromo: true
             },
             {
                 nombre: 'picana grille',
@@ -65,7 +65,7 @@ export const mock: ICategoria[] = [
                 nombre: 'bondiola braseada',
                 precio: getrandomNumber(),
                 ingredientes: ['bondiola braseada en cerveza negra', 'pure de batatas', 'nueces', 'pimientos laqueados'],
-                esOferta: true
+                esPromo: true
 
             },
         ]
@@ -103,7 +103,7 @@ export const mock: ICategoria[] = [
                 precio: getrandomNumber(),
                 ingredientes: ['Laminas de pasta rellenas con salsa con salsa bolognesa, jamon', 'queso con salsa bechamel'],
                 esPopular: true,
-                esOferta: true
+                esPromo: true
 
             },
             {
@@ -115,7 +115,7 @@ export const mock: ICategoria[] = [
                 nombre: 'panzotti de batata ahumada',
                 precio: getrandomNumber(),
                 ingredientes: ['pasta rellena de batatas ahumadas', 'mascarpone', 'almendras con manteca a las finas hierbas'],
-                esOferta: true
+                esPromo: true
 
             },
             {
@@ -191,7 +191,7 @@ export const mock: ICategoria[] = [
                 precio: getrandomNumber(),
                 ingredientes: ['mix de hojas', 'pollo', 'parmesano', 'aceituna negra', 'croutones', 'aderezo cesar'],
                 esPopular: true,
-                esOferta: true
+                esPromo: true
             },
         ]
     },

@@ -51,13 +51,12 @@ export const OrderModal: React.FC<OrderProps> = ({ openOrder, setOpenOrder }) =>
             <button className="border-t-2 pt-3 pb-3 block w-full text-start px-3" onClick={handleMayorPrecio}>
                 Mayor Precio
             </button>
-            <div className="border-t-2 pt-3 pb-3  px-3 flex items-center" >
+            <div className="border-t-2 pt-3 pb-3  px-3 flex items-center flex-wrap" >
                 <label>Hasta $</label>
                 <div>
-                    <input className='tracking-wider  mx-1 px-1 placeholder:text-sm ' type='number' placeholder="Ingrese un monto" onChange={handlePrice} />
+                    <input className='tracking-wider  px-1 placeholder:text-sm ' type='number' placeholder="Ingrese un monto" onChange={handlePrice} />
                     <button className='bg-black text-white px-1 rounded-r-sm' onClick={buscarPrecioHasta}>Buscar</button>
                 </div>
-
             </div>
         </div>
     )

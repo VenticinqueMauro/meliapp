@@ -15,9 +15,10 @@ export interface IMenu {
     nombre: string
     ingredientes: string[]
     precio: number
-    descripcion?: string
-    imagen?: string
+    imagen?: string 
     esPopular?: boolean
-    esOferta?: boolean
+    esPromo?: boolean
+    esVegetariano?: boolean
+    esSinTac?: boolean
 }
 

@@ -7,20 +7,22 @@ import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDGdaZdd5hRH03gIdT6L5Qhq2j6y27FM58",
-  authDomain: "americanorestobar.firebaseapp.com",
-  projectId: "americanorestobar",
-  storageBucket: "americanorestobar.appspot.com",
-  messagingSenderId: "109666462760",
-  appId: "1:109666462760:web:4d40a9334ad9d3ae17d91d"
+  apiKey: "AIzaSyAixUNS-9F8ebjYRHD1RYVShnH4_JumG20",
+  authDomain: "lacarta-92bf7.firebaseapp.com",
+  projectId: "lacarta-92bf7",
+  storageBucket: "lacarta-92bf7.appspot.com",
+  messagingSenderId: "902477021868",
+  appId: "1:902477021868:web:c4a5be3d280454c0655509"
 };
 
 const app = initializeApp(firebaseConfig);
 
 export const db = getFirestore(app)
+export const auth = getAuth(app);
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>

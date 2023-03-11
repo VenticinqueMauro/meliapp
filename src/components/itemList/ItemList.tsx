@@ -1,42 +1,35 @@
-import { useAppSelector } from "@/app/hooks";
-import { selectCarta } from "@/features/menuDigital/cartaSlice";
-import { IoStarSharp } from 'react-icons/io5'
-import { MdLocalOffer } from 'react-icons/md'
-import oferta from '../../assets/sale.svg'
-import popular from '../../assets/star.svg'
+import { useAppDispatch, useAppSelector } from "@/app/hooks";
+import { fetchMenuData, selectCarta } from "@/features/menuDigital/cartaSlice";
+import { useEffect } from "react";
+import { MapeoCards } from "./MapeoCards";
 
 export const ItemList = () => {
 
+    const { data, loading, resultadosBusqueda, populares, promociones,vegetarianos, sinTacc, precioHasta, filtroActual } = useAppSelector(selectCarta)
+    const dispatch = useAppDispatch()
 
-    const Carta = useAppSelector(selectCarta)
-
-
+    useEffect(() => {
+        dispatch(fetchMenuData());
+    }, [dispatch]);
+    
 
     return (
         <div className="containerAll">
             <div className='min-h-screen lg:px-12 pt-1'>
                 {
-                    Carta.map(menu => (
-                        <div key={menu.categoria} id={`${menu.categoria.slice(3)}`} className='card'>
-                            <h2 className="categoria bg-bgPrice/95 inline uppercase  mx-auto text-white text-lg sm:text-xl tracking-widest px-3 rounded-r-sm text-center font-bold b" style={{ textShadow: '0px 1px 1px #000', boxShadow: '0px 0px 2px #000' }}>{menu.categoria}</h2>
-                            {menu.menus.map(m => (
-
-                                <div key={m.nombre} className='pt-3 pb-3 flex justify-between items-end capitalize px-3'>
-                                    <div>
-                                        <div className="flex items-center justify-start gap-1">
-                                            {m.esOferta === true && <img className="w-5 h-5" src={oferta} alt='offer' />}
-                                            {m.esPopular === true && <img className="w-5 h-5" src={popular} alt='offer' />}
-                                            <p className="tracking-wider text-lg sm:text-xl font-bold inline-block  text-bgPrice underline"  >{m.nombre}</p>
-                                        </div>
-                                        <p className="text-base sm:text-lg text-stone-800 font-medium tracking-wider pt-1 rounded rounded-md" >{m.ingredientes.join(', ')}</p>
-                                    </div>
-                                    <div>
-                                        <p className="px-1 ml-5 text-white text-lg sm:text-xl  font-semibold bg-bgPrice shadow shadow-black rounded-sm mr-1 border-2 border-secondary" >${m.precio}</p>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    ))
+                    loading
+                        ?
+                        <p>Cargando...</p>
+                        :
+                        <>
+                        {filtroActual === 'busqueda' && <MapeoCards data={resultadosBusqueda} />}
+                        {filtroActual === 'popular' && <MapeoCards data={populares} />}
+                        {filtroActual === 'promos' && <MapeoCards data={promociones} />}
+                        {filtroActual === 'vegetariano' && <MapeoCards data={vegetarianos} />}
+                        {filtroActual === 'sinTacc' && <MapeoCards data={sinTacc} />}
+                        {filtroActual === 'hasta' && <MapeoCards data={precioHasta} />}
+                        {filtroActual === 'ninguno' && <MapeoCards data={data} /> }
+                        </>
                 }
             </div>
         </div>
