@@ -13,7 +13,6 @@ export const EditarPlatos = ({ categoria, menu }: EditarPlatosProps): JSX.Elemen
     const [nombreCategoria, setNombreCategoria] = useState(categoria);
     const [formData, setFormData] = useState<IMenu>({
         nombre: menu.nombre,
-        descripcion: menu.descripcion || "",
         precio: menu.precio || 0,
         ingredientes: menu.ingredientes || [],
         esPopular: menu.esPopular || false,
@@ -92,10 +91,6 @@ export const EditarPlatos = ({ categoria, menu }: EditarPlatosProps): JSX.Elemen
                 <div >
                     <label className="block font-medium text-gray-700">Ingredientes (separar con coma)</label>
                     <input type="text" name="ingredientes" value={formData.ingredientes} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" onChange={handleChange} />
-                </div>
-                <div >
-                    <label className="block font-medium text-gray-700">Descripción (opcional)</label>
-                    <input type="text" name="descripcion" value={formData.descripcion} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" onChange={handleChange} />
                 </div>
                 <div >
                     <label className="block font-medium text-gray-700">Precio $</label>
