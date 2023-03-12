@@ -1,6 +1,7 @@
 import { IMenu } from "@/interfaces";
 import { db } from "@/main";
 import Resizer from 'react-image-file-resizer';
+import imageFileResizer from 'react-image-file-resizer';
 import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import { ChangeEvent, MouseEvent, useState } from "react";
 
@@ -54,7 +55,7 @@ export const AgregarPlatos = () => {
             return;
         }
 
-        Resizer.imageFileResizer(
+        imageFileResizer.imageFileResizer(
             file,
             300, // Width
             300, // Height
