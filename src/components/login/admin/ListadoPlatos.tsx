@@ -1,4 +1,4 @@
-import { ICategoria } from "@/interfaces";
+import { ICategoria, IMenu } from "@/interfaces";
 import { db } from "@/main";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
@@ -6,10 +6,12 @@ import promo from '../../../assets/sale.svg';
 import popular from '../../../assets/star.svg';
 import { EditarPlatos } from "./EditarPlatos";
 
+
 export const ListadoPlatos = () => {
 
     const [menuData, setMenuData] = useState<ICategoria[]>([]);
     const [edit, setEdit] = useState(false)
+    const [selectedMenu, setSelectedMenu] = useState<IMenu | null>(null)
 
     useEffect(() => {
         const getMenuData = async () => {
@@ -42,9 +44,13 @@ export const ListadoPlatos = () => {
         await updateDoc(menuRef, { menus: menus });
     };
 
+    const handleEdit = (menu: IMenu) => {
+        setSelectedMenu(menu)
+        setEdit(!edit)
+    }
 
     return (
-        <div className="flex justify-around items-center max-w-7xl mx-auto gap-4 flex-wrap">
+        <div className='flex justify-around items-center max-w-7xl mx-auto gap-4 flex-wrap relative'>
             {
                 menuData && menuData.length > 0 ?
                     menuData.map((categoria) => (
@@ -63,9 +69,9 @@ export const ListadoPlatos = () => {
                                     <p className="text-base sm:text-lg text-stone-800 font-medium tracking-wider pt-1 rounded rounded-md" >{menu.ingredientes.join(', ')}</p>
                                 </div>
                                 <button className="bg-red-900 shadow shadow-black text-white inline-block absolute top-0 right-0 px-2" onClick={() => handleDeleteMenu(categoria.categoria, menu.nombre)}>x</button>
-                                <button className="bg-red-900 shadow shadow-black text-white inline-block absolute top-7 right-0 px-2" onClick={() => setEdit(!edit)}>Edit</button>
+                                <button className="bg-red-900 shadow shadow-black text-white inline-block absolute top-7 right-0 px-2" onClick={() => handleEdit(menu)}>Edit</button>
                                 {
-                                    edit && <EditarPlatos categoria={categoria.categoria} menu={menu} />
+                                    edit && selectedMenu && selectedMenu.nombre === menu.nombre && <EditarPlatos categoria={categoria.categoria} menu={menu} setEdit={setEdit} />
                                     
                                 }
                             </div>

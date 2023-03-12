@@ -43,25 +43,6 @@ export const AgregarPlatos = () => {
     };
 
 
-    // const handleImageUpload = (event: ChangeEvent<HTMLInputElement>) => {
-    //     const file = event.target.files?.[0];
-    //     if (!file) return;
-
-    //     Resizer.imageFileResizer(
-    //         file,
-    //         200, // Width
-    //         200, // Height
-    //         'JPEG', // Format
-    //         100, // Quality
-    //         0, // Rotation
-    //         (uri) => {
-    //             setImage(uri as string);
-    //             updateFormData('imagen', uri); // Actualizar el estado de formData con la imagen
-    //         },
-    //         'base64', // Output type
-    //         200 // Max file size
-    //     );
-    // };
     const handleImageUpload = (event: ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
         if (!file) return;

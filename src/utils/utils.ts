@@ -7,3 +7,4 @@ export const generateId = (length: number = 8): string => {
     }
     return result;
 }
+

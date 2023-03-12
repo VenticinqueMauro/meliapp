@@ -33,7 +33,7 @@ export const MapeoCards: React.FC<MapeoCards> = ({ data }) => {
                         <div key={menu.categoria} id={`${menu.categoria.slice(3)}`} className='grid grid-cols-1 md:grid-cols-2 max-w-7xl mx-auto justify-center items-center relative'>
                             {
                                 modalOpen &&
-                                <div className="fixed top-0 right-0 h-screen w-full z-30 bg-black/30"></div>
+                                <div className="fixed top-0 right-0 h-screen w-full z-30 bg-black/20"></div>
                             }
                             <div className="md:col-span-2">
                                 <h2 className="inline-block categoria bg-bgPrice/95 text-start uppercase  text-white  sm:text-lg tracking-widest px-3 rounded-r-sm text-center font-bold " style={{ textShadow: '0px 1px 1px #000', boxShadow: '0px 0px 2px #000' }}>{menu.categoria}</h2>
@@ -49,8 +49,8 @@ export const MapeoCards: React.FC<MapeoCards> = ({ data }) => {
                                                 :
                                                 null
                                         }
-                                        <div className={`${m.imagen ? 'col-start-2 col-span-3' : m.ingredientes.length === 0 && 'col-start-1 col-span-3'} `}>
-                                            <div className="flex items-center gap-1 justify-start ">
+                                        <div className={`${m.imagen ? 'pl-3 col-start-2 col-span-3' : m.ingredientes.length === 0 && 'col-start-1 col-span-3'} `}>
+                                            <div className="flex items-center gap-1 justify-start">
                                                 {m.esPromo === true && <img className="w-5 h-5" src={oferta} alt='offer' />}
                                                 {m.esPopular === true && <img className="w-5 h-5" src={popular} alt='popular' />}
                                                 <p className='tracking-wider text-lg sm:text-xl font-bold inline-block  text-bgPrice underline capitalize'  >{m.nombre}</p>
@@ -60,17 +60,17 @@ export const MapeoCards: React.FC<MapeoCards> = ({ data }) => {
                                         </div>
                                         {
                                             m.ingredientes && m.ingredientes.length > 0 &&
-                                            <div className={`${m.imagen ? 'col-start-2 col-span-3' : 'col-start-1 col-span-4'} `}>
+                                            <div className={`${m.imagen ? 'pl-3 col-start-2 col-span-3' : 'col-start-1 col-span-4'} `}>
                                                 <p className="text-sm  text-gray-900  tracking-wider pt-1 rounded rounded-md capitalize truncate" >{m.ingredientes.join(', ')}</p>
                                             </div>
                                         }
-                                        <div className={`${!m.imagen ? 'col-start-1 col-span-4' : 'col-start-2 col-span-3'} col-span-3 flex items-center justify-between pt-1   `}>
+                                        <div className={`${!m.imagen ? 'col-start-1 col-span-4' : 'pl-3 col-start-2 col-span-3'} col-span-3 flex items-center justify-between pt-1   `}>
                                             <p className="text-bgPrice tracking-wider text-base sm:text-xl font-semibold  inline-block pt-1" >${m.precio}</p>
                                             <IoInformationSharp className="text-2xl cursor-pointer text-primary bg-bgPrice rounded shadow shadow-black" onClick={() => handleModal(m)} />
                                         </div>
                                     </div>
                                     {
-                                        modalOpen && selectedModal &&
+                                        modalOpen && selectedModal?.nombre === m.nombre &&
                                         <Modal
                                             imagen={selectedModal.imagen}
                                             nombre={selectedModal.nombre}

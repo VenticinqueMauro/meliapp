@@ -1,6 +1,7 @@
 import { useAppDispatch, useAppSelector } from "@/app/hooks";
 import { fetchMenuData, selectCarta } from "@/features/menuDigital/cartaSlice";
 import { useEffect } from "react";
+import { Loader } from "../loader/Loader";
 import { MapeoCards } from "./MapeoCards";
 
 export const ItemList = () => {
@@ -15,11 +16,11 @@ export const ItemList = () => {
 
     return (
         <div className="containerAll">
-            <div className='min-h-screen lg:px-12 pt-1'>
+            <div className='min-h-screen pt-1 max-w-7xl mx-auto '>
                 {
                     loading
                         ?
-                        <p>Cargando...</p>
+                        <Loader />
                         :
                         <>
                         {filtroActual === 'busqueda' && <MapeoCards data={resultadosBusqueda} />}

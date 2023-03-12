@@ -1,8 +1,11 @@
+import { useAppDispatch } from "@/app/hooks"
+import { logOutAdmin } from "@/features/menuDigital/cartaSlice"
 import { auth } from "@/main"
 import { updatePassword } from "firebase/auth"
 import { ChangeEvent, useState } from "react"
 import { FaUserCog } from "react-icons/fa"
 import { RiLockPasswordFill } from "react-icons/ri"
+import { useNavigate } from "react-router-dom"
 
 export const CambiarPassword = () => {
 
@@ -12,6 +15,8 @@ export const CambiarPassword = () => {
         newPassword: ''
     })
 
+    const navigate = useNavigate()
+    const dispatch = useAppDispatch()
 
     const user = auth.currentUser
 
@@ -28,10 +33,12 @@ export const CambiarPassword = () => {
     const handleSubmit = async (e: ChangeEvent<HTMLFormElement>) => {
         e.preventDefault()
         try {
-            if(user){
+            if (user) {
                 await updatePassword(user, userCredentials.newPassword)
                 console.log('Cambio de contrasena con exito');
             }
+            dispatch(logOutAdmin())
+            navigate('/login')
         } catch (error) {
             console.log(error);
         }
@@ -41,6 +48,8 @@ export const CambiarPassword = () => {
             oldPassword: '',
             newPassword: ''
         })
+
+
     }
 
     return (
@@ -56,6 +65,7 @@ export const CambiarPassword = () => {
                         className=" w-full placeholder:text-gray-500 outline-none"
                         placeholder="Email"
                         name="email"
+                        value={userCredentials.email}
                         type={"email"}
                         onChange={handleChange}
                     />
@@ -66,6 +76,7 @@ export const CambiarPassword = () => {
                         className=" w-full placeholder:text-gray-500 outline-none"
                         placeholder="Old Password"
                         name="oldPassword"
+                        value={userCredentials.oldPassword}
                         type='password'
                         onChange={handleChange}
                     />
@@ -76,6 +87,7 @@ export const CambiarPassword = () => {
                         className=" w-full placeholder:text-gray-500 outline-none"
                         placeholder="New Password"
                         name="newPassword"
+                        value={userCredentials.newPassword}
                         type='password'
                         onChange={handleChange}
                     />

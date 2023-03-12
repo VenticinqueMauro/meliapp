@@ -1,16 +1,20 @@
-import { ICategoria, IMenu } from "@/interfaces";
+import { IMenu } from "@/interfaces";
 import { db } from "@/main";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { ChangeEvent, FormEvent, MouseEvent, useState } from "react";
+import Resizer from 'react-image-file-resizer';
+
 
 interface EditarPlatosProps {
     categoria: string;
     menu: IMenu;
+    setEdit: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export const EditarPlatos = ({ categoria, menu }: EditarPlatosProps): JSX.Element => {
+export const EditarPlatos = ({ categoria, menu, setEdit }: EditarPlatosProps): JSX.Element => {
 
     const [nombreCategoria, setNombreCategoria] = useState(categoria);
+    const [image, setImage] = useState<string>('');
     const [formData, setFormData] = useState<IMenu>({
         nombre: menu.nombre,
         precio: menu.precio || 0,
@@ -22,13 +26,35 @@ export const EditarPlatos = ({ categoria, menu }: EditarPlatosProps): JSX.Elemen
         imagen: menu.imagen || "",
     });
 
-    // const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    //     const { name, value, type, checked } = event.target;
-    //     setFormData((prevFormData) => ({
-    //         ...prevFormData,
-    //         [name]: type === "checkbox" ? checked : value,
-    //     }));
-    // };
+    const handleImageUpload = (event: ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0];
+        if (!file) return;
+
+        const acceptedFormats = ['image/jpeg', 'image/png', 'image/webp']; // Lista de formatos aceptados
+
+        if (!acceptedFormats.includes(file.type)) {
+            alert('Formato de imagen no válido. Por favor, seleccione una imagen JPEG, PNG o WebP.');
+            return;
+        }
+
+        Resizer.imageFileResizer(
+            file,
+            200, // Width
+            200, // Height
+            file.type.includes('png') ? 'PNG' : (file.type.includes('jpeg') || file.type.includes('webp')) ? 'JPEG' : '', // Format (detectar si el archivo es PNG, JPEG o WebP)
+            100, // Quality
+            0, // Rotation
+            (uri) => {
+                setImage(uri as string);
+                setFormData({
+                    ...formData,
+                    imagen: uri as string
+                }); // Actualizar el estado de formData con la imagen
+            },
+            'base64', // Output type
+            200 // Max file size
+        );
+    };
 
     const handleChange = (e: ChangeEvent<HTMLInputElement> | MouseEvent<EventTarget>) => {
         const { name, value, checked, type } = e.target as HTMLInputElement;
@@ -74,15 +100,17 @@ export const EditarPlatos = ({ categoria, menu }: EditarPlatosProps): JSX.Elemen
         } catch (error) {
             console.error("Error al actualizar el documento:", error);
         }
+
+        setEdit(false)
     };
 
 
     return (
-        <div className="mx-auto max-w-xl px-8">
+        <div className="fixed top-1/2 -translate-x-1/2 left-1/2 -translate-y-1/2 z-50 w-full  bg-primary text-black">
             <form className="flex flex-col gap-4 pt-10" onSubmit={handleFormSubmit}>
                 <div className="c">
                     <label className="block font-medium text-gray-700">Categoria</label>
-                    <input type="text" value={categoria.toLocaleLowerCase()} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" onChange={handleNombreCategoriaChange} disabled/>
+                    <input type="text" value={categoria.toLocaleLowerCase()} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" onChange={handleNombreCategoriaChange} disabled />
                 </div>
                 <div >
                     <label className="block font-medium text-gray-700">Nombre</label>
@@ -91,6 +119,23 @@ export const EditarPlatos = ({ categoria, menu }: EditarPlatosProps): JSX.Elemen
                 <div >
                     <label className="block font-medium text-gray-700">Ingredientes (separar con coma)</label>
                     <input type="text" name="ingredientes" value={formData.ingredientes} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" onChange={handleChange} />
+                </div>
+                <div >
+                    <label className="block font-medium text-gray-700">Imagen (opcional)</label>
+                    <input
+                        type="file"
+                        name="imagen"
+                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                        onChange={handleImageUpload}
+                    />
+                    <div>
+                        {image && (
+                            <div className="mt-4 relative h-[150x] w-[150px]">
+                                <img src={image} alt="Imagen subida" className="w-full h-auto" />
+                                <button className="bg-black text-white px-2 py-1  absolute top-0 right-0" onClick={() => setImage("")}>X</button>
+                            </div>
+                        )}
+                    </div>
                 </div>
                 <div >
                     <label className="block font-medium text-gray-700">Precio $</label>
