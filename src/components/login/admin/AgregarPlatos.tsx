@@ -47,18 +47,18 @@ export const AgregarPlatos = () => {
         const file = event.target.files?.[0];
         if (!file) return;
 
-        const acceptedFormats = ['image/jpeg', 'image/png', 'image/webp']; // Lista de formatos aceptados
+        const acceptedFormats = ['image/jpeg', 'image/png', 'image/webp', 'image/jpg']; // Lista de formatos aceptados
 
         if (!acceptedFormats.includes(file.type)) {
-            alert('Formato de imagen no válido. Por favor, seleccione una imagen JPEG, PNG o WebP.');
+            alert('Formato de imagen no válido. Por favor, seleccione una imagen JPEG, JPG, PNG o WebP.');
             return;
         }
 
         Resizer.imageFileResizer(
             file,
-            200, // Width
-            200, // Height
-            file.type.includes('png') ? 'PNG' : (file.type.includes('jpeg') || file.type.includes('webp')) ? 'JPEG' : '', // Format (detectar si el archivo es PNG, JPEG o WebP)
+            300, // Width
+            300, // Height
+            file.type.includes('png') ? 'PNG' : (file.type.includes('jpeg') || file.type.includes('webp') || file.type.includes('jpg')) ? 'JPEG' : '', // Format (detectar si el archivo es PNG, JPEG, JPG o WebP)
             100, // Quality
             0, // Rotation
             (uri) => {
@@ -69,6 +69,7 @@ export const AgregarPlatos = () => {
             200 // Max file size
         );
     };
+
 
 
     const updateFormData = (name: string, value: any) => {
@@ -133,7 +134,7 @@ export const AgregarPlatos = () => {
     return (
         <div className="mx-auto max-w-xl px-8">
             <h2 className="text-center text-2xl underline">Agregar Platos al Menu</h2>
-            <form className="flex flex-col gap-4 pt-10">
+            <form className="flex flex-col gap-4 pt-10" >
                 <div className="c">
                     <label className="block font-medium text-gray-700">Categoria</label>
                     <input type="text" value={nombreCategoria.toLocaleLowerCase()} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" onChange={handleNombreCategoriaChange} />
@@ -148,13 +149,14 @@ export const AgregarPlatos = () => {
                 </div>
                 <div >
                     <label className="block font-medium text-gray-700">Precio $</label>
-                    <input type="number" name="precio" value={formData.precio} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" onChange={handleChange} required />
+                    <input type="number" name="precio" value={formData.precio} step='1' className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" onChange={handleChange} required />
                 </div>
                 <div >
                     <label className="block font-medium text-gray-700">Imagen (opcional)</label>
                     <input
                         type="file"
                         name="imagen"
+                        accept=".jpeg,.jpg,.png,.webp"
                         className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                         onChange={handleImageUpload}
                     />

@@ -145,9 +145,13 @@ export const cartaSlice = createSlice({
         },
         loginAdmin: (state) => {
             state.adminLogged = true
+            localStorage.setItem('isLogged', 'true');
+            console.log('Login Exitoso!');
         },
         logOutAdmin: (state) => {
-            state.adminLogged = false            
+            state.adminLogged = false  
+            localStorage.removeItem("isLogged");
+            console.log('Logout Exitoso!');
         },
     },
     extraReducers: (builder) => {

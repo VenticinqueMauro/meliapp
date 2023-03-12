@@ -14,15 +14,15 @@ import { loginAdmin, selectCarta } from '@/features/menuDigital/cartaSlice'
 
 export const Login = () => {
 
-    const {adminLogged} = useAppSelector(selectCarta)
+    const { adminLogged } = useAppSelector(selectCarta)
     const dispatch = useAppDispatch()
 
     const [userCredentials, setUserCredentials] = useState<User>({
         email: '',
         password: ''
     })
-
     const [errorMsj, setErrorMsj] = useState('')
+
 
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -44,6 +44,7 @@ export const Login = () => {
 
             // Si el inicio de sesión es exitoso, establece authorized en true
             dispatch(loginAdmin());
+
         } catch (error) {
             // Si hay un error, establece el mensaje de error
             setErrorMsj("ACCESO DENEGADO");
