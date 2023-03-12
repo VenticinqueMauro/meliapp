@@ -16,7 +16,7 @@ const initialState: ICartaState = {
     vegetarianos: [],
     sinTacc: [],
     filtroActual: 'ninguno',
-    adminLogged: true
+    adminLogged: false
 }
 
 export const fetchMenuData = createAsyncThunk(
