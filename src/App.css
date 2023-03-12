@@ -43,14 +43,6 @@
   text-shadow: 0px 2px 2px #000;
 }
 
-.gifWelcome {
-  height: 100%;
-  width: 100%;
-  background-image: url('./assets/camarero.webp');
-  background-size: 150% 100%;
-  background-repeat: no-repeat;
-  background-position: center;
-}
 
 .navbar {
   background-color: #111111;

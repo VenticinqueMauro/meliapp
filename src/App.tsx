@@ -26,7 +26,7 @@ function App() {
       if (keyEvent) {
         keyEvent.preventDefault();
       }
-      navigate('/login-americano-rb')
+      navigate('/login')
     },
   };
 
@@ -64,7 +64,7 @@ function App() {
           :
           <Routes>
             <Route path='/' element={<ItemListContainer />} />
-            <Route path='/login-americano-rb' element={<Login />} />
+            <Route path='/login' element={<Login />} />
             <Route path='*' element={<div>ERROR 404...</div>} />
 
           </Routes>

@@ -1,21 +1,8 @@
-import { ICategoria } from '@/interfaces';
+import { ICartaState, ICategoria } from '@/interfaces';
 import { db } from '@/main';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { doc, getDoc } from 'firebase/firestore';
 import type { RootState } from '../../app/store';
-
-
-interface ICartaState {
-    data: ICategoria[];
-    loading: boolean;
-    resultadosBusqueda: ICategoria[];
-    precioHasta: ICategoria[];
-    populares: ICategoria[];
-    promociones: ICategoria[];
-    vegetarianos: ICategoria[];
-    sinTacc: ICategoria[];
-    filtroActual: string
-}
 
 
 
@@ -28,7 +15,8 @@ const initialState: ICartaState = {
     promociones: [],
     vegetarianos: [],
     sinTacc: [],
-    filtroActual: 'ninguno'
+    filtroActual: 'ninguno',
+    adminLogged: false
 }
 
 export const fetchMenuData = createAsyncThunk(
@@ -151,10 +139,15 @@ export const cartaSlice = createSlice({
 
             return { ...state, sinTacc: newState, filtroActual: 'sinTacc' };
         },
-
         removeFilter: (state) => {
             state.filtroActual = 'ninguno'
             return;
+        },
+        loginAdmin: (state) => {
+            state.adminLogged = true
+        },
+        logOutAdmin: (state) => {
+            state.adminLogged = false            
         },
     },
     extraReducers: (builder) => {
@@ -171,7 +164,7 @@ export const cartaSlice = createSlice({
     }
 })
 
-export const { buscarMenu, filtroPrecioHasta, filtroMenorPrecio, filtroMayorPrecio, filtroPopulares, filtroPromos, filtroVegetarianos, filtroSinTacc, removeFilter } = cartaSlice.actions
+export const { buscarMenu, filtroPrecioHasta, filtroMenorPrecio, filtroMayorPrecio, filtroPopulares, filtroPromos, filtroVegetarianos, filtroSinTacc, loginAdmin, logOutAdmin, removeFilter } = cartaSlice.actions
 
 export const selectCarta = (state: RootState) => state.carta
 

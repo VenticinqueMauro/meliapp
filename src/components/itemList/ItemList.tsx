@@ -5,7 +5,7 @@ import { MapeoCards } from "./MapeoCards";
 
 export const ItemList = () => {
 
-    const { data, loading, resultadosBusqueda, populares, promociones,vegetarianos, sinTacc, precioHasta, filtroActual } = useAppSelector(selectCarta)
+    const { data, loading, resultadosBusqueda, populares, promociones,vegetarianos, sinTacc, precioHasta, filtroActual, adminLogged } = useAppSelector(selectCarta)
     const dispatch = useAppDispatch()
 
     useEffect(() => {
