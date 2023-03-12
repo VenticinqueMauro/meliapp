@@ -58,7 +58,7 @@ export const AgregarPlatos = () => {
             file,
             300, // Width
             300, // Height
-            file.type.includes('png') ? 'PNG' : (file.type.includes('jpeg') || file.type.includes('webp') || file.type.includes('jpg')) ? 'JPEG' : '', // Format (detectar si el archivo es PNG, JPEG, JPG o WebP)
+            'JPEG', // CompressFormat
             100, // Quality
             0, // Rotation
             (uri) => {
