@@ -22,7 +22,7 @@ export const ListadoPlatos = () => {
                     setMenuData(docSnap.data().menus);
                 }
             } catch (error) {
-                console.error(error);   
+                console.error(error);
             }
         };
 
@@ -56,23 +56,25 @@ export const ListadoPlatos = () => {
                     menuData.map((categoria) => (
                         categoria.menus.map((menu) => (
                             <div key={menu.nombre} className='grid grid-cols-3 max-w-md gap-4 mx-auto bg-gray-100 inline-block mt-10 relative'>
-                                <div className="col-span-1 row-span-2 relative">
-                                    <img className="w-full" src="https://resizer.glanacion.com/resizer/aDuSrK-kFy1v27LtOHPRYl4QlRs=/768x0/filters:format(webp):quality(80)/cloudfront-us-east-1.images.arcpublishing.com/lanacionar/RHVGX3MHVRB7VGEXBEVCCZHW5I.jpg" alt="" />
-                                    <p className=" px-1 text-white text-lg font-semibold bg-bgPrice shadow  shadow-black rounded-sm mr-1 inline-block absolute top-0 right-0" >${menu.precio}</p>
-                                </div>
+                                {
+                                    menu.imagen &&
+                                    <div className="col-span-1 row-span-2 relative">
+                                        <img className="w-full" src={menu.imagen} alt={menu.nombre} />
+                                        <p className=" px-1 text-white text-lg font-semibold bg-bgPrice shadow  shadow-black rounded-sm mr-1 inline-block absolute top-0 right-0" >${menu.precio}</p>
+                                    </div>
+                                }
                                 <div className="col-span-2">
                                     <div className="flex items-center justify-start gap-1">
                                         {menu.esPromo === true && <img className="w-5 h-5" src={promo} alt='offer' />}
                                         {menu.esPopular === true && <img className="w-5 h-5" src={popular} alt='offer' />}
                                         <p className="tracking-wider text-lg sm:text-xl font-bold inline-block  text-bgPrice underline"  >{menu.nombre}</p>
                                     </div>
-                                    <p className="text-base sm:text-lg text-stone-800 font-medium tracking-wider pt-1 rounded rounded-md" >{menu.ingredientes.join(', ')}</p>
+                                    <p className="text-base sm:text-lg text-stone-800 font-medium tracking-wider pt-1 rounded rounded-md truncate" >{menu.ingredientes.join(', ')}</p>
                                 </div>
                                 <button className="bg-red-900 shadow shadow-black text-white inline-block absolute top-0 right-0 px-2" onClick={() => handleDeleteMenu(categoria.categoria, menu.nombre)}>x</button>
                                 <button className="bg-red-900 shadow shadow-black text-white inline-block absolute top-7 right-0 px-2" onClick={() => handleEdit(menu)}>Edit</button>
                                 {
                                     edit && selectedMenu && selectedMenu.nombre === menu.nombre && <EditarPlatos categoria={categoria.categoria} menu={menu} setEdit={setEdit} />
-                                    
                                 }
                             </div>
                         ))

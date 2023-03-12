@@ -59,7 +59,7 @@ export const MapeoCards: React.FC<MapeoCards> = ({ data }) => {
                                                 :
                                                 null
                                         }
-                                        <div className={`${m.imagen ? 'pl-3 col-start-2 col-span-3' : m.ingredientes.length === 0 && 'col-start-1 col-span-3'} `}>
+                                        <div className={`${m.imagen ? 'pl-3 col-start-2 col-span-3' : 'col-start-1 col-span-3'} `}>
                                             <div className="flex items-center gap-1 justify-start">
                                                 {m.esPromo === true && <img className="w-5 h-5" src={oferta} alt='offer' />}
                                                 {m.esPopular === true && <img className="w-5 h-5" src={popular} alt='popular' />}
@@ -70,7 +70,7 @@ export const MapeoCards: React.FC<MapeoCards> = ({ data }) => {
                                         </div>
                                         {
                                             m.ingredientes && m.ingredientes.length > 0 &&
-                                            <div className={`${m.imagen ? 'pl-3 col-start-2 col-span-3' : 'col-start-1 col-span-4'} `}>
+                                            <div className={`${m.imagen ? 'pl-3 col-start-2 col-span-2' : 'col-start-1 col-span-3'} `}>
                                                 <p className="text-sm  text-gray-900  tracking-wider pt-1 rounded rounded-md capitalize truncate" >{m.ingredientes.join(', ')}</p>
                                             </div>
                                         }
