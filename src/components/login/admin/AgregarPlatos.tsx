@@ -1,9 +1,9 @@
 import { IMenu } from "@/interfaces";
 import { db, storage } from "@/main";
-import Resizer from 'react-image-file-resizer';
+import { MAX_IMAGE_SIZE } from "@/utils/utils";
 import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
-import { ChangeEvent, MouseEvent, useState } from "react";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { ChangeEvent, MouseEvent, useState } from "react";
 
 
 export const AgregarPlatos = () => {
@@ -51,9 +51,16 @@ export const AgregarPlatos = () => {
         updateFormData('imagen', url);
     };
 
+
     const handleImageUpload = (event: ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
         if (!file) return;
+
+        // Check if file size is greater than 2MB
+        if (file.size > MAX_IMAGE_SIZE) {
+            alert('El tamaño de la imagen es demasiado grande. El tamaño máximo permitido es de 2 MB.');
+            return;
+        }
 
         const extension = file.name.split('.').pop()?.toLowerCase();
         let format: 'JPEG' | 'PNG' = 'JPEG'; // Default to JPEG
@@ -68,21 +75,8 @@ export const AgregarPlatos = () => {
                 break;
         }
 
-        Resizer.imageFileResizer(
-            file,
-            300, // Width
-            300, // Height
-            format, // CompressFormat
-            100, // Quality
-            0, // Rotation
-            (uri) => {
-                const blob = uri as Blob;
-                const newFile = new File([blob], file.name, { type: blob.type, lastModified: new Date().getTime() });
-                uploadImageToFirebase(newFile);
-            },
-            'blob', // Output type
-            200 // Max file size
-        );
+        // Call function to upload image to Firebase
+        uploadImageToFirebase(file);
     };
 
 
@@ -172,6 +166,7 @@ export const AgregarPlatos = () => {
                         type="file"
                         name="imagen"
                         accept=".jpeg,.jpg,.png,.webp"
+                        capture="environment"
                         className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                         onChange={handleImageUpload}
                     />

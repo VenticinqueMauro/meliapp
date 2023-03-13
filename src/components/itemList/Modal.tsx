@@ -14,11 +14,11 @@ export const Modal: React.FC<ModalProps> = ({ imagen, nombre, ingredientes, prec
         <div className="fixed top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 containerAll z-50 w-full sm:max-w-4xl rounded-sm shadow-md shadow-black">
             <div className='relative'>
                 <IoCloseSharp className='absolute text-3xl top-0 right-0 m-2 rounded-full bg-bgPrice/40 text-white' onClick={() => setModalOpen(false)} />
-                <div className='sm:flex'>
+                <div className='sm:flex p-3'>
                     {
                         imagen ?
                             <div>
-                                <img src={imagen} alt={nombre} className='w-full sm:w-[250px] rounded-sm shadow' />
+                                <img src={imagen} alt={nombre} className='w-full sm:w-[250px] rounded-sm ' />
                             </div>
                             :
                             null
