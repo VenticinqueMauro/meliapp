@@ -1,8 +1,9 @@
 import { IMenu } from "@/interfaces";
-import { db } from "@/main";
+import { db, storage } from "@/main";
 import Resizer from 'react-image-file-resizer';
 import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import { ChangeEvent, MouseEvent, useState } from "react";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 
 export const AgregarPlatos = () => {
@@ -42,30 +43,44 @@ export const AgregarPlatos = () => {
         }
     };
 
+    const uploadImageToFirebase = async (file: File) => {
+        const storageRef = ref(storage, `images/${file.name}`);
+        await uploadBytes(storageRef, file);
+        const url = await getDownloadURL(storageRef);
+        setImage(url);
+        updateFormData('imagen', url);
+    };
 
     const handleImageUpload = (event: ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
         if (!file) return;
 
-        const acceptedFormats = ['image/jpeg', 'image/png', 'image/webp', 'image/jpg']; // Lista de formatos aceptados
+        const extension = file.name.split('.').pop()?.toLowerCase();
+        let format: 'JPEG' | 'PNG' = 'JPEG'; // Default to JPEG
 
-        if (!acceptedFormats.includes(file.type)) {
-            alert('Formato de imagen no válido. Por favor, seleccione una imagen JPEG, JPG, PNG o WebP.');
-            return;
+        switch (extension) {
+            case 'png':
+                format = 'PNG';
+                break;
+            case 'jpeg':
+            case 'jpg':
+                format = 'JPEG';
+                break;
         }
 
         Resizer.imageFileResizer(
             file,
             300, // Width
             300, // Height
-            'JPEG', // CompressFormat
+            format, // CompressFormat
             100, // Quality
             0, // Rotation
             (uri) => {
-                setImage(uri as string);
-                updateFormData('imagen', uri); // Actualizar el estado de formData con la imagen
+                const blob = uri as Blob;
+                const newFile = new File([blob], file.name, { type: blob.type, lastModified: new Date().getTime() });
+                uploadImageToFirebase(newFile);
             },
-            'base64', // Output type
+            'blob', // Output type
             200 // Max file size
         );
     };

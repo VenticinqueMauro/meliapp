@@ -1,8 +1,10 @@
 import { IMenu } from "@/interfaces";
-import { db } from "@/main";
+import { db, storage } from "@/main";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { deleteObject, getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { ChangeEvent, FormEvent, MouseEvent, useState } from "react";
 import Resizer from 'react-image-file-resizer';
+
 
 
 interface EditarPlatosProps {
@@ -26,35 +28,74 @@ export const EditarPlatos = ({ categoria, menu, setEdit }: EditarPlatosProps): J
         imagen: menu.imagen || "",
     });
 
+    const updateFormData = (name: string, value: any) => {
+        setFormData({
+            ...formData,
+            [name]: value
+        });
+    };
+
+    const uploadImageToFirebase = async (file: File) => {
+        const storageRef = ref(storage, `images/${file.name}`);
+        await uploadBytes(storageRef, file);
+        const url = await getDownloadURL(storageRef);
+        setImage(url);
+        updateFormData('imagen', url);
+    };
+
+    const replaceImageInFirebase = async (newFile: File, oldImageUrl: string) => {
+        // Delete old image
+        const oldImageRef = ref(storage, oldImageUrl);
+        await deleteObject(oldImageRef);
+
+        // Upload new image
+        const storageRef = ref(storage, `images/${newFile.name}`);
+        await uploadBytes(storageRef, newFile);
+        const url = await getDownloadURL(storageRef);
+        setImage(url);
+        updateFormData('imagen', url);
+    };
+
+
     const handleImageUpload = (event: ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
         if (!file) return;
 
-        const acceptedFormats = ['image/jpeg', 'image/png', 'image/webp']; // Lista de formatos aceptados
+        const extension = file.name.split('.').pop()?.toLowerCase();
+        let format: 'JPEG' | 'PNG' = 'JPEG'; // Default to JPEG
 
-        if (!acceptedFormats.includes(file.type)) {
-            alert('Formato de imagen no válido. Por favor, seleccione una imagen JPEG, PNG o WebP.');
-            return;
+        switch (extension) {
+            case 'png':
+                format = 'PNG';
+                break;
+            case 'jpeg':
+            case 'jpg':
+                format = 'JPEG';
+                break;
         }
 
         Resizer.imageFileResizer(
             file,
-            200, // Width
-            200, // Height
-            file.type.includes('png') ? 'PNG' : (file.type.includes('jpeg') || file.type.includes('webp')) ? 'JPEG' : '', // Format (detectar si el archivo es PNG, JPEG o WebP)
+            300, // Width
+            300, // Height
+            format, // CompressFormat
             100, // Quality
             0, // Rotation
             (uri) => {
-                setImage(uri as string);
-                setFormData({
-                    ...formData,
-                    imagen: uri as string
-                }); // Actualizar el estado de formData con la imagen
+                const blob = uri as Blob;
+                const newFile = new File([blob], file.name, { type: blob.type, lastModified: new Date().getTime() });
+
+                if (formData.imagen) {
+                    replaceImageInFirebase(newFile, formData.imagen);
+                } else {
+                    uploadImageToFirebase(newFile);
+                }
             },
-            'base64', // Output type
-            200 // Max file size
+            'blob', // Output type
+            200 // Max file
         );
     };
+
 
     const handleChange = (e: ChangeEvent<HTMLInputElement> | MouseEvent<EventTarget>) => {
         const { name, value, checked, type } = e.target as HTMLInputElement;

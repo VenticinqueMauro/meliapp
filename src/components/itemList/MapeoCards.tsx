@@ -54,7 +54,7 @@ export const MapeoCards: React.FC<MapeoCards> = ({ data }) => {
                                         {
                                             m.imagen ?
                                                 <div className="col-start-1 col-span-1 row-span-3 mr-2  flex items-center">
-                                                    {m.imagen && <img className="rounded-sm w-full h-full sm:w-[80px] md:w-[90px]  shadow shadow-black" src={m.imagen} alt={m.nombre} />}
+                                                    {m.imagen && <img className="rounded-sm w-full h-full sm:w-[80px] md:w-[90px]" src={m.imagen} alt={m.nombre} />}
                                                 </div>
                                                 :
                                                 null

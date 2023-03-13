@@ -1,6 +1,7 @@
 import { ICategoria, IMenu } from "@/interfaces";
-import { db } from "@/main";
+import { db, storage } from "@/main";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { deleteObject, ref } from "firebase/storage";
 import { useEffect, useState } from "react";
 import promo from '../../../assets/sale.svg';
 import popular from '../../../assets/star.svg';
@@ -30,10 +31,37 @@ export const ListadoPlatos = () => {
     }, [menuData]);
 
 
+
+    // const handleDeleteMenu = async (categoria: string, nombre: string) => {
+    //     const menus = [...menuData];
+    //     const categoriaIndex = menus.findIndex((c) => c.categoria === categoria);
+    //     const menuIndex = menus[categoriaIndex].menus.findIndex((m) => m.nombre === nombre);
+    //     const imagenURL = menus[categoriaIndex].menus[menuIndex].imagenURL; // obtenemos la URL de la imagen
+    //     menus[categoriaIndex].menus.splice(menuIndex, 1);
+    //     setMenuData(menus);
+    //     const categoriaVacia = menus[categoriaIndex].menus.length === 0;
+    //     if (categoriaVacia) {
+    //         menus.splice(categoriaIndex, 1);
+    //     }
+    //     const menuRef = doc(db, "Menus", "Prueba");
+
+    //     // eliminar la imagen del almacenamiento de Firebase antes de actualizar el menú
+    //     if (imagenURL) {
+    //         const imagenRef = ref(storage, imagenURL);
+    //         await deleteObject(imagenRef);
+    //     }
+
+    //     await updateDoc(menuRef, { menus: menus });
+    // };
+
     const handleDeleteMenu = async (categoria: string, nombre: string) => {
         const menus = [...menuData];
         const categoriaIndex = menus.findIndex((c) => c.categoria === categoria);
         const menuIndex = menus[categoriaIndex].menus.findIndex((m) => m.nombre === nombre);
+
+        // Si el campo 'imagen' está en el objeto 'menu' en Firestore
+        const imagenURL = menus[categoriaIndex].menus[menuIndex].imagen;
+
         menus[categoriaIndex].menus.splice(menuIndex, 1);
         setMenuData(menus);
         const categoriaVacia = menus[categoriaIndex].menus.length === 0;
@@ -41,8 +69,18 @@ export const ListadoPlatos = () => {
             menus.splice(categoriaIndex, 1);
         }
         const menuRef = doc(db, "Menus", "Prueba");
+
+        // eliminar la imagen del almacenamiento de Firebase antes de actualizar el menú
+        if (imagenURL) {
+            const imagenRef = ref(storage, imagenURL);
+            await deleteObject(imagenRef);
+        }
+
         await updateDoc(menuRef, { menus: menus });
     };
+
+
+
 
     const handleEdit = (menu: IMenu) => {
         setSelectedMenu(menu)
