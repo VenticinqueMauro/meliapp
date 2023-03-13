@@ -21,7 +21,6 @@ export const SideNav: React.FC<sideBarProps> = ({ open, setOpen }) => {
             <div className='text-center text-black p-2 text-lg hover:bg-secondary hover:text-white transition-all duration-200 cursor-pointer'>Promos</div>
             <div className='text-center text-black p-2 text-lg hover:bg-secondary hover:text-white transition-all duration-200 cursor-pointer'>Info</div>
             <div className='text-center text-black p-2 text-lg hover:bg-secondary hover:text-white transition-all duration-200 cursor-pointer'>Redes</div>
-            <Link to='/login' className='text-center text-black p-2 text-lg hover:bg-secondary hover:text-white transition-all duration-200 cursor-pointer'>Login</Link>
         </div>
     )
 }

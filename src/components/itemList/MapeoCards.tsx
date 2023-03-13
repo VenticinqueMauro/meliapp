@@ -1,11 +1,14 @@
 import { ICategoria, IMenu } from "@/interfaces";
 import React, { useState } from "react";
-import { IoInformationSharp } from 'react-icons/io5';
+import { BiPlus } from 'react-icons/bi';
+import { SlOptionsVertical } from 'react-icons/sl';
 import oferta from '../../assets/sale.svg';
 import sinTacc from '../../assets/sinTacc.webp';
 import popular from '../../assets/popular.svg';
 import vegetariano from '../../assets/vegetal.svg';
 import { Modal } from "./Modal";
+import { useAppSelector } from "@/app/hooks";
+import { selectCarta } from "@/features/menuDigital/cartaSlice";
 
 interface MapeoCards {
     data: ICategoria[]
@@ -13,6 +16,7 @@ interface MapeoCards {
 
 export const MapeoCards: React.FC<MapeoCards> = ({ data }) => {
 
+    const { adminLogged } = useAppSelector(selectCarta)
 
     const [modalOpen, setModalOpen] = useState(false)
     const [selectedModal, setSelectedModal] = useState<IMenu | null>(null)
@@ -60,7 +64,7 @@ export const MapeoCards: React.FC<MapeoCards> = ({ data }) => {
                                                 :
                                                 null
                                         }
-                                        <div className={`${m.imagen ? 'pl-3 col-start-2 col-span-3' : 'col-start-1 col-span-3'} `}>
+                                        <div className={`${m.imagen ? 'pl-3 col-start-2 col-span-2' : 'col-start-1 col-span-3'} `}>
                                             <div className="flex items-center gap-1 justify-start">
                                                 {m.esPromo === true && <img className="w-5 h-5" src={oferta} alt='offer' />}
                                                 {m.esPopular === true && <img className="w-5 h-5" src={popular} alt='popular' />}
@@ -70,6 +74,12 @@ export const MapeoCards: React.FC<MapeoCards> = ({ data }) => {
                                             </div>
                                         </div>
                                         {
+                                            adminLogged &&
+                                            <div className="col-start-4 col-span-1 flex justify-end items-center cursor-pointer">
+                                                <SlOptionsVertical />
+                                            </div>
+                                        }
+                                        {
                                             m.ingredientes && m.ingredientes.length > 0 &&
                                             <div className={`${m.imagen ? 'pl-3 col-start-2 col-span-2' : 'col-start-1 col-span-3'} `}>
                                                 <p className="text-sm  text-gray-900  tracking-wider pt-1 rounded rounded-md capitalize truncate" >{m.ingredientes.join(', ')}</p>
@@ -77,7 +87,7 @@ export const MapeoCards: React.FC<MapeoCards> = ({ data }) => {
                                         }
                                         <div className={`${!m.imagen ? 'col-start-1 col-span-4' : 'pl-3 col-start-2 col-span-3'} col-span-3 flex items-center justify-between pt-1   `}>
                                             <p className="text-bgPrice tracking-wider text-base sm:text-xl font-semibold  inline-block pt-1" >{m.precio === 0 ? ' Consular Precio' : `$${m.precio}`}</p>
-                                            <IoInformationSharp className="text-2xl cursor-pointer text-primary bg-bgPrice rounded shadow shadow-black" onClick={() => handleModal(m)} />
+                                            <BiPlus className="text-2xl cursor-pointer text-primary bg-bgPrice rounded shadow shadow-black" onClick={() => handleModal(m)} />
                                         </div>
                                     </div>
                                     {

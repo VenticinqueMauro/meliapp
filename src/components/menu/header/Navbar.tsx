@@ -1,10 +1,13 @@
 import { useAppDispatch, useAppSelector } from "@/app/hooks"
 import { buscarMenu, selectCarta } from "@/features/menuDigital/cartaSlice"
-import React, { useEffect, useState } from "react"
-import { Link as Ruta } from 'react-scroll'
+import React from "react"
 import { AiOutlineCaretLeft, AiOutlineCaretRight } from 'react-icons/ai'
-import { BiSearchAlt, BiRestaurant } from 'react-icons/bi'
+import { BiRestaurant, BiSearchAlt } from 'react-icons/bi'
+import { GiPadlock, GiPadlockOpen } from 'react-icons/gi'
+import { Link } from "react-router-dom"
+import { Link as Ruta } from 'react-scroll'
 import { OrderAndFilter } from "../orderAndFilter/OrderAndFilter"
+import Dropdown from "./DropDownNavbar"
 
 
 
@@ -15,7 +18,7 @@ interface menuProps {
 
 export const Navbar: React.FC<menuProps> = ({ setOpen }) => {
 
-    const { data } = useAppSelector(selectCarta)
+    const { data, adminLogged } = useAppSelector(selectCarta)
 
 
     const dispatch = useAppDispatch()
@@ -37,7 +40,15 @@ export const Navbar: React.FC<menuProps> = ({ setOpen }) => {
                         {/* <img className="pl-3 w-16 p-1" src="https://cdn-icons-png.flaticon.com/512/5040/5040008.png" alt="logo" /> */}
                         <h2 className="pl-3 font-bold text-2xl">TU LOGO</h2>
                     </div>
-                    <div >
+                    <div className="flex items-center gap-4">
+                        {
+                            adminLogged ?   
+                                <Dropdown />
+                                :
+                                <Link to='/login' className="flex items-center gap-1">
+                                    <GiPadlockOpen className="text-gray-100 text-xl" />
+                                </Link>
+                        }
                         <button className="flex items-center pr-3" onClick={() => setOpen(true)} >
                             <BiRestaurant className="text-4xl p-1 navbar text-secondary  border border-primary rounded-md transition-all duration-300 ease-in-out transform active:scale-95" />
                         </button>
