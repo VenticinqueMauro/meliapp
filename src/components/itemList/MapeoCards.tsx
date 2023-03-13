@@ -53,9 +53,10 @@ export const MapeoCards: React.FC<MapeoCards> = ({ data }) => {
                                     <div className='grid grid-cols-4 px-3 border-b py-4 lg:py-5 mb-2 sm:max-w-md  md:h-28 lg:max-w-lg lg:h-32'>
                                         {
                                             m.imagen ?
-                                                <div className="col-start-1 col-span-1 row-span-3 mr-2  flex items-center">
-                                                    {m.imagen && <img className="rounded-sm w-full  sm:w-[80px] md:w-[90px]" src={m.imagen} alt={m.nombre} />}
+                                                <div className="col-start-1 col-span-1 row-span-3 mr-2 w-20 h-20 lg:w-24 lg:h-24 flex items-center justify-center">
+                                                    {m.imagen && <img className="rounded-md object-cover" src={m.imagen} alt={m.nombre} />}
                                                 </div>
+
                                                 :
                                                 null
                                         }

@@ -17,8 +17,8 @@ export const Modal: React.FC<ModalProps> = ({ imagen, nombre, ingredientes, prec
                 <div className='sm:flex p-3'>
                     {
                         imagen ?
-                            <div>
-                                <img src={imagen} alt={nombre} className='w-full sm:w-[250px] rounded-sm ' />
+                            <div className='w-full md:w-64-200 flex items-center justify-center'>
+                                <img src={imagen} alt={nombre} className='object-cover rounded-md ' />
                             </div>
                             :
                             null
