@@ -53,7 +53,7 @@ function App() {
               <Route path='/login' element={<Login />} />
               <Route path='*' element={<div>ERROR 404...</div>} />
             </Routes>
-            <Toaster position='top-right' />
+            <Toaster position='bottom-right' />
           </>
 
       }

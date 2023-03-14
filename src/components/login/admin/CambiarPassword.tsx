@@ -45,17 +45,36 @@ export const CambiarPassword = () => {
                     await toast.promise(updatePassword(user, newPassword), {
                         loading: 'Cambiando contraseña...',
                         success: 'Cambio de contraseña exitoso!',
-                        error: 'No se pudo cambiar la contraseña.'
+                        error: 'No se pudo cambiar la contraseña.',
+                        
+                    }, {
+                        style: {
+                            borderRadius: '10px',
+                            background: '#333',
+                            color: '#fff',
+                        },
                     });
                     dispatch(logOutAdmin())
                     navigate('/login')
                 } else {
-                    toast.error('Las contraseñas no coinciden')
+                    toast.error('Las contraseñas no coinciden',{
+                        style: {
+                            borderRadius: '10px',
+                            background: '#333',
+                            color: '#fff',
+                        },
+                    })
                 }
             }
         } catch (error) {
             console.log(error)
-            toast.error('La contraseña anterior es incorrecta')
+            toast.error('La contraseña anterior es incorrecta',{
+                style: {
+                    borderRadius: '10px',
+                    background: '#333',
+                    color: '#fff',
+                },
+            })
         }
 
         setUserCredentials({

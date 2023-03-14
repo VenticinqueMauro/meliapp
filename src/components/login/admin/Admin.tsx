@@ -19,7 +19,12 @@ export const Admin = () => {
     const handleLogOut = () => {
         dispatch(logOutAdmin())
         toast('Bye bye!', {
-            icon: '👏',
+            icon: '👋🏻',
+            style: {
+                borderRadius: '10px',
+                background: '#333',
+                color: '#fff',
+            },
         });
         navigate('/')
     }

@@ -131,9 +131,21 @@ export const EditarPlatos = ({ categoria, menu, setEdit }: EditarPlatosProps): J
             // Actualiza el documento de Firestore con la lista actualizada de menús
             await updateDoc(docRef, { menus: newMenuData });
 
-            toast.success('¡Menú actualizado con éxito!')
+            toast.success('¡Menú actualizado con éxito!',{
+                style: {
+                    borderRadius: '10px',
+                    background: '#333',
+                    color: '#fff',
+                },
+            })
         } catch (error) {
-            toast.error('¡Error al actualizar el Menú!')
+            toast.error('¡Error al actualizar el Menú!',{
+                style: {
+                    borderRadius: '10px',
+                    background: '#333',
+                    color: '#fff',
+                },
+            })
             console.error("Error:", error);
         }
 

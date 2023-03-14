@@ -110,7 +110,13 @@ export const AgregarPlatos = () => {
             }
             // Actualizamos el documento en Firestore
             await updateDoc(docRef, { menus: existingData.menus });
-            toast.success('¡Menú agregado con éxito!')
+            toast.success('¡Menú agregado con éxito!',{
+                style: {
+                    borderRadius: '10px',
+                    background: '#333',
+                    color: '#fff',
+                },
+            })
         } else {
             // El documento no existe, lo creamos con el nuevo valor
             const newMenuData = {
@@ -122,7 +128,13 @@ export const AgregarPlatos = () => {
                 ]
             };
             await setDoc(docRef, newMenuData);
-            toast.success('¡Menú agregado con éxito!')
+            toast.success('¡Menú agregado con éxito!', {
+                style: {
+                    borderRadius: '10px',
+                    background: '#333',
+                    color: '#fff',
+                },
+            })
         }
 
         // Limpiamos el formulario y actualizamos el estado
