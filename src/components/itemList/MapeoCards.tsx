@@ -1,14 +1,14 @@
+import { useAppSelector } from "@/app/hooks";
+import { selectCarta } from "@/features/menuDigital/cartaSlice";
 import { ICategoria, IMenu } from "@/interfaces";
 import React, { useState } from "react";
 import { BiPlus } from 'react-icons/bi';
 import { SlOptionsVertical } from 'react-icons/sl';
+import popular from '../../assets/popular.svg';
 import oferta from '../../assets/sale.svg';
 import sinTacc from '../../assets/sinTacc.webp';
-import popular from '../../assets/popular.svg';
 import vegetariano from '../../assets/vegetal.svg';
 import { Modal } from "./Modal";
-import { useAppSelector } from "@/app/hooks";
-import { selectCarta } from "@/features/menuDigital/cartaSlice";
 
 interface MapeoCards {
     data: ICategoria[]

@@ -1,13 +1,15 @@
 import { useEffect, useState } from 'react'
-import { toast, Toaster } from 'react-hot-toast'
+import { Toaster } from 'react-hot-toast'
 import { HotKeys, KeyMap } from 'react-hotkeys'
-import { Route, Routes, useNavigate } from 'react-router-dom'
+import { Navigate, redirect, Route, Routes, useNavigate } from 'react-router-dom'
 import './App.css'
-import { useAppDispatch } from './app/hooks'
+import { useAppDispatch, useAppSelector } from './app/hooks'
 import { Presentacion } from './components'
 import { ItemListContainer } from './components/itemListContainer/ItemListContainer'
+import { Admin } from './components/admin/Admin'
 import { Login } from './components/login/Login'
-import { loginAdmin } from './features/menuDigital/cartaSlice'
+import { loginAdmin, selectCarta } from './features/menuDigital/cartaSlice'
+import { CambiarPassword } from './components/admin/CambiarPassword'
 
 
 const keyMap: KeyMap = {
@@ -21,6 +23,7 @@ function App() {
   const [loader, setLoader] = useState(false)
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
+  const { adminLogged } = useAppSelector(selectCarta)
 
   useEffect(() => {
 
@@ -51,6 +54,8 @@ function App() {
             <Routes>
               <Route path='/' element={<ItemListContainer />} />
               <Route path='/login' element={<Login />} />
+              <Route path='/admin' element={adminLogged ? <Admin /> : <Login /> } />
+              <Route path='/admin/changePassword' element={adminLogged ? <CambiarPassword /> : <Login /> } />
               <Route path='*' element={<div>ERROR 404...</div>} />
             </Routes>
             <Toaster position='bottom-right' />

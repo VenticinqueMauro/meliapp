@@ -5,7 +5,7 @@ import { BiFoodMenu } from "react-icons/bi";
 import { GiPadlock } from "react-icons/gi";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { MdLogout } from "react-icons/md";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 
 function Dropdown() {
@@ -36,24 +36,24 @@ function Dropdown() {
                     <GiPadlock className="text-gray-100 text-xl" />
                 </Menu.Button>
             </div>
-            <Menu.Items className="absolute right-0 mt-2 w-44 origin-top-right bg-white rounded-md shadow-lg focus:outline-none">
+            <Menu.Items className="shadow shadow-bgPrice absolute right-0 mt-2 w-44 origin-top-right bg-white rounded-md shadow-lg focus:outline-none">
                 <div className="py-1">
                     <Menu.Item>
                         {({ active }) => (
-                            <div className={`${active ? "bg-gray-600" : "text-gray-700"
-                                } block px-4 py-2 text-sm cursor-pointer flex items-center gap-1`} >
+                            <Link to='/admin' className={`${active ? "bg-gray-600" : "text-gray-700"
+                                } block px-4 py-2 text-sm cursor-pointer flex items-center gap-1 border-b`} >
                                 <BiFoodMenu />
                                 <span>Editar Menu</span>
-                            </div>
+                            </Link>
                         )}
                     </Menu.Item>
                     <Menu.Item>
                         {({ active }) => (
-                            <div className={`${active ? "bg-gray-600" : "text-gray-700"
-                                } block px-4 py-2 text-sm cursor-pointer flex items-center gap-1`} >
+                            <Link to='/admin/changePassword' className={`${active ? "bg-gray-600" : "text-gray-700"
+                                } block px-4 py-2 text-sm cursor-pointer flex items-center gap-1 border-b`} >
                                 <RiLockPasswordLine />
                                 <span className="text-sm">Cambiar Password</span>
-                            </div>
+                            </Link>
                         )}
                     </Menu.Item>
                     <Menu.Item>
