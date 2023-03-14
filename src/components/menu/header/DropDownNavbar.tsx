@@ -6,6 +6,7 @@ import { GiPadlock } from "react-icons/gi";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { MdLogout } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
 
 function Dropdown() {
 
@@ -15,7 +16,10 @@ function Dropdown() {
 
     const handleLogOut = () => {
         dispatch(logOutAdmin())
-        navigate('/login')
+        toast('Bye bye!', {
+            icon: '👏',
+        });
+        navigate('/')
     }
 
 

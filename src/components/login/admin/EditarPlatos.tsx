@@ -4,6 +4,7 @@ import { MAX_IMAGE_SIZE } from "@/utils/utils";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { deleteObject, getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { ChangeEvent, FormEvent, MouseEvent, useState } from "react";
+import { toast } from "react-hot-toast";
 
 
 
@@ -130,9 +131,10 @@ export const EditarPlatos = ({ categoria, menu, setEdit }: EditarPlatosProps): J
             // Actualiza el documento de Firestore con la lista actualizada de menús
             await updateDoc(docRef, { menus: newMenuData });
 
-            console.log("Documento actualizado con éxito");
+            toast.success('¡Menú actualizado con éxito!')
         } catch (error) {
-            console.error("Error al actualizar el documento:", error);
+            toast.error('¡Error al actualizar el Menú!')
+            console.error("Error:", error);
         }
 
         setEdit(false)
@@ -156,26 +158,28 @@ export const EditarPlatos = ({ categoria, menu, setEdit }: EditarPlatosProps): J
                 </div>
                 <div >
                     <label className="block font-medium text-gray-700">Imagen (opcional)</label>
-                    <input
-                        type="file"
-                        name="imagen"
-                        accept=".jpeg,.jpg,.png,.webp"
-                        capture="environment"
-                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                        onChange={handleImageUpload}
-                    />
+                    <div>
+                        <input
+                            type="file"
+                            name="imagen"
+                            accept=".jpeg,.jpg,.png,.webp"
+                            capture="environment"
+                            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                            onChange={handleImageUpload}
+                        />
+                    </div>
                     <div>
                         {image && (
                             <div className="mt-4 relative h-[150x] w-[150px]">
                                 <img src={image} alt="Imagen subida" className="w-full h-auto" />
-                                <button className="bg-black text-white px-2 py-1  absolute top-0 right-0" onClick={() => setImage("")}>X</button>
+                                <button className="bg-bgPrice rounded-md px-2 py-1  absolute top-0 right-0" onClick={() => setImage("")}>❌</button>
                             </div>
                         )}
                     </div>
                 </div>
                 <div >
                     <label className="block font-medium text-gray-700">Precio $</label>
-                    <input type="number" name="precio" value={formData.precio} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" onChange={handleChange} required />
+                    <input type="number" name="precio" value={formData.precio} step='1' min='1' className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" onChange={handleChange} required={formData.precio === 0} />
                 </div>
 
                 <div className="grid grid-cols-2">

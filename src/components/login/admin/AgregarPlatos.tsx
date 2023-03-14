@@ -4,6 +4,7 @@ import { MAX_IMAGE_SIZE } from "@/utils/utils";
 import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { ChangeEvent, MouseEvent, useState } from "react";
+import { toast } from "react-hot-toast";
 
 
 export const AgregarPlatos = () => {
@@ -89,7 +90,7 @@ export const AgregarPlatos = () => {
     };
 
 
-    const handleSubmit = async (e: MouseEvent<HTMLButtonElement>) => {
+    const handleSubmit = async (e: ChangeEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         const docRef = doc(db, "Menus", "Prueba");
@@ -109,6 +110,7 @@ export const AgregarPlatos = () => {
             }
             // Actualizamos el documento en Firestore
             await updateDoc(docRef, { menus: existingData.menus });
+            toast.success('¡Menú agregado con éxito!')
         } else {
             // El documento no existe, lo creamos con el nuevo valor
             const newMenuData = {
@@ -120,6 +122,7 @@ export const AgregarPlatos = () => {
                 ]
             };
             await setDoc(docRef, newMenuData);
+            toast.success('¡Menú agregado con éxito!')
         }
 
         // Limpiamos el formulario y actualizamos el estado
@@ -143,10 +146,10 @@ export const AgregarPlatos = () => {
     return (
         <div className="mx-auto max-w-xl px-8">
             <h2 className="text-center text-2xl underline">Agregar Platos al Menu</h2>
-            <form className="flex flex-col gap-4 pt-10" >
+            <form className="flex flex-col gap-4 pt-10" onSubmit={handleSubmit}>
                 <div className="c">
                     <label className="block font-medium text-gray-700">Categoria</label>
-                    <input type="text" value={nombreCategoria.toLocaleLowerCase()} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" onChange={handleNombreCategoriaChange} />
+                    <input type="text" value={nombreCategoria.toLocaleLowerCase()} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" onChange={handleNombreCategoriaChange} required />
                 </div>
                 <div >
                     <label className="block font-medium text-gray-700">Nombre</label>
@@ -158,7 +161,7 @@ export const AgregarPlatos = () => {
                 </div>
                 <div >
                     <label className="block font-medium text-gray-700">Precio $</label>
-                    <input type="number" name="precio" value={formData.precio} step='1' className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" onChange={handleChange} required />
+                    <input type="number" name="precio" value={formData.precio} step='1' min='1' className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" onChange={handleChange} required={formData.precio === 0} />
                 </div>
                 <div >
                     <label className="block font-medium text-gray-700">Imagen (opcional)</label>
@@ -170,11 +173,12 @@ export const AgregarPlatos = () => {
                         className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                         onChange={handleImageUpload}
                     />
+
                     <div>
                         {image && (
                             <div className="mt-4 relative h-[150x] w-[150px]">
                                 <img src={image} alt="Imagen subida" className="w-full h-auto" />
-                                <button className="bg-black text-white px-2 py-1  absolute top-0 right-0" onClick={() => setImage("")}>X</button>
+                                <button className="bg-bgPrice rounded-md px-2 py-1  absolute top-0 right-0" onClick={() => setImage("")}>❌</button>
                             </div>
                         )}
                     </div>
@@ -206,7 +210,7 @@ export const AgregarPlatos = () => {
                     </div>
                 </div>
                 <div >
-                    <button type="submit" className="py-2 px-4 bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white rounded-lg" onClick={handleSubmit}>Agregar Menu</button>
+                    <button type="submit" className="py-2 px-4 bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white rounded-lg" >Agregar Menu</button>
                 </div>
             </form>
         </div>

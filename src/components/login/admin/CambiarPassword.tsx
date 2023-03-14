@@ -1,8 +1,9 @@
 import { useAppDispatch } from "@/app/hooks"
 import { logOutAdmin } from "@/features/menuDigital/cartaSlice"
 import { auth } from "@/main"
-import { updatePassword } from "firebase/auth"
+import { EmailAuthProvider, reauthenticateWithCredential, updatePassword } from "firebase/auth"
 import { ChangeEvent, useState } from "react"
+import { toast } from "react-hot-toast"
 import { FaUserCog } from "react-icons/fa"
 import { RiLockPasswordFill } from "react-icons/ri"
 import { useNavigate } from "react-router-dom"
@@ -12,7 +13,8 @@ export const CambiarPassword = () => {
     const [userCredentials, setUserCredentials] = useState({
         email: '',
         oldPassword: '',
-        newPassword: ''
+        newPassword: '',
+        confirmNewPassword: ''
     })
 
     const navigate = useNavigate()
@@ -34,23 +36,37 @@ export const CambiarPassword = () => {
         e.preventDefault()
         try {
             if (user) {
-                await updatePassword(user, userCredentials.newPassword)
-                console.log('Cambio de contrasena con exito');
+                // Verificar la contraseña anterior del usuario
+                const { email, oldPassword, newPassword, confirmNewPassword } = userCredentials
+                const credential = EmailAuthProvider.credential(email, oldPassword)
+                await reauthenticateWithCredential(user, credential)
+
+                if (newPassword === confirmNewPassword) {
+                    await toast.promise(updatePassword(user, newPassword), {
+                        loading: 'Cambiando contraseña...',
+                        success: 'Cambio de contraseña exitoso!',
+                        error: 'No se pudo cambiar la contraseña.'
+                    });
+                    dispatch(logOutAdmin())
+                    navigate('/login')
+                } else {
+                    toast.error('Las contraseñas no coinciden')
+                }
             }
-            dispatch(logOutAdmin())
-            navigate('/login')
         } catch (error) {
-            console.log(error);
+            console.log(error)
+            toast.error('La contraseña anterior es incorrecta')
         }
 
         setUserCredentials({
             email: '',
             oldPassword: '',
-            newPassword: ''
+            newPassword: '',
+            confirmNewPassword: ''
         })
-
-
     }
+
+
 
     return (
         <div className=" max-w-7xl mx-auto text-center">
@@ -88,6 +104,17 @@ export const CambiarPassword = () => {
                         placeholder="New Password"
                         name="newPassword"
                         value={userCredentials.newPassword}
+                        type='password'
+                        onChange={handleChange}
+                    />
+                </div>
+                <div className="flex items-center gap-1 p-1 bg-white shadow rounded-md ">
+                    <RiLockPasswordFill className="text-gray-500" />
+                    <input
+                        className=" w-full placeholder:text-gray-500 outline-none"
+                        placeholder="Confirm Password"
+                        name="confirmNewPassword"
+                        value={userCredentials.confirmNewPassword}
                         type='password'
                         onChange={handleChange}
                     />

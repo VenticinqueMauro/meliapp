@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { toast, Toaster } from 'react-hot-toast'
 import { HotKeys, KeyMap } from 'react-hotkeys'
 import { Route, Routes, useNavigate } from 'react-router-dom'
 import './App.css'
@@ -22,15 +23,13 @@ function App() {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    setTimeout(() => {
-      setLoader(false)
-    }, 3000)
-      const isLogged = localStorage.getItem('isLogged');
-      if (isLogged === 'true') {
-          dispatch(loginAdmin());
-      }
+
+    const isLogged = localStorage.getItem('isLogged');
+    if (isLogged === 'true') {
+      dispatch(loginAdmin());
+    }
   }, [])
-  
+
   const handlers = {
     SAVE: (keyEvent?: KeyboardEvent) => {
       if (keyEvent) {
@@ -48,12 +47,14 @@ function App() {
           ?
           <Presentacion />
           :
-          <Routes>
-            <Route path='/' element={<ItemListContainer />} />
-            <Route path='/login' element={<Login />} />
-            <Route path='*' element={<div>ERROR 404...</div>} />
-
-          </Routes>
+          <>
+            <Routes>
+              <Route path='/' element={<ItemListContainer />} />
+              <Route path='/login' element={<Login />} />
+              <Route path='*' element={<div>ERROR 404...</div>} />
+            </Routes>
+            <Toaster position='top-right' />
+          </>
 
       }
     </HotKeys>

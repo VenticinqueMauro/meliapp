@@ -1,6 +1,7 @@
 import { useAppDispatch } from "@/app/hooks";
 import { logOutAdmin } from "@/features/menuDigital/cartaSlice";
 import { useState } from "react";
+import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { AgregarPlatos } from "./AgregarPlatos";
 import { CambiarPassword } from "./CambiarPassword";
@@ -17,7 +18,10 @@ export const Admin = () => {
 
     const handleLogOut = () => {
         dispatch(logOutAdmin())
-        navigate('/login')
+        toast('Bye bye!', {
+            icon: '👏',
+        });
+        navigate('/')
     }
 
     return (

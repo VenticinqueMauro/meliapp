@@ -2,6 +2,7 @@ import { ICartaState, ICategoria } from '@/interfaces';
 import { db } from '@/main';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { doc, getDoc } from 'firebase/firestore';
+import {  toast } from 'react-hot-toast';
 import type { RootState } from '../../app/store';
 
 
@@ -146,12 +147,10 @@ export const cartaSlice = createSlice({
         loginAdmin: (state) => {
             state.adminLogged = true
             localStorage.setItem('isLogged', 'true');
-            console.log('Login Exitoso!');
         },
         logOutAdmin: (state) => {
-            state.adminLogged = false  
+            state.adminLogged = false
             localStorage.removeItem("isLogged");
-            console.log('Logout Exitoso!');
         },
     },
     extraReducers: (builder) => {

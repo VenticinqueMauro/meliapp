@@ -10,6 +10,7 @@ import { Admin } from './admin/Admin'
 import { auth } from '@/main'
 import { useAppDispatch, useAppSelector } from '@/app/hooks'
 import { loginAdmin, selectCarta } from '@/features/menuDigital/cartaSlice'
+import { toast } from 'react-hot-toast'
 
 
 export const Login = () => {
@@ -21,7 +22,6 @@ export const Login = () => {
         email: '',
         password: ''
     })
-    const [errorMsj, setErrorMsj] = useState('')
 
 
 
@@ -44,10 +44,24 @@ export const Login = () => {
 
             // Si el inicio de sesión es exitoso, establece authorized en true
             dispatch(loginAdmin());
+            toast.success('Login Exitoso!', {
+                style: {
+                    borderRadius: '10px',
+                    background: '#333',
+                    color: '#fff',
+                },
+            })
 
         } catch (error) {
             // Si hay un error, establece el mensaje de error
-            setErrorMsj("ACCESO DENEGADO");
+            toast('Acceso Denegado!', {
+                icon: '⚠️',
+                style: {
+                    borderRadius: '10px',
+                    background: '#333',
+                    color: '#fff',
+                },
+            })
         }
     };
 
@@ -95,9 +109,6 @@ export const Login = () => {
                             Entrar
                         </button>
                     </form>
-                    <span className="bg-red-400 block text-center mt-2 text-xl text-white shadow-sm">
-                        {errorMsj}
-                    </span>
                 </div>
             )}
         </div>
