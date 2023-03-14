@@ -5,6 +5,7 @@ import { EmailAuthProvider, reauthenticateWithCredential, updatePassword } from 
 import { ChangeEvent, useState } from "react"
 import { toast } from "react-hot-toast"
 import { FaUserCog } from "react-icons/fa"
+import { MdKeyboardBackspace } from "react-icons/md"
 import { RiLockPasswordFill } from "react-icons/ri"
 import { Link, useNavigate } from "react-router-dom"
 
@@ -90,8 +91,11 @@ export const CambiarPassword = () => {
     return (
         <div className="w-full h-screen text-center  containerAll relative">
 
-            <Link to='/' className="text-xl text-start px-6 1cursor-pointer">Volver al <b>inicio</b></Link>
-            <div className="fixed top-1/3 -translate-y-1/3 left-1/2 -translate-x-1/2 w-80">
+            <Link to="/" className="flex items-center gap-1">
+                    <MdKeyboardBackspace className="ml-6  text-4xl" />
+                    <p className="text-lg">Volver al <b>inicio</b></p>
+            </Link>
+            <div className="fixed top-1/3 -translate-y-2/3 left-1/2 -translate-x-1/2 w-80">
                 <h2 className="text-center text-3xl mb-10 font-medium">Cambiar Contraseña</h2>
                 <form
                     className="flex flex-col gap-2 w-full"

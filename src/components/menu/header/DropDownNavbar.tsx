@@ -43,7 +43,7 @@ function Dropdown() {
                             <Link to='/admin' className={`${active ? "bg-gray-600" : "text-gray-700"
                                 } block px-4 py-2 text-sm cursor-pointer flex items-center gap-1 border-b`} >
                                 <BiFoodMenu />
-                                <span>Editar Menu</span>
+                                <span>Panel Admin</span>
                             </Link>
                         )}
                     </Menu.Item>

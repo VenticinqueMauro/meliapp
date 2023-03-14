@@ -3,11 +3,9 @@ import { selectCarta } from "@/features/menuDigital/cartaSlice";
 import { ICategoria, IMenu } from "@/interfaces";
 import React, { useState } from "react";
 import { BiPlus } from 'react-icons/bi';
-import { SlOptionsVertical } from 'react-icons/sl';
 import popular from '../../assets/popular.svg';
 import oferta from '../../assets/sale.svg';
-import sinTacc from '../../assets/sinTacc.webp';
-import vegetariano from '../../assets/vegetal.svg';
+import { DropDownCard } from "./DropDownCard";
 import { Modal } from "./Modal";
 
 interface MapeoCards {
@@ -64,27 +62,28 @@ export const MapeoCards: React.FC<MapeoCards> = ({ data }) => {
                                                 :
                                                 null
                                         }
-                                        <div className={`${m.imagen ? 'pl-3 col-start-2 col-span-2' : 'col-start-1 col-span-3'} `}>
+                                        <div className={`${m.imagen ? 'col-start-2 col-span-3' : 'col-start-1 col-span-4'} flex items-center justify-between`}>
                                             <div className="flex items-center gap-1 justify-start">
                                                 {m.esPromo === true && <img className="w-5 h-5" src={oferta} alt='offer' />}
                                                 {m.esPopular === true && <img className="w-5 h-5" src={popular} alt='popular' />}
                                                 <p className='tracking-wider text-lg sm:text-xl font-bold inline-block  text-bgPrice underline capitalize'  >{m.nombre}</p>
-                                                {m.esVegetariano === true && <img className="w-5 h-5" src={vegetariano} alt='vegetariano' />}
-                                                {m.esSinTac === true && <img className="w-5 h-5" src={sinTacc} alt='sinTACC' />}
                                             </div>
+
+                                            {/* BOTON DE OPCIONES ADMIN  */}
+
+                                            {adminLogged && <DropDownCard />}
                                         </div>
-                                        {
-                                            adminLogged &&
-                                            <div className="col-start-4 col-span-1 flex justify-end items-center cursor-pointer">
-                                                <SlOptionsVertical />
-                                            </div>
-                                        }
+
+
+
+
                                         {
                                             m.ingredientes && m.ingredientes.length > 0 &&
                                             <div className={`${m.imagen ? 'pl-3 col-start-2 col-span-2' : 'col-start-1 col-span-3'} `}>
                                                 <p className="text-sm  text-gray-900  tracking-wider pt-1 rounded rounded-md capitalize truncate" >{m.ingredientes.join(', ')}</p>
                                             </div>
                                         }
+
                                         <div className={`${!m.imagen ? 'col-start-1 col-span-4' : 'pl-3 col-start-2 col-span-3'} col-span-3 flex items-center justify-between pt-1   `}>
                                             <p className="text-bgPrice tracking-wider text-base sm:text-xl font-semibold  inline-block pt-1" >{m.precio === 0 ? ' Consular Precio' : `$${m.precio}`}</p>
                                             <BiPlus className="text-2xl cursor-pointer text-primary bg-bgPrice rounded shadow shadow-black" onClick={() => handleModal(m)} />

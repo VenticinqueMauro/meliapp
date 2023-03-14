@@ -3,8 +3,6 @@ import { buscarMenu, selectCarta } from "@/features/menuDigital/cartaSlice"
 import React from "react"
 import { AiOutlineCaretLeft, AiOutlineCaretRight } from 'react-icons/ai'
 import { BiRestaurant, BiSearchAlt } from 'react-icons/bi'
-import { GiPadlock, GiPadlockOpen } from 'react-icons/gi'
-import { Link } from "react-router-dom"
 import { Link as Ruta } from 'react-scroll'
 import { OrderAndFilter } from "../orderAndFilter/OrderAndFilter"
 import Dropdown from "./DropDownNavbar"
@@ -42,12 +40,8 @@ export const Navbar: React.FC<menuProps> = ({ setOpen }) => {
                     </div>
                     <div className="flex items-center gap-4">
                         {
-                            adminLogged ?   
-                                <Dropdown />
-                                :
-                                <Link to='/login' className="flex items-center gap-1">
-                                    <GiPadlockOpen className="text-gray-100 text-xl" />
-                                </Link>
+                            adminLogged && <Dropdown />
+
                         }
                         <button className="flex items-center pr-3" onClick={() => setOpen(true)} >
                             <BiRestaurant className="text-4xl p-1 navbar text-secondary  border border-primary rounded-md transition-all duration-300 ease-in-out transform active:scale-95" />

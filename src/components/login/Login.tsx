@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import { FaUserCog } from 'react-icons/fa'
 import { MdKeyboardBackspace } from 'react-icons/md'
 import { RiLockPasswordFill } from 'react-icons/ri'
-import { Link, useNavigate } from "react-router-dom"
+import { Link, Navigate, useNavigate } from "react-router-dom"
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { Admin } from '../admin/Admin'
 import { auth } from '@/main'
@@ -69,45 +69,51 @@ export const Login = () => {
 
     return (
         <div className='containerAll h-screen card relative'>
-            <Link to="/">
+            <Link to="/" className="flex items-center gap-1">
                 <MdKeyboardBackspace className="ml-6  text-4xl" />
+                <p className="text-lg">Volver al <b>inicio</b></p>
             </Link>
-            <div className="w-4/5 lg:w-1/3 mx-auto mt-20 shadow-md shadow-black rounded-md p-2 bg-bgPrice/10 card">
-                <img
-                    className="w-20 mx-auto m-2"
-                    src={logoAdmin}
-                    alt="admin"
-                />
-                <form
-                    className="flex flex-col gap-2"
-                    typeof="submit"
-                    onSubmit={handleSignIn}
-                >
-                    <div className="flex items-center gap-1 p-1 bg-white shadow rounded-md ">
-                        <FaUserCog className="text-gray-500" />
-                        <input
-                            className=" w-full placeholder:text-gray-500 outline-none"
-                            placeholder="Email"
-                            name="email"
-                            type={"email"}
-                            onChange={handleChange}
+            {
+                !adminLogged ?
+                    <div className="fixed top-1/3 -translate-y-3/4 left-1/2 -translate-x-1/2 w-80 card">
+                        <img
+                            className="w-20 mx-auto m-2"
+                            src={logoAdmin}
+                            alt="admin"
                         />
+                        <form
+                            className="flex flex-col gap-2"
+                            typeof="submit"
+                            onSubmit={handleSignIn}
+                        >
+                            <div className="flex items-center gap-1 p-1 bg-white shadow rounded-md ">
+                                <FaUserCog className="text-gray-500" />
+                                <input
+                                    className=" w-full placeholder:text-gray-500 outline-none"
+                                    placeholder="Email"
+                                    name="email"
+                                    type={"email"}
+                                    onChange={handleChange}
+                                />
+                            </div>
+                            <div className="flex items-center gap-1 p-1 bg-white shadow rounded-md ">
+                                <RiLockPasswordFill className="text-gray-500" />
+                                <input
+                                    className=" w-full placeholder:text-gray-500 outline-none"
+                                    placeholder="Password"
+                                    name="password"
+                                    type="password"
+                                    onChange={handleChange}
+                                />
+                            </div>
+                            <button className="p-1 bg-black text-white shadow rounded-md uppercase font-medium outline-none">
+                                Entrar
+                            </button>
+                        </form>
                     </div>
-                    <div className="flex items-center gap-1 p-1 bg-white shadow rounded-md ">
-                        <RiLockPasswordFill className="text-gray-500" />
-                        <input
-                            className=" w-full placeholder:text-gray-500 outline-none"
-                            placeholder="Password"
-                            name="password"
-                            type="password"
-                            onChange={handleChange}
-                        />
-                    </div>
-                    <button className="p-1 bg-black text-white shadow rounded-md uppercase font-medium outline-none">
-                        Entrar
-                    </button>
-                </form>
-            </div>
+                    :
+                    <Navigate to='/admin' />
+            }
         </div>
     );
 
