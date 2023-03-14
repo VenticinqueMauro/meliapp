@@ -18,6 +18,11 @@ function Dropdown() {
         dispatch(logOutAdmin())
         toast('Bye bye!', {
             icon: '👏',
+            style: {
+                borderRadius: '10px',
+                background: '#333',
+                color: '#fff',
+            },
         });
         navigate('/')
     }
