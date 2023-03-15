@@ -1,9 +1,11 @@
-import { IMenu } from "@/interfaces";
+import { useAppSelector } from "@/app/hooks";
+import { selectCarta } from "@/features/menuDigital/cartaSlice";
+import { ICategoria, IMenu } from "@/interfaces";
 import { db, storage } from "@/main";
 import { MAX_IMAGE_SIZE } from "@/utils/utils";
 import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { ChangeEvent, MouseEvent, useState } from "react";
+import { ChangeEvent, MouseEvent, useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import { MdKeyboardBackspace } from "react-icons/md";
 import { Link } from "react-router-dom";
@@ -11,8 +13,12 @@ import { Link } from "react-router-dom";
 
 export const AgregarPlatos = () => {
 
+    const { data } = useAppSelector(selectCarta)
+
     const [image, setImage] = useState<string>('');
     const [nombreCategoria, setNombreCategoria] = useState("");
+    const [categorias, setCategorias] = useState<string[]>([]);
+
     const [formData, setFormData] = useState<IMenu>({
         nombre: "",
         precio: 0,
@@ -24,7 +30,16 @@ export const AgregarPlatos = () => {
         imagen: "",
     });
 
-    const handleNombreCategoriaChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    useEffect(() => {
+        if (data && data.length > 0) {
+            const categorias: string[] = data.map((categoria: ICategoria) => categoria.categoria.toLocaleLowerCase());
+            setCategorias(categorias);
+        }
+    }, [data]);
+
+
+
+    const handleNombreCategoriaChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) => {
         setNombreCategoria(e.target.value.toLocaleLowerCase());
     };
 
@@ -174,7 +189,19 @@ export const AgregarPlatos = () => {
                 <form className="flex flex-col gap-4 pt-10" onSubmit={handleSubmit}>
                     <div>
                         <label className="block font-medium text-gray-700">Categoria</label>
-                        <input type="text" value={nombreCategoria.toLocaleLowerCase()} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" onChange={handleNombreCategoriaChange} required />
+                        {
+                            categorias.length > 0 && <select className="block w-full rounded-md border-gray-200 shadow-sm my-2" onChange={handleNombreCategoriaChange}>
+                                <option className="text-gray-400" value="">Seleccione una categoria</option>
+                                {
+                                    categorias.map(c => (
+                                        <option key={c} className="text-gray-700" value={c.toLocaleLowerCase()} >{c}</option>
+                                    ))
+                                }
+                            </select>
+
+                        }
+                        <input type="text" value={nombreCategoria.toLocaleLowerCase()} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" onChange={handleNombreCategoriaChange} />
+
                     </div>
                     <div >
                         <label className="block font-medium text-gray-700">Nombre</label>
