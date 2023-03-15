@@ -23,11 +23,11 @@ export const DropDownCard: React.FC<DropwDownCardProps> = ({ categoria, nombre, 
         <>
             <Menu as="div" className="relative inline-block text-left ">
                 <div>
-                    <Menu.Button className="flex justify-end font-medium text-black">
+                    <Menu.Button className="flex justify-end font-medium text-black ">
                         <SlOptionsVertical />
                     </Menu.Button>
                 </div>
-                <Menu.Items className="shadow shadow-bgPrice absolute right-0 mt-2 w-44 origin-top-right bg-white rounded-md shadow-lg focus:outline-none">
+                <Menu.Items className="shadow  absolute right-0 mt-2 w-40 origin-top-right bg-white rounded-md shadow-lg focus:outline-none">
                     <div className="py-1">
                         <Menu.Item>
                             {({ active }) => (

@@ -56,9 +56,10 @@ export const MapeoCards: React.FC<MapeoCards> = ({ data }) => {
                                     <div className='grid grid-cols-4 px-3 border-b py-4 lg:py-5 mb-2 sm:max-w-md  md:h-28 lg:max-w-lg lg:h-32'>
                                         {
                                             m.imagen ?
-                                                <div className="col-start-1 col-span-1 row-span-3 mr-2 w-20 h-20 lg:w-24 lg:h-24 flex items-center justify-center">
-                                                    {m.imagen && <img className="rounded-md object-cover" src={m.imagen} alt={m.nombre} />}
+                                                <div className="col-start-1 col-span-1 row-span-3 mr-2 w-20 max-h-20 lg:w-24 lg:h-24 flex items-center justify-center">
+                                                    {m.imagen && <img className="rounded-md object-contain h-full w-full" style={{ objectFit: 'cover' }} src={m.imagen} alt={m.nombre} />}
                                                 </div>
+
 
                                                 :
                                                 null
@@ -80,12 +81,12 @@ export const MapeoCards: React.FC<MapeoCards> = ({ data }) => {
 
                                         {
                                             m.ingredientes && m.ingredientes.length > 0 &&
-                                            <div className={`${m.imagen ? 'pl-3 col-start-2 col-span-2' : 'col-start-1 col-span-3'} `}>
+                                            <div className={`${m.imagen ? 'col-start-2 col-span-2' : 'col-start-1 col-span-3'} `}>
                                                 <p className="text-sm  text-gray-900  tracking-wider pt-1 rounded rounded-md capitalize truncate" >{m.ingredientes.join(', ')}</p>
                                             </div>
                                         }
 
-                                        <div className={`${!m.imagen ? 'col-start-1 col-span-4' : 'pl-3 col-start-2 col-span-3'} col-span-3 flex items-center justify-between pt-1   `}>
+                                        <div className={`${!m.imagen ? 'col-start-1 col-span-4' : 'col-start-2 col-span-3'} col-span-3 flex items-center justify-between pt-1   `}>
                                             <p className="text-bgPrice tracking-wider text-base sm:text-xl font-semibold  inline-block pt-1" >{m.precio === 0 ? ' Consular Precio' : `$${m.precio}`}</p>
                                             <BiPlus className="text-2xl cursor-pointer text-primary bg-bgPrice rounded shadow shadow-black" onClick={() => handleModal(m)} />
                                         </div>

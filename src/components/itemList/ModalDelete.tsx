@@ -85,7 +85,7 @@ export const ModalDelete = forwardRef((props: ModalDeleteProps, ref) => {
 
     return (
         <>
-            <button className="block px-4 py-2 text-sm cursor-pointer flex items-center gap-1 border-b text-red-500" onClick={() => setIsOpen(true)}>
+            <button className="block px-4 py-2 text-sm cursor-pointer flex items-center gap-1 text-red-500" onClick={() => setIsOpen(true)}>
                 <AiOutlineDelete />
                 <span>Eliminar Menú</span>
             </button>

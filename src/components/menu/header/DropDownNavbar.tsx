@@ -36,7 +36,7 @@ function Dropdown() {
                     <GiPadlock className="text-gray-100 text-xl" />
                 </Menu.Button>
             </div>
-            <Menu.Items className="shadow shadow-bgPrice absolute right-0 mt-2 w-48 origin-top-right bg-white rounded-md shadow-lg focus:outline-none">
+            <Menu.Items className="shadow absolute right-0 mt-2 w-48 origin-top-right bg-white rounded-md shadow-lg focus:outline-none">
                 <div className="py-1">
                     <Menu.Item>
                         {({ active }) => (
