@@ -40,10 +40,10 @@ function Dropdown() {
                 <div className="py-1">
                     <Menu.Item>
                         {({ active }) => (
-                            <Link to='/admin' className={`${active ? "bg-gray-600" : "text-gray-700"
+                            <Link to='/admin/agregarmenus' className={`${active ? "bg-gray-600" : "text-gray-700"
                                 } block px-4 py-2 text-sm cursor-pointer flex items-center gap-1 border-b`} >
                                 <BiFoodMenu />
-                                <span>Panel Admin</span>
+                                <span>Agregar menús</span>
                             </Link>
                         )}
                     </Menu.Item>

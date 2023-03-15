@@ -20,8 +20,6 @@ export const MapeoCards: React.FC<MapeoCards> = ({ data }) => {
     const [selectedModal, setSelectedModal] = useState<IMenu | null>(null)
 
 
-
-
     const handleModal = (menu: IMenu) => {
         setSelectedModal(menu)
         setModalOpen(true)
@@ -41,7 +39,7 @@ export const MapeoCards: React.FC<MapeoCards> = ({ data }) => {
 
                             {
                                 modalOpen &&
-                                <div className="fixed top-0 right-0 h-screen w-full z-30 bg-black/20"></div>
+                                <div className="fixed top-0 right-0 h-screen w-full z-30 bg-bgPrice/10"></div>
                             }
 
                             {/* NOMBRE CATEGORIA  */}
@@ -74,7 +72,7 @@ export const MapeoCards: React.FC<MapeoCards> = ({ data }) => {
 
                                             {/* BOTON DE OPCIONES ADMIN  */}
 
-                                            {adminLogged && <DropDownCard categoria={menu.categoria} nombre={m.nombre} data={data} />}
+                                            {adminLogged && <DropDownCard categoria={menu.categoria} nombre={m.nombre} menu={m} data={data} />}
                                         </div>
 
 

@@ -56,29 +56,6 @@ export const cartaSlice = createSlice({
             state.resultadosBusqueda = newState;
             state.filtroActual = 'busqueda';
         },
-        // eliminarMenu: (state, { payload }: { payload: { categoria: string, nombre: string } }): ICartaState => {
-        //     const newState: ICategoria[] = state.data.map((categoria) => {
-        //         if (categoria.categoria === payload.categoria) {
-        //             const newMenus = categoria.menus.filter((menu) => menu.nombre !== payload.nombre);
-        //             return { ...categoria, menus: newMenus };
-        //         } else {
-        //             return categoria;
-        //         }
-        //     });
-        //     return { ...state, data: newState };
-        // },
-        // eliminarMenu: (state, { payload }: { payload: { categoria: string, nombre: string } }): ICartaState => {
-        //     const newState: ICategoria[] = state.data.map((categoria) => {
-        //         if (categoria.categoria === payload.categoria) {
-        //             const newMenus = categoria.menus.filter((menu) => menu.nombre !== payload.nombre);
-        //             if (newMenus.length !== categoria.menus.length) {
-        //                 return { ...categoria, menus: newMenus };
-        //             }
-        //         }
-        //         return categoria;
-        //     });
-        //     return { ...state, data: newState };
-        // },
         eliminarMenu: (state, { payload }: { payload: { categoria: string, nombre: string } }): ICartaState => {
             const categoriaIndex = state.data.findIndex(categoria => categoria.categoria === payload.categoria);
             if (categoriaIndex === -1) {

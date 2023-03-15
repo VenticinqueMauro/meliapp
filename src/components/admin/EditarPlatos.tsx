@@ -5,16 +5,18 @@ import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { deleteObject, getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { ChangeEvent, FormEvent, MouseEvent, useState } from "react";
 import { toast } from "react-hot-toast";
+import { MdKeyboardBackspace } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 
 
 interface EditarPlatosProps {
     categoria: string;
     menu: IMenu;
-    setEdit: React.Dispatch<React.SetStateAction<boolean>>
+    setEditMenu: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export const EditarPlatos = ({ categoria, menu, setEdit }: EditarPlatosProps): JSX.Element => {
+export const EditarPlatos = ({ categoria, menu, setEditMenu }: EditarPlatosProps): JSX.Element => {
 
     const [nombreCategoria, setNombreCategoria] = useState(categoria);
     const [image, setImage] = useState<string>('');
@@ -131,7 +133,7 @@ export const EditarPlatos = ({ categoria, menu, setEdit }: EditarPlatosProps): J
             // Actualiza el documento de Firestore con la lista actualizada de menús
             await updateDoc(docRef, { menus: newMenuData });
 
-            toast.success('¡Menú actualizado con éxito!',{
+            toast.success('¡Menú actualizado con éxito!', {
                 style: {
                     borderRadius: '10px',
                     background: '#333',
@@ -139,7 +141,7 @@ export const EditarPlatos = ({ categoria, menu, setEdit }: EditarPlatosProps): J
                 },
             })
         } catch (error) {
-            toast.error('¡Error al actualizar el Menú!',{
+            toast.error('¡Error al actualizar el Menú!', {
                 style: {
                     borderRadius: '10px',
                     background: '#333',
@@ -149,81 +151,85 @@ export const EditarPlatos = ({ categoria, menu, setEdit }: EditarPlatosProps): J
             console.error("Error:", error);
         }
 
-        setEdit(false)
+        setEditMenu(false)
     };
 
 
     return (
-        <div className="fixed top-1/2 -translate-x-1/2 left-1/2 -translate-y-1/2 z-50 w-full  bg-primary text-black">
-            <form className="flex flex-col gap-4 pt-10" onSubmit={handleFormSubmit}>
-                <div className="c">
-                    <label className="block font-medium text-gray-700">Categoria</label>
-                    <input type="text" value={categoria.toLocaleLowerCase()} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" onChange={handleNombreCategoriaChange} disabled />
-                </div>
-                <div >
-                    <label className="block font-medium text-gray-700">Nombre</label>
-                    <input type="text" name="nombre" value={formData.nombre.toLocaleLowerCase()} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" onChange={handleChange} required />
-                </div>
-                <div >
-                    <label className="block font-medium text-gray-700">Ingredientes (separar con coma)</label>
-                    <input type="text" name="ingredientes" value={formData.ingredientes} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" onChange={handleChange} />
-                </div>
-                <div >
-                    <label className="block font-medium text-gray-700">Imagen (opcional)</label>
-                    <div>
-                        <input
-                            type="file"
-                            name="imagen"
-                            accept=".jpeg,.jpg,.png,.webp"
-                            capture="environment"
-                            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                            onChange={handleImageUpload}
-                        />
+        <div className=" w-full h-screen fixed top-0 left-0 containerAll z-40 overflow-hidden">
+            <button className="flex items-center gap-1" onClick={() => setEditMenu(false)}>
+                <MdKeyboardBackspace className="ml-6  text-4xl" />
+            </button>
+            <div className="fixed top-1/2 -translate-y-2/3 w-80 left-1/2 -translate-x-1/2">
+                <h2 className="text-center text-2xl underline">Editar Menú</h2>
+                <form className="flex flex-col gap-4 pt-10" onSubmit={handleFormSubmit}>
+                    <div className="c">
+                        <label className="block font-medium text-gray-700">Categoria</label>
+                        <input type="text" value={categoria.toLocaleLowerCase()} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" onChange={handleNombreCategoriaChange} disabled />
                     </div>
-                    <div>
-                        {image && (
-                            <div className="mt-4 relative h-[150x] w-[150px]">
-                                <img src={image} alt="Imagen subida" className="w-full h-auto" />
-                                <button className="bg-bgPrice rounded-md px-2 py-1  absolute top-0 right-0" onClick={() => setImage("")}>❌</button>
-                            </div>
-                        )}
+                    <div >
+                        <label className="block font-medium text-gray-700">Nombre</label>
+                        <input type="text" name="nombre" value={formData.nombre.toLocaleLowerCase()} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" onChange={handleChange} required />
                     </div>
-                </div>
-                <div >
-                    <label className="block font-medium text-gray-700">Precio $</label>
-                    <input type="number" name="precio" value={formData.precio} step='1' min='1' className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" onChange={handleChange} required={formData.precio === 0} />
-                </div>
+                    <div >
+                        <label className="block font-medium text-gray-700">Ingredientes (separar con coma)</label>
+                        <input type="text" name="ingredientes" value={formData.ingredientes} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" onChange={handleChange} />
+                    </div>
+                    <div >
+                        <label className="block font-medium text-gray-700">Imagen (opcional)</label>
+                        <div>
+                            <input
+                                type="file"
+                                name="imagen"
+                                accept=".jpeg,.jpg,.png,.webp"
+                                capture="environment"
+                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                onChange={handleImageUpload}
+                            />
+                        </div>
+                        <div>
+                            {image && (
+                                <div className="mt-4 relative h-[150x] w-[150px]">
+                                    <img src={image} alt="Imagen subida" className="w-full h-auto" />
+                                    <button className="bg-bgPrice rounded-md px-2 py-1  absolute top-0 right-0" onClick={() => setImage("")}>❌</button>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                    <div >
+                        <label className="block font-medium text-gray-700">Precio $</label>
+                        <input type="number" name="precio" value={formData.precio} step='1' min='1' className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" onChange={handleChange} required={formData.precio === 0} />
+                    </div>
 
-                <div className="grid grid-cols-2">
-                    <div >
-                        <div className="flex items-center">
-                            <input type="checkbox" name="esPopular" className="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" onChange={handleChange} checked={formData.esPopular} />
-                            <label className="ml-2 block font-medium text-gray-700">Popular</label>
+                    <div className="grid grid-cols-2">
+                        <div >
+                            <div className="flex items-center">
+                                <input type="checkbox" name="esPopular" className="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" onChange={handleChange} checked={formData.esPopular} />
+                                <label className="ml-2 block font-medium text-gray-700">Recomendado</label>
+                            </div>
+                        </div>
+                        <div >
+                            <div className="flex items-center">
+                                <input type="checkbox" name="esPromo" className="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" onChange={handleChange} checked={formData.esPromo} />
+                                <label className="ml-2 block font-medium text-gray-700">Promocional</label>
+                            </div>
+                        </div>
+                        <div >
+                            <div className="flex items-center">
+                                <input type="checkbox" name="esVegetariano" className="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" onChange={handleChange} checked={formData.esVegetariano} />
+                                <label className="ml-2 block font-medium text-gray-700">Vegetariano</label>
+                            </div>
+                        </div>
+                        <div >
+                            <div className="flex items-center">
+                                <input type="checkbox" name="esSinTac" className="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" onChange={handleChange} checked={formData.esSinTac} />
+                                <label className="ml-2 block font-medium text-gray-700" >Sin TAC</label>
+                            </div>
                         </div>
                     </div>
-                    <div >
-                        <div className="flex items-center">
-                            <input type="checkbox" name="esPromo" className="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" onChange={handleChange} checked={formData.esPromo} />
-                            <label className="ml-2 block font-medium text-gray-700">Promocional</label>
-                        </div>
-                    </div>
-                    <div >
-                        <div className="flex items-center">
-                            <input type="checkbox" name="esVegetariano" className="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" onChange={handleChange} checked={formData.esVegetariano} />
-                            <label className="ml-2 block font-medium text-gray-700">Vegetariano</label>
-                        </div>
-                    </div>
-                    <div >
-                        <div className="flex items-center">
-                            <input type="checkbox" name="esSinTac" className="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" onChange={handleChange} checked={formData.esSinTac} />
-                            <label className="ml-2 block font-medium text-gray-700" >Sin TAC</label>
-                        </div>
-                    </div>
-                </div>
-                <div >
-                    <button type="submit" className="py-2 px-4 bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white rounded-lg">Actualizar</button>
-                </div>
-            </form>
+                    <button type="submit" className="py-2 px-4 bg-bgPrice block text-white rounded-lg mt-5 uppercase">Actualizar</button>
+                </form>
+            </div>
         </div>
     )
 }

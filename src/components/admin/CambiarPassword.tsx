@@ -92,13 +92,12 @@ export const CambiarPassword = () => {
         <div className="w-full h-screen text-center  containerAll relative">
 
             <Link to="/" className="flex items-center gap-1">
-                    <MdKeyboardBackspace className="ml-6  text-4xl" />
-                    <p className="text-lg">Volver al <b>inicio</b></p>
+                <MdKeyboardBackspace className="ml-6  text-4xl" />
             </Link>
             <div className="fixed top-1/3 -translate-y-2/3 left-1/2 -translate-x-1/2 w-80">
-                <h2 className="text-center text-3xl mb-10 font-medium">Cambiar Contraseña</h2>
+                <h2 className="text-center text-2xl underline">Cambiar Contraseña</h2>
                 <form
-                    className="flex flex-col gap-2 w-full"
+                    className="flex flex-col gap-4 mt-10"
                     typeof="submit"
                     onSubmit={handleSubmit}
                 >
@@ -146,7 +145,7 @@ export const CambiarPassword = () => {
                             onChange={handleChange}
                         />
                     </div>
-                    <button type="submit" className="p-1 bg-black text-white shadow rounded-md uppercase font-medium outline-none">
+                    <button type="submit" className="p-1 bg-bgPrice text-white shadow rounded-md uppercase font-medium outline-none">
                         Change Password
                     </button>
                 </form>

@@ -91,7 +91,7 @@ export const ListadoPlatos = () => {
                                 <button className="bg-red-900 shadow shadow-black text-white inline-block absolute top-0 right-0 px-2" onClick={() => handleDeleteMenu(categoria.categoria, menu.nombre)}>x</button>
                                 <button className="bg-red-900 shadow shadow-black text-white inline-block absolute top-7 right-0 px-2" onClick={() => handleEdit(menu)}>Edit</button>
                                 {
-                                    edit && selectedMenu && selectedMenu.nombre === menu.nombre && <EditarPlatos categoria={categoria.categoria} menu={menu} setEdit={setEdit} />
+                                    edit && selectedMenu && selectedMenu.nombre === menu.nombre && <EditarPlatos categoria={categoria.categoria} menu={menu}  />
                                 }
                             </div>
                         ))

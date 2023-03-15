@@ -35,7 +35,6 @@ export const Navbar: React.FC<menuProps> = ({ setOpen }) => {
 
                 <div className="flex items-center justify-between py-2 ">
                     <div className="">
-                        {/* <img className="pl-3 w-16 p-1" src="https://cdn-icons-png.flaticon.com/512/5040/5040008.png" alt="logo" /> */}
                         <h2 className="pl-3 font-bold text-2xl">TU LOGO</h2>
                     </div>
                     <div className="flex items-center gap-4">

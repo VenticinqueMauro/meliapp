@@ -11,13 +11,7 @@ interface OrderProps {
 export const FilterModal: React.FC<OrderProps> = ({ openFilter, setOpenFilter }) => {
 
 
-    // const {data} = useAppSelector(selectCarta)
     const dispatch = useAppDispatch()
-
-    // const handleFilterIngredientes = (ing: string) => {
-    //     dispatch(filtroPorIngredientes(ing))
-    //     setOpenFilter(false)
-    // } 
 
     const handleFilterPopulares = () => {
         dispatch(filtroPopulares())
@@ -52,7 +46,7 @@ export const FilterModal: React.FC<OrderProps> = ({ openFilter, setOpenFilter })
                 </Menu.Button>
 
                 <Menu.Button className='border-t-2 pt-3 pb-3 mx-3 px-1 flex items-center text-lg w-full' onClick={() => handleFilterPopulares()}>
-                    <span>Populares</span>
+                    <span>Recomendados</span>
                 </Menu.Button>
 
                 <Menu.Button className='border-t-2 pt-3 pb-3 mx-3 px-1 flex items-center text-lg w-full' onClick={() => handleFilterVegetarianos()}>
@@ -62,20 +56,6 @@ export const FilterModal: React.FC<OrderProps> = ({ openFilter, setOpenFilter })
                 <Menu.Button className='border-t-2 pt-3 pb-3 mx-3 px-1 flex items-center text-lg w-full' onClick={() => handleFilterSinTacc()}>
                     <span>Sin T.A.C.C</span>
                 </Menu.Button>
-
-                {/* <Menu.Button className='border-t-2 pt-3 pb-3 mx-3 px-1 flex items-center text-lg w-full'>
-                    <span>Ingredientes</span>
-                    <MdOutlineKeyboardArrowDown />
-                </Menu.Button>
-                <Menu.Items className='flex flex-col border'>
-                    <Menu.Items className='flex flex-col border'>
-                        {
-                            data.map(menu => menu.menus.map((m) => [...new Set(m.ingredientes)].map((ingredientes, i) => (
-                                <button key={i} className='mt-2 p-1 text-gray-600 text-sm px-3 capitalize' onClick={() => handleFilterIngredientes(ingredientes)}>{ingredientes}</button>
-                            ))))
-                        }
-                    </Menu.Items>
-                </Menu.Items> */}
             </Menu >
         </div >
     )

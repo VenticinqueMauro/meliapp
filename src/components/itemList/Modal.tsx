@@ -11,13 +11,13 @@ interface ModalProps extends IMenu {
 
 export const Modal: React.FC<ModalProps> = ({ imagen, nombre, ingredientes, precio, setModalOpen, esPromo, esPopular, esVegetariano, esSinTac }) => {
     return (
-        <div className="fixed top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 containerAll z-50 w-full sm:max-w-4xl rounded-sm shadow-md shadow-black">
+        <div className="fixed top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 containerAll z-50 w-full sm:max-w-4xl rounded-md shadow-md ">
             <div className='relative'>
                 <IoCloseSharp className='absolute text-3xl top-0 right-0 m-2 rounded-full bg-bgPrice/40 text-white' onClick={() => setModalOpen(false)} />
                 <div className='sm:flex p-3'>
                     {
                         imagen ?
-                            <div className='w-full md:w-64-200 flex items-center justify-center'>
+                            <div className='w-full md:w-64 flex items-center justify-center'>
                                 <img src={imagen} alt={nombre} className='object-cover rounded-md ' />
                             </div>
                             :

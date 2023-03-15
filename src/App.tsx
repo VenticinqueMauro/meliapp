@@ -1,15 +1,12 @@
 import { useEffect, useState } from 'react'
 import { Toaster } from 'react-hot-toast'
 import { HotKeys, KeyMap } from 'react-hotkeys'
-import { Route, Routes, useNavigate } from 'react-router-dom'
+import { Navigate, Route, Routes, useNavigate } from 'react-router-dom'
 import './App.css'
 import { useAppDispatch, useAppSelector } from './app/hooks'
 import { Presentacion } from './components'
-import { Admin } from './components/admin/Admin'
 import { AgregarPlatos } from './components/admin/AgregarPlatos'
 import { CambiarPassword } from './components/admin/CambiarPassword'
-import { EditarPlatos } from './components/admin/EditarPlatos'
-import { ModalDelete } from './components/itemList/ModalDelete'
 import { ItemListContainer } from './components/itemListContainer/ItemListContainer'
 import { Login } from './components/login/Login'
 import { loginAdmin, selectCarta } from './features/menuDigital/cartaSlice'
@@ -56,10 +53,10 @@ function App() {
           <>
             <Routes>
               <Route path='/' element={<ItemListContainer />} />
-              <Route path='/login' element={<Login />} />
-              <Route path='/admin' element={adminLogged ? <Admin /> : <Login /> } />
+              <Route path='/login' element={!adminLogged ? <Login /> : <Navigate to='/' />} />
+              {/* <Route path='/admin' element={adminLogged ? <Admin /> : <Login /> } /> */}
               <Route path='/admin/changepassword' element={adminLogged ? <CambiarPassword /> : <Login /> } />
-              <Route path='/admin/agregarplatos' element={adminLogged ? <AgregarPlatos /> : <Login /> } />
+              <Route path='/admin/agregarmenus' element={adminLogged ? <AgregarPlatos /> : <Login /> } />              
               <Route path='*' element={<div>ERROR 404...</div>} />
             </Routes>
             <Toaster position='bottom-right' />
