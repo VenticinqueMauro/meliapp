@@ -6,7 +6,6 @@ import { deleteObject, getDownloadURL, ref, uploadBytes } from "firebase/storage
 import { ChangeEvent, FormEvent, MouseEvent, useState } from "react";
 import { toast } from "react-hot-toast";
 import { MdKeyboardBackspace } from "react-icons/md";
-import { Link } from "react-router-dom";
 
 
 
