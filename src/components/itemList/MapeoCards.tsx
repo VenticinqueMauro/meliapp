@@ -1,7 +1,7 @@
 import { useAppSelector } from "@/app/hooks";
 import { selectCarta } from "@/features/menuDigital/cartaSlice";
 import { ICategoria, IMenu } from "@/interfaces";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BiPlus } from 'react-icons/bi';
 import popular from '../../assets/popular.svg';
 import oferta from '../../assets/sale.svg';
@@ -20,10 +20,13 @@ export const MapeoCards: React.FC<MapeoCards> = ({ data }) => {
     const [selectedModal, setSelectedModal] = useState<IMenu | null>(null)
 
 
+
+
     const handleModal = (menu: IMenu) => {
         setSelectedModal(menu)
         setModalOpen(true)
     }
+
 
     return (
         <>
@@ -44,7 +47,7 @@ export const MapeoCards: React.FC<MapeoCards> = ({ data }) => {
                             {/* NOMBRE CATEGORIA  */}
 
                             <div className="md:col-span-2">
-                                <h2 className="inline-block categoria bg-bgPrice/95 text-start uppercase  text-white  sm:text-lg tracking-widest px-3 rounded-r-sm text-center font-bold " style={{ textShadow: '0px 1px 1px #000', boxShadow: '0px 0px 2px #000' }}>{menu.categoria}</h2>
+                                <h2 className="inline-block categoria bg-bgPrice/95 text-start uppercase  text-white  sm:text-lg tracking-widest px-3 rounded-r-sm text-center font-bold z-0" style={{ textShadow: '0px 1px 1px #000', boxShadow: '0px 0px 2px #000' }}>{menu.categoria.length > 0 && menu.categoria}</h2>
                             </div>
 
                             {/* MAP DE CARDS  */}
@@ -71,7 +74,7 @@ export const MapeoCards: React.FC<MapeoCards> = ({ data }) => {
 
                                             {/* BOTON DE OPCIONES ADMIN  */}
 
-                                            {adminLogged && <DropDownCard />}
+                                            {adminLogged && <DropDownCard categoria={menu.categoria} nombre={m.nombre} data={data} />}
                                         </div>
 
 

@@ -2,7 +2,6 @@ import { ICartaState, ICategoria } from '@/interfaces';
 import { db } from '@/main';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { doc, getDoc } from 'firebase/firestore';
-import {  toast } from 'react-hot-toast';
 import type { RootState } from '../../app/store';
 
 
@@ -56,6 +55,52 @@ export const cartaSlice = createSlice({
                 .filter((categoria) => categoria !== null) as ICategoria[];
             state.resultadosBusqueda = newState;
             state.filtroActual = 'busqueda';
+        },
+        // eliminarMenu: (state, { payload }: { payload: { categoria: string, nombre: string } }): ICartaState => {
+        //     const newState: ICategoria[] = state.data.map((categoria) => {
+        //         if (categoria.categoria === payload.categoria) {
+        //             const newMenus = categoria.menus.filter((menu) => menu.nombre !== payload.nombre);
+        //             return { ...categoria, menus: newMenus };
+        //         } else {
+        //             return categoria;
+        //         }
+        //     });
+        //     return { ...state, data: newState };
+        // },
+        // eliminarMenu: (state, { payload }: { payload: { categoria: string, nombre: string } }): ICartaState => {
+        //     const newState: ICategoria[] = state.data.map((categoria) => {
+        //         if (categoria.categoria === payload.categoria) {
+        //             const newMenus = categoria.menus.filter((menu) => menu.nombre !== payload.nombre);
+        //             if (newMenus.length !== categoria.menus.length) {
+        //                 return { ...categoria, menus: newMenus };
+        //             }
+        //         }
+        //         return categoria;
+        //     });
+        //     return { ...state, data: newState };
+        // },
+        eliminarMenu: (state, { payload }: { payload: { categoria: string, nombre: string } }): ICartaState => {
+            const categoriaIndex = state.data.findIndex(categoria => categoria.categoria === payload.categoria);
+            if (categoriaIndex === -1) {
+                return state;
+            }
+        
+            const categoria = state.data[categoriaIndex];
+            const newMenus = categoria.menus.filter(menu => menu.nombre !== payload.nombre);
+        
+            if (newMenus.length === categoria.menus.length) {
+                return state;
+            }
+        
+            const newCategoria = { ...categoria, menus: newMenus };
+            const newData = [...state.data];
+            newData[categoriaIndex] = newCategoria;
+        
+            if (newMenus.length === 0) {
+                newData.splice(categoriaIndex, 1);
+            }
+        
+            return { ...state, data: newData };
         },
         filtroPrecioHasta: (state, { payload }: { payload: number }) => {
             if (!payload) {
@@ -167,7 +212,7 @@ export const cartaSlice = createSlice({
     }
 })
 
-export const { buscarMenu, filtroPrecioHasta, filtroMenorPrecio, filtroMayorPrecio, filtroPopulares, filtroPromos, filtroVegetarianos, filtroSinTacc, loginAdmin, logOutAdmin, removeFilter } = cartaSlice.actions
+export const { buscarMenu, eliminarMenu, filtroPrecioHasta, filtroMenorPrecio, filtroMayorPrecio, filtroPopulares, filtroPromos, filtroVegetarianos, filtroSinTacc, loginAdmin, logOutAdmin, removeFilter } = cartaSlice.actions
 
 export const selectCarta = (state: RootState) => state.carta
 

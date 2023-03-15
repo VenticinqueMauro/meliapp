@@ -43,7 +43,7 @@ export const FilterModal: React.FC<OrderProps> = ({ openFilter, setOpenFilter })
 
 
     return (
-        <div className={`fixed inset-0 ${openFilter ? 'h-screen' : 'h-0'} pt-3 text-black bg-gray-100 overflow-auto`}>
+        <div className={`fixed inset-0 ${openFilter ? 'h-screen' : 'h-0'} pt-3 text-black bg-gray-100 overflow-auto z-50`}>
             <MdKeyboardBackspace className='mx-3 text-3xl cursor-pointer' onClick={() => setOpenFilter(false)} />
             <p className="text-center text-3xl p-5">Filtrar Por</p>
             <Menu>

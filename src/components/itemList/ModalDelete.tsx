@@ -1,20 +1,47 @@
+import { useAppDispatch } from '@/app/hooks';
+import { eliminarMenu } from '@/features/menuDigital/cartaSlice';
 import { ICategoria } from '@/interfaces';
 import { db, storage } from '@/main';
-import { Dialog } from '@headlessui/react';
-import { doc, updateDoc } from 'firebase/firestore';
-import { deleteObject, ref } from 'firebase/storage';
-import { useState } from 'react';
+import { doc, getDoc, updateDoc } from 'firebase/firestore';
+import { deleteObject, ref as refed } from 'firebase/storage';
+import { forwardRef, useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { AiOutlineDelete } from 'react-icons/ai';
 
-export const ModalDelete = () => {
+interface ModalDeleteProps {
+    categoria: string;
+    nombre: string;
+    data: ICategoria[]
+}
+
+export const ModalDelete = forwardRef((props: ModalDeleteProps, ref) => {
 
     const [menuData, setMenuData] = useState<ICategoria[]>([]);
     const [isOpen, setIsOpen] = useState(false);
 
+    const dispatch = useAppDispatch()
+
+    useEffect(() => {
+        const getMenuData = async () => {
+            try {
+                const docRef = doc(db, "Menus", "Prueba");
+                const docSnap = await getDoc(docRef);
+                if (docSnap.exists()) {
+                    setMenuData(docSnap.data().menus);
+                }
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        getMenuData();
+    }, [props.data]);
+
+
     const handleDeleteMenu = async (categoria: string, nombre: string) => {
+        
         const menus = [...menuData];
-        const categoriaIndex = menus.findIndex((c) => c.categoria === categoria);
+        const categoriaIndex = menus.findIndex((c) => c?.categoria === categoria);
         const menuIndex = menus[categoriaIndex].menus.findIndex((m) => m.nombre === nombre);
 
         // Si el campo 'imagen' está en el objeto 'menu' en Firestore
@@ -30,13 +57,31 @@ export const ModalDelete = () => {
 
         // eliminar la imagen del almacenamiento de Firebase antes de actualizar el menú
         if (imagenURL) {
-            const imagenRef = ref(storage, imagenURL);
+            const imagenRef = refed(storage, imagenURL);
             await deleteObject(imagenRef);
         }
 
-        await updateDoc(menuRef, { menus: menus });
-        toast.success("¡Menú eliminado con éxito!")
+        await toast.promise(updateDoc(menuRef, { menus: menus }), {
+            loading: 'Eliminando menú...',
+            success: '¡Menú eliminado con éxito!',
+            error: 'No se pudo eliminar el menú.',
+
+        }, {
+            style: {
+                borderRadius: '10px',
+                background: '#333',
+                color: '#fff',
+            },
+        });
+        dispatch(eliminarMenu({categoria: props.categoria, nombre: props.nombre}))
+        
     };
+
+    const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault()
+        handleDeleteMenu(props.categoria, props.nombre)
+    }
+
 
     return (
         <>
@@ -45,19 +90,30 @@ export const ModalDelete = () => {
                 <span>Eliminar Menú</span>
             </button>
 
-            <Dialog open={isOpen} onClose={() => setIsOpen(false)} className='absolute top-1/2 -translate-x-1/2 left-1/2 -translate-y-1/2 bg-bgPrice text-white w-80 p-3 rounded-xl z-50'>
-                <Dialog.Panel>
-                    <Dialog.Title className='text-center text-2xl'>¿Eliminar menú?</Dialog.Title>
-                    <Dialog.Description className='text-center mt-2'>
-                        Esta acción no se puede revertir.
-                    </Dialog.Description>
-                    <div className="flex flex-row justify-evenly mt-3">
-                        <button className='flex justify-start' onClick={() => setIsOpen(false)}>Cancel</button>
-                        <button className='flex justify-end ' >Confirmar</button>
+            {isOpen && (
+                <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-center">
+                    <div className="bg-white rounded-lg p-6">
+                        <h2 className="text-lg font-medium mb-2 text-center">¿Eliminar menú?</h2>
+                        <p className="text-gray-500 text-sm mb-4">Esta acción no se puede revertir.</p>
+                        <div className="flex justify-end space-x-2">
+                            <button
+                                className="px-4 py-2 rounded-lg text-gray-500 border border-gray-500 hover:bg-gray-100 transition-colors"
+                                onClick={() => setIsOpen(false)}
+                            >
+                                Cancelar
+                            </button>
+                            <button
+                                className="px-4 py-2 rounded-lg bg-red-500 text-white hover:bg-red-600 transition-colors"
+                                onClick={handleClick}
+                            >
+                                Confirmar
+                            </button>
+                        </div>
                     </div>
-                </Dialog.Panel>
-            </Dialog>
+                </div>
+            )}
+
         </>
     );
-};
+});
 

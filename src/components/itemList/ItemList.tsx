@@ -6,13 +6,15 @@ import { MapeoCards } from "./MapeoCards";
 
 export const ItemList = () => {
 
-    const { data, loading, resultadosBusqueda, populares, promociones,vegetarianos, sinTacc, precioHasta, filtroActual, adminLogged } = useAppSelector(selectCarta)
+    const { data, loading, resultadosBusqueda, populares, promociones, vegetarianos, sinTacc, precioHasta, filtroActual, adminLogged } = useAppSelector(selectCarta)
     const dispatch = useAppDispatch()
 
     useEffect(() => {
         dispatch(fetchMenuData());
     }, [dispatch]);
-    
+
+
+
 
     return (
         <div className="containerAll">
@@ -23,13 +25,13 @@ export const ItemList = () => {
                         <Loader />
                         :
                         <>
-                        {filtroActual === 'busqueda' && <MapeoCards data={resultadosBusqueda} />}
-                        {filtroActual === 'popular' && <MapeoCards data={populares} />}
-                        {filtroActual === 'promos' && <MapeoCards data={promociones} />}
-                        {filtroActual === 'vegetariano' && <MapeoCards data={vegetarianos} />}
-                        {filtroActual === 'sinTacc' && <MapeoCards data={sinTacc} />}
-                        {filtroActual === 'hasta' && <MapeoCards data={precioHasta} />}
-                        {filtroActual === 'ninguno' && <MapeoCards data={data} /> }
+                            {filtroActual === 'busqueda' && <MapeoCards data={resultadosBusqueda} />}
+                            {filtroActual === 'popular' && <MapeoCards data={populares} />}
+                            {filtroActual === 'promos' && <MapeoCards data={promociones} />}
+                            {filtroActual === 'vegetariano' && <MapeoCards data={vegetarianos} />}
+                            {filtroActual === 'sinTacc' && <MapeoCards data={sinTacc} />}
+                            {filtroActual === 'hasta' && <MapeoCards data={precioHasta} />}
+                            {filtroActual === 'ninguno' && <MapeoCards data={data} />}
                         </>
                 }
             </div>

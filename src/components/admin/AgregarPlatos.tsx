@@ -112,7 +112,11 @@ export const AgregarPlatos = () => {
             }
             // Actualizamos el documento en Firestore
             await updateDoc(docRef, { menus: existingData.menus });
-            toast.success('¡Menú agregado con éxito!', {
+            await toast.promise(updateDoc(docRef, { menus: existingData.menus }), {
+                loading: 'Agregando menú...',
+                success: '¡Menú agregado con éxito!',
+                error: 'No se pudo agregar el Menú.'
+            }, {
                 style: {
                     borderRadius: '10px',
                     background: '#333',
@@ -129,8 +133,11 @@ export const AgregarPlatos = () => {
                     }
                 ]
             };
-            await setDoc(docRef, newMenuData);
-            toast.success('¡Menú agregado con éxito!', {
+            await toast.promise(setDoc(docRef, newMenuData), {
+                loading: 'Agregando menú...',
+                success: '¡Menú agregado con éxito!',
+                error: 'No se pudo agregar el Menú.'
+            }, {
                 style: {
                     borderRadius: '10px',
                     background: '#333',
@@ -160,8 +167,8 @@ export const AgregarPlatos = () => {
     return (
         <div className='containerAll h-screen card relative'>
             <Link to="/" className="flex items-center gap-1">
-                    <MdKeyboardBackspace className="ml-6  text-4xl" />
-                    <p className="text-lg">Volver al <b>inicio</b></p>
+                <MdKeyboardBackspace className="ml-6  text-4xl" />
+                <p className="text-lg">Volver al <b>inicio</b></p>
             </Link>
             <div className="fixed top-1/2 -translate-y-2/3 w-80 left-1/2 -translate-x-1/2">
                 <h2 className="text-center text-2xl underline">Agregar Platos al Menu</h2>

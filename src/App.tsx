@@ -8,6 +8,7 @@ import { Presentacion } from './components'
 import { Admin } from './components/admin/Admin'
 import { AgregarPlatos } from './components/admin/AgregarPlatos'
 import { CambiarPassword } from './components/admin/CambiarPassword'
+import { EditarPlatos } from './components/admin/EditarPlatos'
 import { ModalDelete } from './components/itemList/ModalDelete'
 import { ItemListContainer } from './components/itemListContainer/ItemListContainer'
 import { Login } from './components/login/Login'
@@ -59,7 +60,6 @@ function App() {
               <Route path='/admin' element={adminLogged ? <Admin /> : <Login /> } />
               <Route path='/admin/changepassword' element={adminLogged ? <CambiarPassword /> : <Login /> } />
               <Route path='/admin/agregarplatos' element={adminLogged ? <AgregarPlatos /> : <Login /> } />
-              <Route path='/modal' element={<ModalDelete />} />
               <Route path='*' element={<div>ERROR 404...</div>} />
             </Routes>
             <Toaster position='bottom-right' />

@@ -42,7 +42,7 @@ export const OrderModal: React.FC<OrderProps> = ({ openOrder, setOpenOrder }) =>
     console.log(precio);
 
     return (
-        <div className={`fixed inset-0 ${openOrder ? 'h-screen' : 'h-0'} pt-3 text-black bg-gray-100`}>
+        <div className={`fixed inset-0 ${openOrder ? 'h-screen' : 'h-0'} pt-3 text-black bg-gray-100 z-50`}>
             <MdKeyboardBackspace className='mx-3 text-3xl cursor-pointer' onClick={() => setOpenOrder(false)} />
             <p className="text-center text-3xl p-5">Ordenar Por</p>
             <button className="border-t-2 pt-5 pb-3 block w-full text-start px-3" onClick={handleMenorPrecio}>
