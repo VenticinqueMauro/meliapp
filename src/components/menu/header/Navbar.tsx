@@ -49,11 +49,11 @@ export const Navbar: React.FC<menuProps> = ({ setOpen }) => {
                 </div>
                 <div className="relative overflow-hidden mx-auto">
                     <div className="flex overflow-x-auto gap- xl:justify-around items-center " style={{ whiteSpace: 'nowrap' }}>
-                        <span><AiOutlineCaretRight className="text-xl text-primary" /></span>
+                        <span><AiOutlineCaretRight className="text-xl" /></span>
                         {
                             data &&
                             data.map((menu, i) => (
-                                <Ruta key={i} to={`${menu.categoria.slice(3)}`} spy={true} smooth={true} offset={-180} duration={500} className="mx-1 categoria uppercase w-auto p-1 text-sm text-center rounded-md mt-2 mb-2 tracking-wider bg-secondary/95 text-primary transition-all duration-300 ease-in-out transform active:scale-95 " style={{ textShadow: '1px 1px 1px #111111' }}>
+                                <Ruta key={i} to={`${menu.categoria.slice(3)}`} spy={true} smooth={true} offset={-180} duration={500} className="mx-1 categoria uppercase w-auto p-1 text-sm text-center rounded-md mt-2 mb-2 tracking-wider bg-secondary text-bgPrice transition-all duration-300 ease-in-out transform active:scale-95 " >
                                     {menu.categoria}
                                 </Ruta>
                             ))

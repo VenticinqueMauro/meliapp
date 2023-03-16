@@ -30,7 +30,7 @@ export const MapeoCards: React.FC<MapeoCards> = ({ data }) => {
         <>
             {
                 data.length === 0 ?
-                    <p>Porfavor Cargue sus menus a LaCarta </p>
+                    <p className="text-center py-5">No se encontraron Menús... </p>
                     :
                     data.map(menu => (
                         <div key={menu.categoria} id={`${menu.categoria.slice(3)}`} className='grid grid-cols-1 md:grid-cols-2 max-w-7xl mx-auto justify-center items-center relative'>

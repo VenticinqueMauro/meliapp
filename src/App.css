@@ -22,9 +22,13 @@
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center; */
-  background-color: #FFFBF3;
+  background-color: #faffff;
   background-image: url(https://www.transparenttextures.com/patterns/redox-02.png);
   /* background-image: url("https://www.transparenttextures.com/patterns/food.png"); */
+}
+
+.navbar {
+  background-color: #111111;
 }
 
 ::-webkit-scrollbar {
@@ -43,9 +47,6 @@
 }
 
 
-.navbar {
-  background-color: #111111;
-}
 
 .card {
   /* background: #00000070; */
