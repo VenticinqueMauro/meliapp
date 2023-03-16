@@ -1,7 +1,7 @@
 import { useAppSelector } from "@/app/hooks";
 import { selectCarta } from "@/features/menuDigital/cartaSlice";
 import { ICategoria, IMenu } from "@/interfaces";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { BiPlus } from 'react-icons/bi';
 import popular from '../../assets/popular.svg';
 import oferta from '../../assets/sale.svg';

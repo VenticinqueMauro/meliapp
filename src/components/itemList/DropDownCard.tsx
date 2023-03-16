@@ -46,7 +46,7 @@ export const DropDownCard: React.FC<DropwDownCardProps> = ({ categoria, nombre, 
             </Menu>
             {
                 editMenu ?
-                    <EditarPlatos categoria={categoria} menu={menu} setEditMenu={setEditMenu} />
+                    <EditarPlatos categoria={categoria} menu={menu}  setEditMenu={setEditMenu} />
                     :
                     null
             }

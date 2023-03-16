@@ -1,15 +1,13 @@
 import { IMenu } from '@/interfaces';
-import { IoCloseSharp } from 'react-icons/io5'
-import oferta from '../../assets/sale.svg';
-import sinTacc from '../../assets/sinTacc.webp';
+import { IoCloseSharp } from 'react-icons/io5';
 import popular from '../../assets/popular.svg';
-import vegetariano from '../../assets/vegetal.svg';
+import oferta from '../../assets/sale.svg';
 
 interface ModalProps extends IMenu {
     setModalOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export const Modal: React.FC<ModalProps> = ({ imagen, nombre, ingredientes, precio, setModalOpen, esPromo, esPopular, esVegetariano, esSinTac }) => {
+export const Modal: React.FC<ModalProps> = ({ imagen, nombre, ingredientes, precio, setModalOpen, esPromo, esPopular }) => {
     return (
         <div className="fixed top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 containerAll z-50 w-full sm:max-w-4xl rounded-md shadow-md ">
             <div className='relative'>
@@ -17,8 +15,8 @@ export const Modal: React.FC<ModalProps> = ({ imagen, nombre, ingredientes, prec
                 <div className='sm:flex p-3'>
                     {
                         imagen ?
-                            <div className='w-full md:w-64 flex items-center justify-center'>
-                                <img src={imagen} alt={nombre} className='object-cover rounded-md ' />
+                            <div className='w-full max-h-96 md:w-64  md:max-h-56 flex items-center justify-center'>
+                                <img src={imagen} alt={nombre} className='object-contain w-full h-full rounded-md ' />
                             </div>
                             :
                             null
@@ -29,8 +27,6 @@ export const Modal: React.FC<ModalProps> = ({ imagen, nombre, ingredientes, prec
                                 {esPromo === true && <img className="w-5 h-5" src={oferta} alt='offer' />}
                                 {esPopular === true && <img className="w-5 h-5" src={popular} alt='popular' />}
                                 <p className='tracking-wider text-lg text-xl font-bold inline-block  text-bgPrice underline capitalize'  >{nombre}</p>
-                                {esVegetariano === true && <img className="w-5 h-5" src={vegetariano} alt='vegetariano' />}
-                                {esSinTac === true && <img className="w-5 h-5" src={sinTacc} alt='sinTACC' />}
                             </div>
                         </div>
                         <div className='px-3 py-1'>

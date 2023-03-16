@@ -53,7 +53,7 @@ export const Navbar: React.FC<menuProps> = ({ setOpen }) => {
                         {
                             data &&
                             data.map((menu, i) => (
-                                <Ruta key={i} to={`${menu.categoria.slice(3)}`} spy={true} smooth={true} offset={-180} duration={500} className="mx-1 categoria uppercase w-auto p-1 text-sm text-center rounded-md mt-2 mb-2 tracking-wider bg-secondary text-white transition-all duration-300 ease-in-out transform active:scale-95 " >
+                                <Ruta key={i} to={`${menu.categoria.slice(3)}`} spy={true} smooth={true} offset={-180} duration={500} className="mx-1 categoria uppercase w-auto p-1 text-sm text-center rounded-md mt-2 mb-2 tracking-wider bg-secondary text-stone-200 hover:text-orange-400 transition-all duration-300 ease-in-out transform active:scale-95 " >
                                     {menu.categoria}
                                 </Ruta>
                             ))
