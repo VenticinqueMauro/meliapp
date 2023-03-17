@@ -15,9 +15,10 @@ export const Modal: React.FC<ModalProps> = ({ imagen, nombre, ingredientes, prec
                 <div className='sm:flex p-3'>
                     {
                         imagen ?
-                            <div className='w-full max-h-96 md:w-64  md:max-h-56 flex items-center justify-center'>
-                                <img src={imagen} alt={nombre} className='object-contain w-full h-full rounded-md ' />
+                            <div className='w-full md:w-64 md:max-h-56 flex items-center justify-center'>
+                                <img src={imagen} alt={nombre} className='object-cover w-full h-full rounded-md' style={{ objectFit: 'cover' }} />
                             </div>
+
                             :
                             null
                     }
