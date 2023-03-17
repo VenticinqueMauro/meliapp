@@ -13,7 +13,8 @@ export const ItemList = () => {
         dispatch(fetchMenuData());
     }, [dispatch]);
 
-
+    useEffect(() => {
+    }, [data])
 
 
     return (
