@@ -89,12 +89,12 @@ export const CambiarPassword = () => {
 
 
     return (
-        <div className="w-full h-screen text-center  containerAll relative">
+        <div className="w-full h-screen text-center  containerAll relative ">
 
             <Link to="/" className="flex items-center gap-1">
                 <MdKeyboardBackspace className="ml-6  text-4xl" />
             </Link>
-            <div className="fixed top-2/3 -translate-y-2/3 left-1/2 -translate-x-1/2 w-80">
+            <div className="fixed top-1/3 -translate-y-1/3   left-1/2 -translate-x-1/2 w-80">
                 <h2 className="text-center text-2xl underline">Cambiar Contraseña</h2>
                 <form
                     className="flex flex-col gap-4 mt-10"

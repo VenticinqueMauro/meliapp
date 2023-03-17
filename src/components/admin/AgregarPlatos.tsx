@@ -184,7 +184,7 @@ export const AgregarPlatos = () => {
             <Link to="/" className="flex items-center gap-1">
                 <MdKeyboardBackspace className="ml-6  text-4xl" />
             </Link>
-            <div className="fixed top-2/3 -translate-y-2/3 w-80 left-1/2 -translate-x-1/2">
+            <div className="fixed top-1/2 -translate-y-1/2 w-80 left-1/2 -translate-x-1/2">
                 <h2 className="text-center text-2xl underline">Agregar Productos al Menú</h2>
                 <form className="flex flex-col gap-4 pt-10" onSubmit={handleSubmit}>
                     <div>
