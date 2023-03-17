@@ -31,7 +31,7 @@ function Dropdown() {
     return (
         <Menu as="div" className="relative inline-block text-left z-50">
             <div>
-                <Menu.Button className="flex items-center gap-1 px-4 py-2 text-sm font-medium text-white bg-gray-800 rounded-md hover:bg-gray-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
+                <Menu.Button className="flex items-center gap-1 px-4 py-2 text-sm font-medium text-primary bg-gray-900 rounded-md hover:bg-gray-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
                     <p>Admin</p>
                     <GiPadlock className="text-gray-100 text-xl" />
                 </Menu.Button>

@@ -22,13 +22,13 @@
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center; */
-  background-color: #faffff;
+  background-color: #fffef8;
   background-image: url(https://www.transparenttextures.com/patterns/redox-02.png);
   /* background-image: url("https://www.transparenttextures.com/patterns/food.png"); */
 }
 
 .navbar {
-  background-color: #111111;
+  background-color: #232c30;
 }
 
 ::-webkit-scrollbar {
