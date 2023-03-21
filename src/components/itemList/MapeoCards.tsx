@@ -88,7 +88,7 @@ export const MapeoCards: React.FC<MapeoCards> = ({ data }) => {
 
                                         <div className={`${!m.imagen ? 'col-start-1 col-span-4' : 'col-start-2 col-span-3'} col-span-3 flex items-center justify-between pt-1   `}>
                                             <p className="text-bgPrice tracking-wider text-base sm:text-xl font-semibold  inline-block pt-1" >{m.precio === 0 ? ' Consular Precio' : `$${m.precio}`}</p>
-                                            <BiPlus className="text-2xl cursor-pointer text-primary bg-bgPrice rounded shadow shadow-black" onClick={() => handleModal(m)} />
+                                            <BiPlus className="text-2xl cursor-pointer text-primary bg-secondary rounded shadow shadow-black" onClick={() => handleModal(m)}/>
                                         </div>
                                     </div>
                                     {

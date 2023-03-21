@@ -11,7 +11,7 @@ module.exports = {
         // 'secondary': '#fac240',
         // 'bgPrice': '#111111'
         'primary': '#fffef8',
-        'secondary': '#1f2937',
+        'secondary': '#fb923c',
         'bgPrice': '#232c30'
       }
     },

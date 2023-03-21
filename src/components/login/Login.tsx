@@ -36,21 +36,30 @@ export const Login = () => {
         event.preventDefault();
 
         try {
-            await signInWithEmailAndPassword(
-                auth,
-                userCredentials.email,
-                userCredentials.password
-            );
+            await toast.promise(signInWithEmailAndPassword(auth, userCredentials.email, userCredentials.password),
+                {
+                    loading: 'ingresando...',
+                    success: 'Login realizado con éxito!',
+                    error: 'No se pudo ingresar a la cuenta.',
 
-            // Si el inicio de sesión es exitoso, establece authorized en true
-            dispatch(loginAdmin());
-            toast.success('Login Exitoso!', {
+                }, {
                 style: {
                     borderRadius: '10px',
                     background: '#333',
                     color: '#fff',
-                },
-            })
+                }
+            }
+            )
+
+            // Si el inicio de sesión es exitoso, establece authorized en true
+            dispatch(loginAdmin());
+            // toast.success('Login Exitoso!', {
+            //     style: {
+            //         borderRadius: '10px',
+            //         background: '#333',
+            //         color: '#fff',
+            //     },
+            // })
             navigate('/')
 
         } catch (error) {

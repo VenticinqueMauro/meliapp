@@ -43,7 +43,7 @@ export const Navbar: React.FC<menuProps> = ({ setOpen }) => {
 
                         }
                         <button className="flex items-center pr-3" onClick={() => setOpen(true)} >
-                            <BiRestaurant className="text-4xl p-1 navbar text-white  border border-primary rounded-md transition-all duration-300 ease-in-out transform active:scale-95" />
+                            <BiRestaurant className="text-4xl p-1 navbar text-secondary  border border-primary rounded-md transition-all duration-300 ease-in-out transform active:scale-95" />
                         </button>
                     </div>
                 </div>
@@ -53,7 +53,7 @@ export const Navbar: React.FC<menuProps> = ({ setOpen }) => {
                         {
                             data &&
                             data.map((menu, i) => (
-                                <Ruta key={i} to={`${menu.categoria.slice(3)}`} spy={true} smooth={true} offset={-180} duration={500} className="mx-1 categoria uppercase w-auto p-1 text-sm text-center rounded-md mt-2 mb-2 tracking-wider bg-gray-700 text-primary hover:text-orange-400 hover:bg-gray-700 transition-all duration-300 ease-in-out transform active:scale-95 " >
+                                <Ruta key={i} to={`${menu.categoria.slice(3)}`} spy={true} smooth={true} offset={-180} duration={500} className="mx-1 categoria uppercase w-auto p-1 text-sm text-center rounded-md mt-2 mb-2 tracking-wider bg-gray-700 text-primary hover:text-secondary hover:bg-gray-700 transition-all duration-300 ease-in-out transform active:scale-95 font-medium" >
                                     {menu.categoria}
                                 </Ruta>
                             ))
@@ -61,8 +61,8 @@ export const Navbar: React.FC<menuProps> = ({ setOpen }) => {
                         <span><AiOutlineCaretLeft className="text-xl text-primary" /></span>
                     </div>
                     <div className="flex justify-start  items-center mx-auto col-start-5 col-span-2 px-3 py-2">
-                        <BiSearchAlt className="text-xl text-white rounded-l-md border-t border-l border-b border-secondary  bg-secondary h-7 w-7 p-1" />
-                        <input className="bg-primary text-black h-7 w-full outline-none p-2 placeholder:text-gray-900 rounded-r-md  border-b-2 border-transparent transition-all duration-200 placeholder:text-start tracking-widest placeholder:text-sm placeholder:font-medium focus:outline-none focus:border-none" type={'text'} placeholder="Busca tu menú favorito..." onChange={handleSearch} />
+                        <BiSearchAlt className="text-xl text-bgPrice rounded-l-md bg-primary h-6 w-7 p-1" />
+                        <input className="bg-primary text-black h-6 w-full outline-none p-2 placeholder:text-gray-900 rounded-r-md  border-b-2 border-transparent transition-all duration-200 placeholder:text-start tracking-widest placeholder:text-sm placeholder:font-medium focus:outline-none focus:border-none" type={'text'} placeholder="Busca tu menú favorito..." onChange={handleSearch} />
                     </div>
                 </div>
                 <OrderAndFilter />
