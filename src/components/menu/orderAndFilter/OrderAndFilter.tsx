@@ -19,7 +19,7 @@ export const OrderAndFilter = () => {
 
     return (
         <>
-            <div className="flex justify-around items-center p-1 bg-primary text-bgPrice border-b-2 border-black/80 tracking-wider ">
+            <div className="flex justify-around items-center p-1 bg-primary text-gray-800 border-b-2 border-black/80 tracking-wider ">
                 <div className='flex items-center gap-1 text-sm cursor-pointer font-medium'>
                     <span><TbArrowsUpDown /></span>
                     <span onClick={() => setOpenOrder(true)}>Ordernar</span>

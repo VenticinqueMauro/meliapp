@@ -160,7 +160,7 @@ export const EditarPlatos = ({ categoria, menu, setEditMenu }: EditarPlatosProps
             <button className="flex items-center gap-1" onClick={() => setEditMenu(false)}>
                 <MdKeyboardBackspace className="ml-6  text-4xl" />
             </button>
-            <div className="fixed top-2/3 -translate-y-2/3 w-80 left-1/2 -translate-x-1/2">
+            <div className="fixed top-1/2 -translate-y-1/2 w-80 left-1/2 -translate-x-1/2">
                 <h2 className="text-center text-2xl underline">Editar Menú</h2>
                 <form className="flex flex-col gap-4 pt-10" onSubmit={handleFormSubmit}>
                     <div className="c">
@@ -227,7 +227,7 @@ export const EditarPlatos = ({ categoria, menu, setEditMenu }: EditarPlatosProps
                             </div>
                         </div>
                     </div>
-                    <button type="submit" className="py-2 px-4 bg-bgPrice block text-white rounded-lg mt-5 uppercase">Actualizar</button>
+                    <button type="submit" className="py-2 px-4 bg-bgPrice block text-white rounded-lg mt-5 uppercase transition-all duration-300 ease-in-out transform active:scale-95">Actualizar</button>
                 </form>
             </div>
         </div>

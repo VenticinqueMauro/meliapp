@@ -81,11 +81,10 @@ export const Login = () => {
                 <MdKeyboardBackspace className="ml-6  text-4xl" />
             </Link>
             <div className="fixed top-1/3 -translate-y-3/4 left-1/2 -translate-x-1/2 w-80 card">
-                <img
-                    className="w-20 mx-auto m-2"
-                    src={logoAdmin}
-                    alt="admin"
-                />
+                <div className='text-center tracking-wide pb-10'>
+                    <h2 className='text-3xl'>⚠️ Acceso restringido</h2>
+                    <h4 className='text-gray-700'>solo para administradores del restaurante</h4>
+                </div>
                 <form
                     className="flex flex-col gap-2"
                     typeof="submit"

@@ -145,7 +145,7 @@ export const CambiarPassword = () => {
                             onChange={handleChange}
                         />
                     </div>
-                    <button type="submit" className="p-1 bg-bgPrice text-white shadow rounded-md uppercase font-medium outline-none">
+                    <button type="submit" className="p-1 bg-bgPrice text-white shadow rounded-md uppercase font-medium outline-none transition-all duration-300 ease-in-out transform active:scale-95">
                         Change Password
                     </button>
                 </form>

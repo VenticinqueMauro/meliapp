@@ -1,4 +1,5 @@
 /* TODO  */
+
 /* @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500&display=swap'); */
 @import url('https://fonts.googleapis.com/css2?family=Bitter:wght@400;500;600&display=swap');
 /* Titulos Categorias  */
@@ -13,7 +14,8 @@
 }
 
 .containerAll {
-  font-family: 'Bitter', serif;
+  /* font-family: 'Bitter', serif; */
+  /* font-family: 'EB Garamond', serif; */
   /* background-image: url('https://lexica-serve-encoded-images2.sharif.workers.dev/full_jpg/ad0173a9-f9a8-4816-93d6-3e4facfc2c50'); */
   /* background-image: url('https://lexica-serve-encoded-images2.sharif.workers.dev/full_jpg/77d2b1a2-81c2-4297-96c2-76885868fb01'); */
   /* background-image: url('https://lexica-serve-encoded-images2.sharif.workers.dev/full_jpg/6edd7e8b-140c-471c-9310-5b5c3db4655b'); */
@@ -22,13 +24,13 @@
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center; */
-  background-color: #fffef8;
-  background-image: url(https://www.transparenttextures.com/patterns/redox-02.png);
+  background-color: #f1f2df;
+  background-image: url("https://www.transparenttextures.com/patterns/xv.png");
   /* background-image: url("https://www.transparenttextures.com/patterns/food.png"); */
 }
 
 .navbar {
-  background-color: #232c30;
+  background-image: linear-gradient(to right top, #067d32, #177c3a, #227b41, #2b7947, #33784d);
 }
 
 ::-webkit-scrollbar {
@@ -88,4 +90,9 @@
   100% {
     stroke-dashoffset: -125px;
   }
+}
+
+
+.animate__animated.animate__fadeIn {
+  --animate-duration: 0.4s;
 }

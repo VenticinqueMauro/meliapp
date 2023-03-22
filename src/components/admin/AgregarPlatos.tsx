@@ -260,7 +260,7 @@ export const AgregarPlatos = () => {
                             </div>
                         </div>
                     </div>
-                    <button type="submit" className="py-2 px-4 bg-bgPrice block text-white rounded-lg mt-5 uppercase" >Agregar Menu</button>
+                    <button type="submit" className="py-2 px-4 bg-bgPrice block text-white rounded-lg mt-5 uppercase transition-all duration-300 ease-in-out transform active:scale-95" >Agregar Menu</button>
                 </form>
             </div>
         </div>
