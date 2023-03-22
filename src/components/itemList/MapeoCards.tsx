@@ -53,7 +53,7 @@ export const MapeoCards: React.FC<MapeoCards> = ({ data }) => {
 
                             {menu.menus.map(m => (
                                 <div key={m.nombre} >
-                                    <div className='grid grid-cols-4 px-3 border-b py-4 lg:py-5 mb-2 sm:max-w-md  md:h-28 lg:max-w-lg lg:h-32'>
+                                    <div className='grid grid-cols-4 px-3 border-b border-b-gray-400/50 py-4 lg:py-5 mb-2 sm:max-w-md  md:h-28 lg:max-w-lg lg:h-32'>
                                         {
                                             m.imagen ?
                                                 <div className="col-start-1 col-span-1 row-span-3 mr-2 w-20 max-h-20 lg:w-24 lg:h-24 flex items-center justify-center">
