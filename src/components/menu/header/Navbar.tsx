@@ -30,7 +30,6 @@ export const Navbar: React.FC<menuProps> = ({ setOpen }) => {
     const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault()
         dispatch(buscarMenu(e.target.value))
-        console.log(e.target.value);
     }
 
     return (
@@ -41,10 +40,14 @@ export const Navbar: React.FC<menuProps> = ({ setOpen }) => {
                     <div className="pl-3">
                         <img src={logo} alt='logo' width={180} />
                     </div>
-                    <Link to='/login' className="flex items-center gap-1 mb-5 absolute top-3 right-3">
-                        {/* {!adminLogged && <GiPadlockOpen className="text-white/50 text-xl " />} */}
+
+                    {/* BOTON LOGIN ADMIN */}
+
+                    {/* <Link to='/login' className="flex items-center gap-1 mb-5 absolute top-3 right-3">
                         {!adminLogged && <RiAdminLine className="text-white/50 text-xl " />}
-                    </Link>
+                    </Link> */}
+
+
                     <div className="absolute top-0 right-0">
                         {
                             adminLogged && <Dropdown />
