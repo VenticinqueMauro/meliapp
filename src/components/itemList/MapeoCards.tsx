@@ -38,8 +38,8 @@ export const MapeoCards: React.FC<MapeoCards> = ({ data }) => {
                             {/* FONDO OSCURO  */}
 
                             {
-                                modalOpen &&
-                                <div className="fixed top-0 right-0 h-screen w-full z-30 bg-black/30"></div>
+                                modalOpen &&    
+                                <div className="fixed top-0 right-0 h-screen w-full z-30 bg-black/5"></div>
                             }
 
                             {/* NOMBRE CATEGORIA  */}
