@@ -43,9 +43,9 @@ export const Navbar: React.FC<menuProps> = ({ setOpen }) => {
 
                     {/* BOTON LOGIN ADMIN */}
 
-                    {/* <Link to='/login' className="flex items-center gap-1 mb-5 absolute top-3 right-3">
-                        {!adminLogged && <RiAdminLine className="text-white/50 text-xl " />}
-                    </Link> */}
+                    <Link to='/login' className="flex items-center gap-1 mb-5 absolute top-3 right-3">
+                        {!adminLogged && <RiAdminLine className="text-transparent text-xl " />}
+                    </Link>
 
 
                     <div className="absolute top-0 right-0">
