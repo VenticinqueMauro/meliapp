@@ -38,7 +38,7 @@ export const Navbar: React.FC<menuProps> = ({ setOpen }) => {
 
                 <div className="flex items-center justify-center py-2 ">
                     <div className="pl-3">
-                        <img src={logo} alt='logo' width={180} />
+                        <img className="logoAmericano" src={logo} alt='logo' width={180} />
                     </div>
 
                     {/* BOTON LOGIN ADMIN */}

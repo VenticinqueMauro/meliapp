@@ -30,7 +30,14 @@
 }
 
 .navbar {
-  background-image: linear-gradient(to right top, #067d32, #177c3a, #227b41, #2b7947, #33784d);
+  /* background-image: linear-gradient(to right top, #067d32, #177c3a, #227b41, #2b7947, #33784d); */
+  background-color: #227b41;
+  background-image: url("https://www.transparenttextures.com/patterns/xv.png");
+
+}
+
+.logoAmericano{
+  filter: drop-shadow(2px 2px 3px #000);
 }
 
 ::-webkit-scrollbar {
