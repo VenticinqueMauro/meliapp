@@ -20,7 +20,7 @@ const keyMap: KeyMap = {
 
 function App() {
 
-  const [loader, setLoader] = useState(false)
+  const [loader, setLoader] = useState(true)
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
   const { adminLogged } = useAppSelector(selectCarta)
@@ -31,6 +31,10 @@ function App() {
     if (isLogged === 'true') {
       dispatch(loginAdmin());
     }
+
+    setTimeout(() => {
+      setLoader(false);
+    }, 2000)
   }, [])
 
   const handlers = {
