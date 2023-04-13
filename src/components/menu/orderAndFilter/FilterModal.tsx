@@ -16,21 +16,25 @@ export const FilterModal: React.FC<OrderProps> = ({ openFilter, setOpenFilter })
     const handleFilterPopulares = () => {
         dispatch(filtroPopulares())
         setOpenFilter(false)
+        window.scrollTo(0, 0);
     }
 
     const handleFilterPromos = () => {
         dispatch(filtroPromos())
         setOpenFilter(false)
+        window.scrollTo(0, 0);
     }
 
     const handleFilterVegetarianos = () => {
         dispatch(filtroVegetarianos())
         setOpenFilter(false)
+        window.scrollTo(0, 0);
     }
 
     const handleFilterSinTacc = () => {
         dispatch(filtroSinTacc())
         setOpenFilter(false)
+        window.scrollTo(0, 0);
     }
 
 
