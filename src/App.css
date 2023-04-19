@@ -40,9 +40,13 @@
   filter: drop-shadow(2px 2px 3px #000);
 }
 
+.logoMenuDelDia{
+  filter: drop-shadow(0px 0px 1px #000);
+}
+
 ::-webkit-scrollbar {
   display: none;
-}
+}1
 
 
 .welcome {

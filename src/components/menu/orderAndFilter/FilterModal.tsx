@@ -45,9 +45,9 @@ export const FilterModal: React.FC<OrderProps> = ({ openFilter, setOpenFilter })
             <MdKeyboardBackspace className='mx-3 text-3xl cursor-pointer' onClick={() => setOpenFilter(false)} />
             <p className="text-center text-3xl p-5">Filtrar Por</p>
             <Menu>
-                <Menu.Button className='border-t-2 pt-3 pb-3 mx-3 px-1 flex items-center text-lg w-full' onClick={() => handleFilterPromos()}>
+                {/* <Menu.Button className='border-t-2 pt-3 pb-3 mx-3 px-1 flex items-center text-lg w-full' onClick={() => handleFilterPromos()}>
                     <span>Promociones</span>
-                </Menu.Button>
+                </Menu.Button> */}
 
                 <Menu.Button className='border-t-2 pt-3 pb-3 mx-3 px-1 flex items-center text-lg w-full' onClick={() => handleFilterPopulares()}>
                     <span>Recomendados</span>

@@ -20,7 +20,7 @@ const keyMap: KeyMap = {
 
 function App() {
 
-  const [loader, setLoader] = useState(true)
+  const [loader, setLoader] = useState(false)
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
   const { adminLogged } = useAppSelector(selectCarta)

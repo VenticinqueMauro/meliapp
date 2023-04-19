@@ -244,7 +244,7 @@ export const AgregarPlatos = () => {
                         <div >
                             <div className="flex items-center">
                                 <input type="checkbox" name="esPromo" className="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" onChange={handleChange} checked={formData.esPromo} />
-                                <label className="ml-2 block font-medium text-gray-700">Promocional</label>
+                                <label className="ml-2 block font-medium text-gray-700">Menú del dia</label>
                             </div>
                         </div>
                         <div >
@@ -256,7 +256,7 @@ export const AgregarPlatos = () => {
                         <div >
                             <div className="flex items-center">
                                 <input type="checkbox" name="esSinTac" className="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" onChange={handleChange} checked={formData.esSinTac} />
-                                <label className="ml-2 block font-medium text-gray-700" >Sin TAC</label>
+                                <label className="ml-2 block font-medium text-gray-700" >Sin TACC</label>
                             </div>
                         </div>
                     </div>
