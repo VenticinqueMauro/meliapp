@@ -18,7 +18,7 @@ export const ItemListContainer = () => {
         <>
             <Menu />
             <ItemList />
-            <img className="fixed bottom-0 left-1/2 -translate-x-1/2 logoMenuDelDia" width={100}  src={menuDelDia} alt="menu del dia" onClick={handleFilterMenuDelDia}/>
+            <img className="fixed bottom-6 right-1 logoMenuDelDia " width={100}  src={menuDelDia} alt="menu del dia" onClick={handleFilterMenuDelDia}/>
             <Footer />
         </>
     )

@@ -33,7 +33,7 @@ export const MapeoCards: React.FC<MapeoCards> = ({ data }) => {
                     <p className="text-center py-5">No se encontraron Menús... </p>
                     :
                     data.map(menu => (
-                        <div key={menu.categoria} id={`${menu.categoria.slice(3)}`} className='grid grid-cols-1 md:grid-cols-2 max-w-7xl mx-auto justify-center items-center relative'>
+                        <div key={menu.categoria} id={`${menu.categoria.slice(3)}`} className='grid grid-cols-1 md:grid-cols-2 max-w-7xl mx-auto justify-center items-center relative' >
 
                             {/* FONDO OSCURO  */}
 
@@ -53,7 +53,7 @@ export const MapeoCards: React.FC<MapeoCards> = ({ data }) => {
 
                             {menu.menus.map(m => (
                                 <div key={m.nombre} >
-                                    <div className='grid grid-cols-4 px-3 border-b border-b-gray-400/50 py-4 lg:py-5 mb-2 sm:max-w-md  md:h-28 lg:max-w-lg lg:h-32'>
+                                    <div className='grid grid-cols-4 px-3 border-b border-b-gray-400/50 py-4 lg:py-5 mb-2 sm:max-w-md  md:h-28 lg:max-w-lg lg:h-32' onClick={() => handleModal(m)}>
                                         {
                                             m.imagen ?
                                                 <div className="col-start-1 col-span-1 row-span-3 mr-2 w-20 max-h-20 lg:w-24 lg:h-24 flex items-center justify-center">
@@ -88,7 +88,7 @@ export const MapeoCards: React.FC<MapeoCards> = ({ data }) => {
 
                                         <div className={`${!m.imagen ? 'col-start-1 col-span-4' : 'col-start-2 col-span-3'} col-span-3 flex items-center justify-between pt-1   `}>
                                             <p className="text-gray-800 tracking-wider text-base sm:text-xl font-semibold  inline-block pt-1" >{m.precio === 0 ? ' Consular Precio' : `$${m.precio}`}</p>
-                                            <BiPlus className="text-2xl cursor-pointer text-primary bg-bgPrice rounded shadow shadow-black" onClick={() => handleModal(m)}/>
+                                            {/* <BiPlus className="text-2xl cursor-pointer text-primary bg-bgPrice rounded shadow shadow-black" /> */}
                                         </div>
                                     </div>
                                     {
