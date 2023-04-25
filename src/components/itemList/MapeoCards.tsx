@@ -53,7 +53,7 @@ export const MapeoCards: React.FC<MapeoCards> = ({ data }) => {
 
                             {menu.menus.map(m => (
                                 <div key={m.nombre} >
-                                    <div className='grid grid-cols-4 px-3 border-b border-b-gray-400/50 py-4 lg:py-5 mb-2 sm:max-w-md  md:h-28 lg:max-w-lg lg:h-32' onClick={() => handleModal(m)}>
+                                    <div className='grid grid-cols-4 px-3 border-b border-b-gray-400/50 py-4 lg:py-5 mb-2 sm:max-w-md  md:h-28 lg:max-w-lg lg:h-32' >
                                         {
                                             m.imagen ?
                                                 <div className="col-start-1 col-span-1 row-span-3 mr-2 w-20 max-h-20 lg:w-24 lg:h-24 flex items-center justify-center">
@@ -66,9 +66,9 @@ export const MapeoCards: React.FC<MapeoCards> = ({ data }) => {
                                         }
                                         <div className={`${m.imagen ? 'col-start-2 col-span-3' : 'col-start-1 col-span-4'} flex items-center justify-between`}>
                                             <div className="flex items-center gap-1 justify-start">
-                                                {m.esPromo === true && <img className="w-5 h-5" src={oferta} alt='offer' />}
+                                                {/* {m.esPromo === true && <img className="w-5 h-5" src={oferta} alt='offer' />} */}
                                                 {m.esPopular === true && <img className="w-5 h-5" src={popular} alt='popular' />}
-                                                <p className='tracking-wider text-lg sm:text-xl font-bold inline-block  text-gray-800 underline capitalize'  >{m.nombre}</p>
+                                                <p className='tracking-wider text-lg sm:text-xl font-bold inline-block  text-gray-800 underline capitalize cursor-pointer'  onClick={() => handleModal(m)}>{m.nombre}</p>
                                             </div>
 
                                             {/* BOTON DE OPCIONES ADMIN  */}
@@ -82,12 +82,12 @@ export const MapeoCards: React.FC<MapeoCards> = ({ data }) => {
                                         {
                                             m.ingredientes && m.ingredientes.length > 0 &&
                                             <div className={`${m.imagen ? 'col-start-2 col-span-2' : 'col-start-1 col-span-3'} `}>
-                                                <p className="text-sm  text-gray-700  tracking-wider pt-1 rounded rounded-md capitalize truncate" >{m.ingredientes.join(', ')}</p>
+                                                <p className="text-sm  text-gray-700  tracking-wider pt-1 rounded rounded-md capitalize truncate cursor-pointer" onClick={() => handleModal(m)} >{m.ingredientes.join(', ')}</p>
                                             </div>
                                         }
 
                                         <div className={`${!m.imagen ? 'col-start-1 col-span-4' : 'col-start-2 col-span-3'} col-span-3 flex items-center justify-between pt-1   `}>
-                                            <p className="text-gray-800 tracking-wider text-base sm:text-xl font-semibold  inline-block pt-1" >{m.precio === 0 ? ' Consular Precio' : `$${m.precio}`}</p>
+                                            <p className="text-gray-800 tracking-wider text-base sm:text-xl font-semibold  inline-block pt-1 cursor-pointer"  onClick={() => handleModal(m)}>{m.precio === 0 ? ' Consular Precio' : `$${m.precio}`}</p>
                                             {/* <BiPlus className="text-2xl cursor-pointer text-primary bg-bgPrice rounded shadow shadow-black" /> */}
                                         </div>
                                     </div>
