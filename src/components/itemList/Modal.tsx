@@ -26,7 +26,7 @@ export const Modal: React.FC<ModalProps> = ({ imagen, nombre, ingredientes, prec
                     <div className=''>
                         <div className='px-3 py-1'>
                             <div className="flex items-center gap-1 justify-start mt-2">
-                                {esPromo === true && <img className="w-5 h-5" src={oferta} alt='offer' />}
+                                {/* {esPromo === true && <img className="w-5 h-5" src={oferta} alt='offer' />} */}
                                 {esPopular === true && <img className="w-5 h-5" src={popular} alt='popular' />}
                                 <p className='tracking-wider text-lg text-xl font-bold inline-block  text-gray-900 underline capitalize'  >{nombre}</p>
                             </div>

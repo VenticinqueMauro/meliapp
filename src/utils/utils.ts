@@ -8,7 +8,8 @@ export const generateId = (length: number = 8): string => {
     return result;
 }
 
-export  const MAX_IMAGE_SIZE = 1024 * 1024 * 2; // 2 MB
+// export const MAX_IMAGE_SIZE = 1024 * 1024 * 2; // 1 MB
+export const MAX_IMAGE_SIZE = 1024 * 1024; // 1 MB
 
 
 

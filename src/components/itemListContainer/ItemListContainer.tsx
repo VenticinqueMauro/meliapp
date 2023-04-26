@@ -9,7 +9,6 @@ export const ItemListContainer = () => {
 
     const dispatch = useAppDispatch()
 
-
     const handleFilterMenuDelDia = () => {
         dispatch(filtroPromos())
         window.scrollTo(0, 0);

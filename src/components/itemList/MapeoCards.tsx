@@ -38,7 +38,7 @@ export const MapeoCards: React.FC<MapeoCards> = ({ data }) => {
                             {/* FONDO OSCURO  */}
 
                             {
-                                modalOpen &&    
+                                modalOpen &&
                                 <div className="fixed top-0 right-0 h-screen w-full z-30 bg-black/5"></div>
                             }
 
@@ -57,7 +57,7 @@ export const MapeoCards: React.FC<MapeoCards> = ({ data }) => {
                                         {
                                             m.imagen ?
                                                 <div className="col-start-1 col-span-1 row-span-3 mr-2 w-20 max-h-20 lg:w-24 lg:h-24 flex items-center justify-center">
-                                                    {m.imagen && <img className="rounded-md object-contain h-full w-full" style={{ objectFit: 'cover' }} src={m.imagen} alt={m.nombre} />}
+                                                    {m.imagen && <img className="rounded-md object-contain h-full w-full shadow shadow-black" style={{ objectFit: 'cover' }} src={m.imagen} alt={m.nombre} onClick={() => handleModal(m)} />}
                                                 </div>
 
 
@@ -68,7 +68,7 @@ export const MapeoCards: React.FC<MapeoCards> = ({ data }) => {
                                             <div className="flex items-center gap-1 justify-start">
                                                 {/* {m.esPromo === true && <img className="w-5 h-5" src={oferta} alt='offer' />} */}
                                                 {m.esPopular === true && <img className="w-5 h-5" src={popular} alt='popular' />}
-                                                <p className='tracking-wider text-lg sm:text-xl font-bold inline-block  text-gray-800 underline capitalize cursor-pointer'  onClick={() => handleModal(m)}>{m.nombre}</p>
+                                                <p className='tracking-wider text-lg sm:text-xl font-bold inline-block  text-gray-800 underline capitalize cursor-pointer' onClick={() => handleModal(m)}>{m.nombre}</p>
                                             </div>
 
                                             {/* BOTON DE OPCIONES ADMIN  */}
@@ -87,7 +87,7 @@ export const MapeoCards: React.FC<MapeoCards> = ({ data }) => {
                                         }
 
                                         <div className={`${!m.imagen ? 'col-start-1 col-span-4' : 'col-start-2 col-span-3'} col-span-3 flex items-center justify-between pt-1   `}>
-                                            <p className="text-gray-800 tracking-wider text-base sm:text-xl font-semibold  inline-block pt-1 cursor-pointer"  onClick={() => handleModal(m)}>{m.precio === 0 ? ' Consular Precio' : `$${m.precio}`}</p>
+                                            <p className="text-gray-800 tracking-wider text-base sm:text-xl font-semibold  inline-block pt-1 cursor-pointer" onClick={() => handleModal(m)}>{m.precio === 0 ? ' Consular Precio' : `$${m.precio}`}</p>
                                             {/* <BiPlus className="text-2xl cursor-pointer text-primary bg-bgPrice rounded shadow shadow-black" /> */}
                                         </div>
                                     </div>
