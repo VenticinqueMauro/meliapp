@@ -23,17 +23,20 @@ export const OrderModal: React.FC<OrderProps> = ({ openOrder, setOpenOrder }) =>
     const handleMenorPrecio = () => {
         dispatch(filtroMenorPrecio())
         setOpenOrder(false)
+        window.scrollTo(0, 0);
     }
 
     const handleMayorPrecio = () => {
         dispatch(filtroMayorPrecio())
         setOpenOrder(false)
+        window.scrollTo(0, 0);
     }
     
 
     const buscarPrecioHasta = () => {
         dispatch(filtroPrecioHasta(precio))
         setOpenOrder(false)
+        window.scrollTo(0, 0);
     }
 
 
