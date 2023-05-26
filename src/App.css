@@ -1,11 +1,11 @@
 /* TODO  */
 
 /* @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500&display=swap'); */
-@import url('https://fonts.googleapis.com/css2?family=Bitter:wght@400;500;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Bitter:wght@400;500;600&display=swap");
 /* Titulos Categorias  */
-@import url('https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital@1&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital@1&display=swap");
 /* Bienvenida  */
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap");
 
 * {
   padding: 0;
@@ -24,45 +24,42 @@
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center; */
-  background-color: #f1f2df;
-  background-image: url("https://www.transparenttextures.com/patterns/xv.png");
+  background-color: #fff6ff;
+  background-image: url("https://www.transparenttextures.com/patterns/gray-floral.png");
+
+  //background-image: url("https://www.transparenttextures.com/patterns/xv.png");
   /* background-image: url("https://www.transparenttextures.com/patterns/food.png"); */
 }
 
 .navbar {
-  /* background-image: linear-gradient(to right top, #067d32, #177c3a, #227b41, #2b7947, #33784d); */
-  background-color: #227b41;
-  background-image: url("https://www.transparenttextures.com/patterns/xv.png");
-
+  background-color: #e791e7;
+  background-image: url("https://www.transparenttextures.com/patterns/redox-02.png");
 }
 
-.logoAmericano{
-  filter: drop-shadow(2px 2px 3px #000);
+.logoAmericano {
+  //filter: drop-shadow(0px 0px 1px #000);
 }
 
-.logoMenuDelDia{
+.logoMenuDelDia {
   filter: drop-shadow(0px 0px 1px #000);
 }
 
 ::-webkit-scrollbar {
   display: none;
-}1
-
-
-.welcome {
-  font-family: 'Dancing Script', cursive;
+}
+1 .welcome {
+  font-family: "Dancing Script", cursive;
   text-shadow: 0px 2px 2px #000;
 }
 
 .gifWelcome {
   height: 100%;
   width: 100%;
-  background-image: url('/src/assets/camarero.webp');
+  background-image: url("/src/assets/camarero.webp");
   background-size: 150% 100%;
   background-repeat: no-repeat;
   background-position: center;
 }
-
 
 .card {
   /* background: #00000070; */
@@ -110,7 +107,6 @@
     stroke-dashoffset: -125px;
   }
 }
-
 
 .animate__animated.animate__fadeIn {
   --animate-duration: 0.4s;

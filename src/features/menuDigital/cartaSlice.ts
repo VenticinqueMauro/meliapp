@@ -23,7 +23,7 @@ export const fetchMenuData = createAsyncThunk(
     'carta/fetchMenuData',
     async () => {
         try {
-            const docRef = doc(db, "Menus", "Prueba");
+            const docRef = doc(db, "Meli", "catalogo");
             const docSnap = await getDoc(docRef);
             if (docSnap.exists()) {
                 return docSnap.data().menus;

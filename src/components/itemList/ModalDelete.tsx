@@ -24,7 +24,7 @@ export const ModalDelete = forwardRef((props: ModalDeleteProps, ref) => {
     useEffect(() => {
         const getMenuData = async () => {
             try {
-                const docRef = doc(db, "Menus", "Prueba");
+                const docRef = doc(db, "Meli", "catalogo");
                 const docSnap = await getDoc(docRef);
                 if (docSnap.exists()) {
                     setMenuData(docSnap.data().menus);
@@ -53,7 +53,7 @@ export const ModalDelete = forwardRef((props: ModalDeleteProps, ref) => {
         if (categoriaVacia) {
             menus.splice(categoriaIndex, 1);
         }
-        const menuRef = doc(db, "Menus", "Prueba");
+        const menuRef = doc(db, "Meli", "catalogo");
 
         // eliminar la imagen del almacenamiento de Firebase antes de actualizar el menú
         if (imagenURL) {
@@ -62,9 +62,9 @@ export const ModalDelete = forwardRef((props: ModalDeleteProps, ref) => {
         }
 
         await toast.promise(updateDoc(menuRef, { menus: menus }), {
-            loading: 'Eliminando menú...',
-            success: '¡Menú eliminado con éxito!',
-            error: 'No se pudo eliminar el menú.',
+            loading: 'Eliminando producto...',
+            success: '¡Producto eliminado con éxito!',
+            error: 'No se pudo eliminar el producto.',
 
         }, {
             style: {
@@ -87,13 +87,13 @@ export const ModalDelete = forwardRef((props: ModalDeleteProps, ref) => {
         <>
             <button className="block px-4 py-2 text-sm cursor-pointer flex items-center gap-1 text-red-500" onClick={() => setIsOpen(true)}>
                 <AiOutlineDelete />
-                <span>Eliminar Menú</span>
+                <span>Eliminar </span>
             </button>
 
             {isOpen && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-center">
                     <div className="bg-white rounded-lg p-6">
-                        <h2 className="text-lg font-medium mb-2 text-center">¿Eliminar menú?</h2>
+                        <h2 className="text-lg font-medium mb-2 text-center">¿Eliminar Producto?</h2>
                         <p className="text-gray-500 text-sm mb-4">Esta acción no se puede revertir.</p>
                         <div className="flex justify-end space-x-2">
                             <button

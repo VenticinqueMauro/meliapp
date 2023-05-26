@@ -62,7 +62,7 @@ export const AgregarPlatos = () => {
     };
 
     const uploadImageToFirebase = async (file: File) => {
-        const storageRef = ref(storage, `images/${file.name}`);
+        const storageRef = ref(storage, `images/meli/${file.name}`);
         await uploadBytes(storageRef, file);
         const url = await getDownloadURL(storageRef);
         setImage(url);
@@ -110,7 +110,7 @@ export const AgregarPlatos = () => {
     const handleSubmit = async (e: ChangeEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        const docRef = doc(db, "Menus", "Prueba");
+        const docRef = doc(db, "Meli", "catalogo");
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
@@ -128,9 +128,9 @@ export const AgregarPlatos = () => {
             // Actualizamos el documento en Firestore
             await updateDoc(docRef, { menus: existingData.menus });
             await toast.promise(updateDoc(docRef, { menus: existingData.menus }), {
-                loading: 'Agregando menú...',
-                success: '¡Menú agregado con éxito!',
-                error: 'No se pudo agregar el Menú.'
+                loading: 'Agregandp producto...',
+                success: '¡Producto agregado con éxito!',
+                error: 'No se pudo agregar el producto.'
             }, {
                 style: {
                     borderRadius: '10px',
@@ -149,9 +149,9 @@ export const AgregarPlatos = () => {
                 ]
             };
             await toast.promise(setDoc(docRef, newMenuData), {
-                loading: 'Agregando menú...',
-                success: '¡Menú agregado con éxito!',
-                error: 'No se pudo agregar el Menú.'
+                loading: 'Agregando Producto...',
+                success: '¡Producto agregado con éxito!',
+                error: 'No se pudo agregar el producto.'
             }, {
                 style: {
                     borderRadius: '10px',
@@ -185,7 +185,7 @@ export const AgregarPlatos = () => {
                 <MdKeyboardBackspace className="ml-6  text-4xl" />
             </Link>
             <div className="fixed top-1/2 -translate-y-1/2 w-80 left-1/2 -translate-x-1/2">
-                <h2 className="text-center text-2xl underline">Agregar Productos al Menú</h2>
+                <h2 className="text-center text-2xl underline">Agregar Productos</h2>
                 <form className="flex flex-col gap-4 pt-10" onSubmit={handleSubmit}>
                     <div>
                         <label className="block font-medium text-gray-700">Categoria</label>
@@ -208,7 +208,7 @@ export const AgregarPlatos = () => {
                         <input type="text" name="nombre" value={formData.nombre.toLocaleLowerCase()} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" onChange={handleChange} required />
                     </div>
                     <div >
-                        <label className="block font-medium text-gray-700">Ingredientes (separar con coma)</label>
+                        <label className="block font-medium text-gray-700">Descripción</label>
                         <input type="text" name="ingredientes" value={formData.ingredientes} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" onChange={handleChange} />
                     </div>
                     <div >
@@ -244,21 +244,21 @@ export const AgregarPlatos = () => {
                         <div >
                             <div className="flex items-center">
                                 <input type="checkbox" name="esPromo" className="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" onChange={handleChange} checked={formData.esPromo} />
-                                <label className="ml-2 block font-medium text-gray-700">Menú del dia</label>
+                                <label className="ml-2 block font-medium text-gray-700">Oferta</label>
                             </div>
                         </div>
                         <div >
                             <div className="flex items-center">
                                 <input type="checkbox" name="esVegetariano" className="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" onChange={handleChange} checked={formData.esVegetariano} />
-                                <label className="ml-2 block font-medium text-gray-700">Vegetariano</label>
+                                <label className="ml-2 block font-medium text-gray-700">Popular</label>
                             </div>
                         </div>
-                        <div >
+                        {/* <div >
                             <div className="flex items-center">
                                 <input type="checkbox" name="esSinTac" className="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" onChange={handleChange} checked={formData.esSinTac} />
                                 <label className="ml-2 block font-medium text-gray-700" >Sin TACC</label>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                     <button type="submit" className="py-2 px-4 bg-bgPrice block text-white rounded-lg mt-5 uppercase transition-all duration-300 ease-in-out transform active:scale-95" >Agregar Menu</button>
                 </form>

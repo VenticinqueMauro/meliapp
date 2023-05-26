@@ -37,8 +37,8 @@ export const Navbar: React.FC<menuProps> = ({ setOpen }) => {
             <div className="max-w-7xl mx-auto relative">
 
                 <div className="flex items-center justify-center py-2 ">
-                    <div className="pl-3">
-                        <img className="logoAmericano" src={logo} alt='logo' width={180} />
+                    <div className="pl-3 text-3xl font-bold" >
+                        <img className="logoAmericano" src={logo} alt='logo' width={250} />
                     </div>
 
                     {/* BOTON LOGIN ADMIN */}
@@ -64,7 +64,7 @@ export const Navbar: React.FC<menuProps> = ({ setOpen }) => {
                         {
                             data &&
                             data.map((menu, i) => (
-                                <Ruta key={i} to={`${menu.categoria.slice(3)}`} spy={true} smooth={true} offset={-225} duration={500} className="mx-1 categoria uppercase w-auto p-1 text-sm text-center rounded-md mt-2 mb-2 tracking-wider bg-bgPrice text-white hover:text-gray-700 hover:bg-primary transition-all duration-300 ease-in-out transform active:scale-95 font-medium shadow shadow-black" >
+                                <Ruta key={i} to={`${menu.categoria.slice(3)}`} spy={true} smooth={true} offset={-290} duration={500} className="mx-1 categoria uppercase w-auto p-1 text-sm text-center rounded-md mt-2 mb-2 tracking-wider bg-bgPrice text-white hover:text-gray-700 hover:bg-primary transition-all duration-300 ease-in-out transform active:scale-95 font-medium shadow shadow-black" >
                                     {menu.categoria}
                                 </Ruta>
                             ))
@@ -73,7 +73,7 @@ export const Navbar: React.FC<menuProps> = ({ setOpen }) => {
                     </div>
                     <div className="flex justify-start  items-center mx-auto col-start-5 col-span-2 px-3 py-2">
                         <BiSearchAlt className="text-xl text-bgPrice rounded-l-md bg-primary h-6 w-7 p-1" />
-                        <input className="bg-primary text-black h-6 w-full outline-none p-2 placeholder:text-gray-900 rounded-r-md  border-b-2 border-transparent transition-all duration-200 placeholder:text-start tracking-widest placeholder:text-sm placeholder:font-medium focus:outline-none focus:border-none" type={'text'} placeholder="Busca tu menú favorito..." onChange={handleSearch} />
+                        <input className="bg-primary text-black h-6 w-full outline-none p-2 placeholder:text-gray-900 rounded-r-md  border-b-2 border-transparent transition-all duration-200 placeholder:text-start tracking-widest placeholder:text-sm placeholder:font-medium focus:outline-none focus:border-none" type={'text'} placeholder="Buscar producto..." onChange={handleSearch} />
                     </div>
                 </div>
                 <OrderAndFilter />

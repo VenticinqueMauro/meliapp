@@ -10,9 +10,9 @@ module.exports = {
         // 'primary': '#FFFBF3',
         // 'secondary': '#fac240',
         // 'bgPrice': '#111111'
-        'primary': '#f1f2df',
+        'primary': '#FFF6FF',
         'secondary': '#fb923c',
-        'bgPrice': '#818853'
+        'bgPrice': '#FF90C9'
       }
     },
   },

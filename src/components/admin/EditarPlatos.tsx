@@ -38,7 +38,7 @@ export const EditarPlatos = ({ categoria, menu, setEditMenu }: EditarPlatosProps
     };
 
     const uploadImageToFirebase = async (file: File) => {
-        const storageRef = ref(storage, `images/${file.name}`);
+        const storageRef = ref(storage, `images/meli/${file.name}`);
         await uploadBytes(storageRef, file);
         const url = await getDownloadURL(storageRef);
         setImage(url);
@@ -51,7 +51,7 @@ export const EditarPlatos = ({ categoria, menu, setEditMenu }: EditarPlatosProps
         await deleteObject(oldImageRef);
 
         // Upload new image
-        const storageRef = ref(storage, `images/${newFile.name}`);
+        const storageRef = ref(storage, `images/meli/${newFile.name}`);
         await uploadBytes(storageRef, newFile);
         const url = await getDownloadURL(storageRef);
         setImage(url);
@@ -117,7 +117,7 @@ export const EditarPlatos = ({ categoria, menu, setEditMenu }: EditarPlatosProps
         event.preventDefault();
 
         try {
-            const docRef = doc(db, "Menus", "Prueba");
+            const docRef = doc(db, "Meli", "catalogo");
             const docData = await getDoc(docRef);
             const menuData = docData.data()?.menus || [];
 
@@ -132,7 +132,7 @@ export const EditarPlatos = ({ categoria, menu, setEditMenu }: EditarPlatosProps
             // Actualiza el documento de Firestore con la lista actualizada de menús
             await updateDoc(docRef, { menus: newMenuData });
 
-            toast.success('¡Menú actualizado con éxito!', {
+            toast.success('¡Producto actualizado con éxito!', {
                 style: {
                     borderRadius: '10px',
                     background: '#333',
@@ -140,7 +140,7 @@ export const EditarPlatos = ({ categoria, menu, setEditMenu }: EditarPlatosProps
                 },
             })
         } catch (error) {
-            toast.error('¡Error al actualizar el Menú!', {
+            toast.error('¡Error al actualizar el Producto!', {
                 style: {
                     borderRadius: '10px',
                     background: '#333',
@@ -172,7 +172,7 @@ export const EditarPlatos = ({ categoria, menu, setEditMenu }: EditarPlatosProps
                         <input type="text" name="nombre" value={formData.nombre.toLocaleLowerCase()} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" onChange={handleChange} required />
                     </div>
                     <div >
-                        <label className="block font-medium text-gray-700">Ingredientes (separar con coma)</label>
+                        <label className="block font-medium text-gray-700">Descripción</label>
                         <input type="text" name="ingredientes" value={formData.ingredientes} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" onChange={handleChange} />
                     </div>
                     <div >
@@ -211,21 +211,21 @@ export const EditarPlatos = ({ categoria, menu, setEditMenu }: EditarPlatosProps
                         <div >
                             <div className="flex items-center">
                                 <input type="checkbox" name="esPromo" className="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" onChange={handleChange} checked={formData.esPromo} />
-                                <label className="ml-2 block font-medium text-gray-700">Menú del dia</label>
+                                <label className="ml-2 block font-medium text-gray-700">Oferta</label>
                             </div>
                         </div>
                         <div >
                             <div className="flex items-center">
                                 <input type="checkbox" name="esVegetariano" className="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" onChange={handleChange} checked={formData.esVegetariano} />
-                                <label className="ml-2 block font-medium text-gray-700">Vegetariano</label>
+                                <label className="ml-2 block font-medium text-gray-700">Popular</label>
                             </div>
                         </div>
-                        <div >
+                        {/* <div >
                             <div className="flex items-center">
                                 <input type="checkbox" name="esSinTac" className="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" onChange={handleChange} checked={formData.esSinTac} />
                                 <label className="ml-2 block font-medium text-gray-700" >Sin TAC</label>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                     <button type="submit" className="py-2 px-4 bg-bgPrice block text-white rounded-lg mt-5 uppercase transition-all duration-300 ease-in-out transform active:scale-95">Actualizar</button>
                 </form>

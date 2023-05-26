@@ -34,7 +34,7 @@ export const DropDownCard: React.FC<DropwDownCardProps> = ({ categoria, nombre, 
                                 <button className={`${active ? "bg-gray-600" : "text-gray-700"
                                     } block px-4 py-2 text-sm cursor-pointer w-full flex items-center gap-1 border-b hover:text-white z-50 `} onClick={() => setEditMenu(true)}>
                                     <BiFoodMenu />
-                                    <span>Editar Menú</span>
+                                    <span>Editar Producto</span>
                                 </button>
                             )}
                         </Menu.Item>
